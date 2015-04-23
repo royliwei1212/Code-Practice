@@ -12,12 +12,44 @@ public class MaximalRectangle {
 		}
 		int width = matrix[0].length;
 
-		int ml = 0;
-		int mt = 0;
-		int mr = width - 1;
-		int mb = height - 1;
+		int ml = -1;
+		int mt = -1;
+		int mr = width;
+		int mb = height;
 
+		for (int i = 0; i < width; i++) {
+			if (checkRow(i, matrix)) {
+				ml = i;
+				break;
+			}
+		}
+		// if no 1 found
+		if (ml == -1) {
+			return 0;
+		}
 
+		for (int i = width - 1; i >= ml; i--) {
+			if (checkRow(i, matrix)) {
+				mr = i;
+				break;
+			}
+		}
+
+		for (int i = 0; i < height; i++) {
+			if (checkLine(i, matrix)) {
+				mt = i;
+				break;
+			}
+		}
+
+		for (int i = height - 1; i >= mt; i--) {
+			if (checkLine(i, matrix)) {
+				mb = i;
+				break;
+			}
+		}
+
+		return (mr - ml + 1) * (mb - mt + 1);
 
 	}
 

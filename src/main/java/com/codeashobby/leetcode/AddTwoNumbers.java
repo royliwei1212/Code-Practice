@@ -1,5 +1,7 @@
 package com.codeashobby.leetcode;
 
+import com.codeashobby.leetcode.parent.ListNode;
+
 /**
  * Created by hzhou on 4/23/15. codeashobby@gmail.com
  */
@@ -61,13 +63,4 @@ public class AddTwoNumbers {
 		return len;
 	}
 
-	public class ListNode {
-
-		int val;
-		ListNode next;
-
-		ListNode(int x) {
-			val = x;
-		}
-	}
 }

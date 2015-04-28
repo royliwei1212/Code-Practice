@@ -1,5 +1,7 @@
 package com.codeashobby.leetcode;
 
+import com.codeashobby.leetcode.parent.TreeNode;
+
 /**
  * Created by hzhou on 4/22/15. codeashobby@gmail.com
  */
@@ -26,16 +28,5 @@ public class PathSum {
 			right = helper(root.right, sum - root.val);
 		}
 		return left || right;
-	}
-
-	public class TreeNode {
-
-		int val;
-		TreeNode left;
-		TreeNode right;
-
-		TreeNode(int x) {
-			val = x;
-		}
 	}
 }

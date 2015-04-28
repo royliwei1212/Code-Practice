@@ -1,5 +1,7 @@
 package com.codeashobby.leetcode;
 
+import com.codeashobby.leetcode.parent.TreeNode;
+
 /**
  * Created by hzhou on 4/21/15. codeashobby@gmail.com
  */
@@ -32,16 +34,5 @@ public class SortedArrayToBST {
 		SortedArrayToBST s = new SortedArrayToBST();
 		int[] num = new int[0];//{1,2,3,4,5,6,7};
 		TreeNode tree = s.sortedArrayToBST(num);
-	}
-
-	public class TreeNode {
-
-		int val;
-		TreeNode left;
-		TreeNode right;
-
-		TreeNode(int x) {
-			val = x;
-		}
 	}
 }

@@ -11,7 +11,7 @@ public class FactorialTrailingZeroes {
 		}
 
 		int result = 0;
-		int factor = 5;
+		long factor = 5;
 
 		while (n / factor > 0) {
 			result += n / factor;

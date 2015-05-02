@@ -4,7 +4,9 @@
 package com.codeashobby.leetcode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -18,17 +20,67 @@ public class RepeatedDNASequences {
 	//TODO: wrong answer
 	public List<String> findRepeatedDnaSequences(String s) {
 		List<String> result = new ArrayList<String>();
+		Map<Long, Integer> map = new HashMap<Long, Integer>();
 		if (s == null || s.isEmpty() || s.length() < 10) {
 			return result;
 		}
 
-		for (int i = 0; i < s.length() - 10; i++) {
+		for (int i = 0; i < s.length() - 9; i++) {
 			String tmp = s.substring(i, i + 10);
-			if (s.indexOf(tmp, i + 1) != -1) {
-				result.add(tmp);
+			Long key = str2long(tmp);
+			if (map.containsKey(key)) {
+				map.put(key, map.get(key) + 1);
+			} else {
+				map.put(key, 1);
+			}
+		}
+
+		for (Long key : map.keySet()) {
+			if (map.get(key) > 1) {
+				result.add(long2str(key));
 			}
 		}
 		return result;
+	}
+
+	private long str2long(String s) {
+		long res = 0;
+		for (int i = 0; i < 10; i++) {
+			if (s.charAt(i) == 'A') {
+				res = res * 10 + 1;
+			}
+			if (s.charAt(i) == 'T') {
+				res = res * 10 + 2;
+			}
+			if (s.charAt(i) == 'C') {
+				res = res * 10 + 3;
+			}
+			if (s.charAt(i) == 'G') {
+				res = res * 10 + 4;
+			}
+		}
+		return res;
+	}
+
+	private String long2str(long s) {
+		String res = "";
+		for (int i = 0; i < 10; i++) {
+			long d = s % 10;
+			if (d == 1) {
+				res = 'A' + res;
+			}
+			if (d == 2) {
+				res = 'T' + res;
+			}
+			if (d == 3) {
+				res = 'C' + res;
+			}
+			if (d == 4) {
+				res = 'G' + res;
+			}
+			s = s / 10;
+		}
+		return res;
 	}
 
 	@Test

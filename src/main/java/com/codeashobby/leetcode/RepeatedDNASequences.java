@@ -63,24 +63,24 @@ public class RepeatedDNASequences {
 	}
 
 	private String long2str(long s) {
-		String res = "";
+		StringBuilder res = new StringBuilder();
 		for (int i = 0; i < 10; i++) {
 			long d = s % 10;
 			if (d == 1) {
-				res = 'A' + res;
+				res.insert(0, 'A');
 			}
 			if (d == 2) {
-				res = 'T' + res;
+				res.insert(0, 'T');
 			}
 			if (d == 3) {
-				res = 'C' + res;
+				res.insert(0, 'C');
 			}
 			if (d == 4) {
-				res = 'G' + res;
+				res.insert(0, 'G');
 			}
 			s = s / 10;
 		}
-		return res;
+		return res.toString();
 	}
 
 	@Test

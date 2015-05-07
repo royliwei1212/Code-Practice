@@ -26,9 +26,10 @@ public class BinaryTreeLevelOrderTraversalII {
 		queue.offer(root);
 		int c1 = 1;
 		int c2 = 0;
-		//List<Integer>
+		List<Integer> crt = new ArrayList<Integer>();
 		while (!queue.isEmpty()) {
 			TreeNode node = queue.poll();
+			crt.add(node.val);
 			c1--;
 			if (node.left != null) {
 				queue.offer(node.left);
@@ -40,12 +41,14 @@ public class BinaryTreeLevelOrderTraversalII {
 			}
 			if (c1 == 0) {
 				c1 = c2;
+				c2 = 0;
+				result.add(0, new ArrayList<Integer>(crt));
+				crt.clear();
 			}
 		}
+		if (!crt.isEmpty()) {
+			result.add(0, new ArrayList<Integer>(crt));
+		}
 		return result;
-	}
-
-	private void helper(List<List<Integer>> result, TreeNode root, int level) {
-
 	}
 }

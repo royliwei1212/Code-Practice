@@ -28,10 +28,6 @@ public class InsertionSortList {
 			while (pre.next != null && pre.next != next && pre.next.val <= next.val) {
 				pre = pre.next;
 			}
-			if (pre.next == null) {
-				break;
-			}
-
 			if (pre.next == next) {
 				cursor = next;
 				continue;

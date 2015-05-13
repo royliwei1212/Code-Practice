@@ -2,6 +2,10 @@ package com.codeashobby.leetcode;
 
 /**
  * Created by hzhou on 5/12/15. codeashobby@gmail.com
+ * <p/>
+ * http://www.programcreek.com/2014/03/leetcode-single-number-ii-java/
+ * <p/>
+ * http://www.acmerblog.com/leetcode-single-number-ii-5394.html
  */
 public class SingleNumberII {
 

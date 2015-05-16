@@ -6,6 +6,7 @@ package com.codeashobby.leetcode;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 
 import com.codeashobby.leetcode.parent.UndirectedGraphNode;
 import org.junit.Test;
@@ -22,7 +23,7 @@ public class CloneGraph {
 			return null;
 		}
 
-		LinkedList<UndirectedGraphNode> queue = new LinkedList<UndirectedGraphNode>();
+		Queue<UndirectedGraphNode> queue = new LinkedList<UndirectedGraphNode>();
 		Map<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<UndirectedGraphNode, UndirectedGraphNode>();
 
 		UndirectedGraphNode newHead = new UndirectedGraphNode(node.label);
@@ -31,7 +32,7 @@ public class CloneGraph {
 		map.put(node, newHead);
 
 		while (!queue.isEmpty()) {
-			UndirectedGraphNode curr = queue.pop();
+			UndirectedGraphNode curr = queue.poll();
 
 			for (UndirectedGraphNode n : curr.neighbors) {
 				if (!map.containsKey(n)) {

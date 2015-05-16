@@ -4,7 +4,9 @@
 package com.codeashobby.leetcode;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -71,31 +73,88 @@ public class WordDictionary {
 	// Returns if the word is in the data structure. A word could
 	// contain the dot character '.' to represent any one letter.
 	public boolean search(String word) {
-		return word == null || word.isEmpty() || searchHelper(0, word, root);
+		if (word == null || word.isEmpty()) {
+			return true;
+		}
+		Map<Character, Set<WordLinkNode>> childrens = new HashMap<Character, Set<WordLinkNode>>();
+		mapInsertHelper(childrens, root.getChildren());
 
+		for (int i = 0; i < word.length(); i++) {
+			char c = word.charAt(i);
+			if (c == '.') {
+				if (i == word.length() - 1) {
+					for (Set<WordLinkNode> values : childrens.values()) {
+						for (WordLinkNode w : values) {
+							if (w.isLeaf()) {
+								return true;
+							}
+						}
+					}
+					return false;
+				}
+				childrens = forward(childrens);
+			} else {
+				if (!childrens.containsKey(c)) {
+					return false;
+				} else {
+					if (i == word.length() - 1) {
+						for (WordLinkNode w : childrens.get(c)) {
+							if (w.isLeaf()) {
+								return true;
+							}
+						}
+						return false;
+					}
+					childrens = forward(childrens, c);
+				}
+			}
+		}
+
+		return true;
 	}
 
-	private boolean searchHelper(int start, String word, WordLinkNode root) {
-		if (start == word.length()) {
-			return root.isLeaf();
-		}
-		boolean result = false;
-		Map<Character, WordLinkNode> children = root.getChildren();
-		char c = word.charAt(start);
-		if (c == '.') {
-
-			for (WordLinkNode w : children.values()) {
-				result |= searchHelper(start + 1, word, w);
+	private void mapInsertHelper(Map<Character, Set<WordLinkNode>> childrens, Map<Character, WordLinkNode> children) {
+		for (Character c : children.keySet()) {
+			if (childrens.containsKey(c)) {
+				childrens.get(c).add(children.get(c));
+			} else {
+				Set<WordLinkNode> set = new HashSet<WordLinkNode>();
+				set.add(children.get(c));
+				childrens.put(c, set);
 			}
-		} else {
-			result = root.getChildren().containsKey(c) && searchHelper(start + 1, word, root.getChildren().get(c));
 		}
+	}
 
-		return result;
+	private Map<Character, Set<WordLinkNode>> forward(Map<Character, Set<WordLinkNode>> childrens) {
+		Map<Character, Set<WordLinkNode>> tmp = new HashMap<Character, Set<WordLinkNode>>();
+		for (Set<WordLinkNode> values : childrens.values()) {
+			for (WordLinkNode w : values) {
+				mapInsertHelper(tmp, w.getChildren());
+			}
+		}
+		return tmp;
+	}
+
+	private Map<Character, Set<WordLinkNode>> forward(Map<Character, Set<WordLinkNode>> childrens, Character c) {
+		Map<Character, Set<WordLinkNode>> tmp = new HashMap<Character, Set<WordLinkNode>>();
+		for (WordLinkNode w : childrens.get(c)) {
+			mapInsertHelper(tmp, w.getChildren());
+		}
+		return tmp;
 	}
 
 	@Test
 	public void test() {
+		addWord("ran");
+		addWord("rune");
+		addWord("runner");
+		addWord("runs");
+		addWord("add");
+		addWord("adds");
+		addWord("adder");
+		addWord("addee");
+		assertEquals(true, search("r.n"));
+
 		addWord("bad");
 		addWord("dad");
 		addWord("mad");
@@ -103,6 +162,7 @@ public class WordDictionary {
 		assertEquals(true, search("bad"));
 		assertEquals(true, search(".ad"));
 		assertEquals(true, search("b.."));
+
 	}
 
 	static class WordLinkNode {

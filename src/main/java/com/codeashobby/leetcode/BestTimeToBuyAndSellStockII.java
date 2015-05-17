@@ -3,7 +3,7 @@ package com.codeashobby.leetcode;
 /**
  * Created by hzhou on 4/30/15. codeashobby@gmail.com
  */
-public class BestTimeToBuyAndSellStockTwo {
+public class BestTimeToBuyAndSellStockII {
 
 	public int maxProfit(int[] prices) {
 		if (prices.length < 2) {

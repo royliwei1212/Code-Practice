@@ -84,34 +84,34 @@ public class Trie {
 		}
 		return true;
 	}
-}
 
-class TrieNode {
+	class TrieNode {
 
-	private Map<Character, TrieNode> children;
-	private Character value;
-	private boolean isLeaf;
+		private Map<Character, TrieNode> children;
+		private Character value;
+		private boolean isLeaf;
 
-	// Initialize your data structure here.
-	public TrieNode() {
-		children = new HashMap<Character, TrieNode>();
-		isLeaf = false;
-	}
+		// Initialize your data structure here.
+		public TrieNode() {
+			children = new HashMap<Character, TrieNode>();
+			isLeaf = false;
+		}
 
-	public TrieNode(Character value) {
-		this();
-		this.value = value;
-	}
+		public TrieNode(Character value) {
+			this();
+			this.value = value;
+		}
 
-	public Map<Character, TrieNode> getChildren() {
-		return children;
-	}
+		public Map<Character, TrieNode> getChildren() {
+			return children;
+		}
 
-	public boolean isLeaf() {
-		return isLeaf;
-	}
+		public boolean isLeaf() {
+			return isLeaf;
+		}
 
-	public void setIsLeaf(boolean isLeaf) {
-		this.isLeaf = isLeaf;
+		public void setIsLeaf(boolean isLeaf) {
+			this.isLeaf = isLeaf;
+		}
 	}
 }

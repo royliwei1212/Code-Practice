@@ -30,39 +30,36 @@ public class LongestConsecutiveSequence {
 			return 1;
 		}
 
-		int min = nums[0];
-		int max = nums[0];
 		Set<Integer> set = new HashSet<Integer>();
-		set.add(nums[0]);
-		for (int i = 1; i < nums.length; i++) {
-			set.add(nums[i]);
-			if (max < nums[i]) {
-				max = nums[i];
-			}
 
-			if (min > nums[i]) {
-				min = nums[i];
-			}
+		for (int i : nums) {
+			set.add(i);
 		}
 
 		int result = 0;
-		int crt = 1;
-		for (int i = min + 1; i <= max; i++) {
-			if (set.contains(i)) {
-				crt++;
-			} else {
-				if (result < crt) {
-					result = crt;
-				}
-				crt = 0;
+
+		for (int i : nums) {
+			int l = i - 1;
+			int r = i + 1;
+			int count = 1;
+			while (set.contains(l)) {
+				count++;
+				set.remove(l);
+				l--;
 			}
+			while (set.contains(r)) {
+				count++;
+				//set.remove(r);
+				r++;
+			}
+			result = Math.max(result, count);
 		}
 		return result;
 	}
 
 	@Test
 	public void test() {
-		int[] nums = new int[]{100, 4, 200, 1, 3, 2, 5};
-		assertSame(5, longestConsecutive(nums));
+		int[] nums = new int[]{2147483646, -2147483647, 0, 2, 2147483644, -2147483645, 2147483645};
+		assertSame(3, longestConsecutive(nums));
 	}
 }

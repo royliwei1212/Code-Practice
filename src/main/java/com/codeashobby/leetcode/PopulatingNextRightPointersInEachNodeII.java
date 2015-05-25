@@ -1,7 +1,5 @@
 package com.codeashobby.leetcode;
 
-import java.util.Stack;
-
 import com.codeashobby.leetcode.parent.TreeLinkNode;
 import org.junit.Test;
 
@@ -9,6 +7,8 @@ import static org.junit.Assert.assertSame;
 
 /**
  * Created by hzhou on 4/27/15. codeashobby@gmail.com
+ * <p/>
+ * https://chazyhabit.wordpress.com/2014/08/16/populating-next-right-pointers-in-each-node-ii-leetcode-83/
  */
 public class PopulatingNextRightPointersInEachNodeII {
 
@@ -17,22 +17,33 @@ public class PopulatingNextRightPointersInEachNodeII {
 			return;
 		}
 
-		Stack<TreeLinkNode> stack = new Stack<TreeLinkNode>();
-		stack.push(root);
-		while (!stack.isEmpty()) {
-			TreeLinkNode node = stack.pop();
-			if (node.left != null) {
-				stack.push(node.left);
-				TreeLinkNode cursor = null;
-				while (node != null) {
-					if (cursor != null) {
-						cursor.next = node.left;
+		TreeLinkNode head = null; // the head node of the next level
+		TreeLinkNode prev = null; // the previous node of the current node in the same level
+		TreeLinkNode curr = root;
+		while (curr != null) {
+			while (curr != null) {
+				if (curr.left != null) {
+					if (prev == null) {
+						head = curr.left;
+					} else {
+						prev.next = curr.left;
 					}
-					node.left.next = node.right;
-					cursor = node.right;
-					node = node.next;
+					prev = curr.left;
 				}
+				if (curr.right != null) {
+					if (prev == null) {
+						head = curr.right;
+					} else {
+						prev.next = curr.right;
+					}
+					prev = curr.right;
+				}
+				curr = curr.next;
 			}
+			// go to next level
+			curr = head;
+			head = null;
+			prev = null;
 		}
 	}
 

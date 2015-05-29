@@ -28,7 +28,7 @@ public class SubstringWithConcatenationOfAllWords {
 		Map<String, Integer> map = getMap(words);
 		for (int i = 0; i <= s.length() - totalLength; i++) {
 			String tmp = s.substring(i, i + wordLength);
-			if (map.containsKey(tmp) && check(s.substring(i, i + totalLength), words)) {
+			if (map.containsKey(tmp) && check(s.substring(i, i + totalLength), words, map)) {
 				result.add(i);
 			}
 		}
@@ -48,15 +48,22 @@ public class SubstringWithConcatenationOfAllWords {
 		return map;
 	}
 
-	private boolean check(String s, String[] words) {
-		Map<String, Integer> map = getMap(words);
+	private boolean check(String s, String[] words, Map<String, Integer> map) {
+		Map<String, Integer> tMap = new HashMap<String, Integer>();
 		int length = words[0].length();
 		for (int i = 0; i <= s.length() - length; i = i + length) {
 			String tmp = s.substring(i, i + length);
-			if (!map.containsKey(tmp) || map.get(tmp) == 0) {
+			if (!map.containsKey(tmp)) {
 				return false;
+			}
+
+			if (tMap.containsKey(tmp)) {
+				tMap.put(tmp, tMap.get(tmp) + 1);
 			} else {
-				map.put(tmp, map.get(tmp) - 1);
+				tMap.put(tmp, 1);
+			}
+			if (tMap.get(tmp) > map.get(tmp)) {
+				return false;
 			}
 		}
 		return true;
@@ -65,7 +72,7 @@ public class SubstringWithConcatenationOfAllWords {
 	@Test
 	public void test() {
 		String s = "lingmindraboofooowingdingbarrwingmonkeypoundcake";
-		String[] words = new String[]{"fooo","barr","wing","ding","wing"};
+		String[] words = new String[]{"fooo", "barr", "wing", "ding", "wing"};
 		List<Integer> result = findSubstring(s, words);
 	}
 

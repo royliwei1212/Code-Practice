@@ -1,16 +1,15 @@
 package com.codeashobby.leetcode;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import org.junit.Test;
 
 /**
  * Created by hzhou on 2015/5/28. Email: codeashobby@gmail.com
- *
+ * <p/>
  * // Note: leetcode test says words can have duplicated items
  */
 public class SubstringWithConcatenationOfAllWords {
@@ -26,10 +25,10 @@ public class SubstringWithConcatenationOfAllWords {
 		if (s.length() < totalLength) {
 			return result;
 		}
-		Set<String> set = getSet(words);
+		Map<String, Integer> map = getMap(words);
 		for (int i = 0; i <= s.length() - totalLength; i++) {
 			String tmp = s.substring(i, i + wordLength);
-			if (set.contains(tmp) && check(s.substring(i, i + totalLength), words)) {
+			if (map.containsKey(tmp) && check(s.substring(i, i + totalLength), words)) {
 				result.add(i);
 			}
 		}
@@ -37,30 +36,36 @@ public class SubstringWithConcatenationOfAllWords {
 		return result;
 	}
 
-	private Set<String> getSet(String[] words) {
-		Set<String> result = new HashSet<String>();
-		Collections.addAll(result, words);
-		return result;
+	private Map<String, Integer> getMap(String[] words) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		for (String s : words) {
+			if (map.containsKey(s)) {
+				map.put(s, map.get(s) + 1);
+			} else {
+				map.put(s, 1);
+			}
+		}
+		return map;
 	}
 
 	private boolean check(String s, String[] words) {
-		Set<String> set = getSet(words);
+		Map<String, Integer> map = getMap(words);
 		int length = words[0].length();
 		for (int i = 0; i <= s.length() - length; i = i + length) {
 			String tmp = s.substring(i, i + length);
-			if (!set.contains(tmp)) {
+			if (!map.containsKey(tmp) || map.get(tmp) == 0) {
 				return false;
 			} else {
-				set.remove(tmp);
+				map.put(tmp, map.get(tmp) - 1);
 			}
 		}
-		return set.isEmpty();
+		return true;
 	}
 
 	@Test
 	public void test() {
-		String s = "barfoothefoobarman";
-		String[] words = new String[]{"foo", "bar"};
+		String s = "lingmindraboofooowingdingbarrwingmonkeypoundcake";
+		String[] words = new String[]{"fooo","barr","wing","ding","wing"};
 		List<Integer> result = findSubstring(s, words);
 	}
 

@@ -4,57 +4,50 @@
 package com.codeashobby.leetcode;
 
 /**
- * Description:
+ * Description: TODO: cannot understand
+ * <p/>
+ * http://www.lifeincode.net/programming/leetcode-scramble-string-java/
  *
  * @author hzhou
  */
 public class ScrambleString {
 
 	public boolean isScramble(String s1, String s2) {
-		if (!isAnagram(s1, s2)) {
-			return false;
-		}
-		int length = s1.length();
-		for (int i = 1; i < length; i++) {
-			String s11 = s1.substring(0, i);
-			String s12 = s1.substring(i, length);
-			String s21 = s2.substring(0, i);
-			String s22 = s2.substring(i, length);
-			if (isScramble(s11, s21) && isScramble(s12, s22)) {
-				return true;
-			}
-			s21 = s2.substring(0, length - i);
-			s22 = s2.substring(length - i, length);
-
-			if (isScramble(s11, s22) && isScramble(s12, s21)) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	private boolean isAnagram(String s1, String s2) {
-		if (s1 == s2 || s1.equals(s2)) {
-			return true;
-		}
-
+		//Check lengths.
 		if (s1.length() != s2.length()) {
 			return false;
 		}
-
-		int[] chars = new int[26];
-		for (int i = 0; i < s1.length(); i++) {
-			chars[s1.charAt(i) - 'a']++;
-			chars[s2.charAt(i) - 'a']--;
+		if (s1.equals(s2)) {
+			return true;
 		}
 
-		for (int i : chars) {
-			if (i != 0) {
-				return false;
+		int L = s1.length();
+		boolean[][][] scramble = new boolean[L][L][L];
+		for (int i = 0; i < L; i++) {
+			for (int j = 0; j < L; j++) {
+				if (s1.charAt(i) == s2.charAt(j)) {
+					scramble[0][i][j] = true;
+				}
 			}
 		}
 
-		return true;
+		for (int k = 2; k <= L; k++) {
+			for (int i = L - k; i >= 0; i--) {
+				for (int j = L - k; j >= 0; j--) {
+					boolean canScramble = false;
+					for (int m = 1; m < k; m++) {
+						canScramble = (scramble[m - 1][i][j] && scramble[k - m - 1][i + m][j + m]) || (
+								scramble[m - 1][i][j + k - m] && scramble[k - m - 1][i + m][j]);
+						if (canScramble) {
+							break;
+						}
+					}
+					scramble[k - 1][i][j] = canScramble;
+				}
+			}
+		}
+
+		return scramble[L - 1][0][0];
 	}
+
 }

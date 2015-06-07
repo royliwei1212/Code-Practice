@@ -2,9 +2,6 @@ package com.codeashobby.leetcode;
 
 import com.codeashobby.leetcode.parent.TreeNode;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 /**
  * Created by hzhou on 2015/6/7.
  * Email: i@hzhou.me
@@ -12,25 +9,27 @@ import java.util.Queue;
 public class CountCompleteTreeNodes {
 
     public int countNodes(TreeNode root) {
-        int result = 0;
         if (root == null) {
-            return result;
+            return 0;
+        }
+        int l, r;
+        l = r = 0;
+        TreeNode cursor = root;
+        while (cursor != null) {
+            l++;
+            cursor = cursor.left;
+        }
+        cursor = root;
+        while (cursor != null) {
+            r++;
+            cursor = cursor.right;
         }
 
-        Queue<TreeNode> queue = new LinkedList<TreeNode>();
-        queue.add(root);
-
-        while (!queue.isEmpty()) {
-            TreeNode node = queue.poll();
-            result++;
-            if (node.left != null) {
-                queue.add(node.left);
-            }
-            if (node.right != null) {
-                queue.add(node.right);
-            }
+        if (l == r) {
+            return (int) Math.pow(2, l) - 1;
+        } else {
+            return countNodes(root.left) + countNodes(root.right) + 1;
         }
-
-        return result;
     }
+
 }

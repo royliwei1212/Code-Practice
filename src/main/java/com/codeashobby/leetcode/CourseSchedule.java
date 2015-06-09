@@ -31,8 +31,8 @@ public class CourseSchedule {
 
         while (!queue.isEmpty()) {
             int c = queue.poll();
-            for (int i = 0; i < length; i++) {
-                int crtC = prerequisites[i][0];
+            for (int[] prerequisite : prerequisites) {
+                int crtC = prerequisite[0];
                 if (crtC == c) {
                     counter[crtC]--;
                     if (counter[crtC] == 0) {

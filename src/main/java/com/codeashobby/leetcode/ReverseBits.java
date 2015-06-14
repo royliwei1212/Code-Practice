@@ -27,7 +27,7 @@ public class ReverseBits {
 	}
 
 	private int setZero(int n, int position) {
-		return n & (~(~n ^ (1 << position)));
+		return n & (~(1 << position));
 	}
 
 	private int setOne(int n, int position) {

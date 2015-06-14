@@ -8,36 +8,31 @@ import java.util.Set;
  */
 public class HappyNumber {
 
-	public boolean isHappy(int n) {
-		assert n >= 0;
+    public boolean isHappy(int n) {
+        if (n < 1) {
+            return false;
+        }
+        Set<Integer> set = new HashSet<Integer>();
+        int result = n;
+        while (true) {
+            result = calc(result);
+            if (result == 1) {
+                return true;
+            }
+            if (set.contains(result)) {
+                return false;
+            }
+            set.add(result);
+        }
+    }
 
-		Set<Integer> history = new HashSet<Integer>();
-		int tmp = calculator(n);
-		history.add(tmp);
-
-		while (true) {
-			if (tmp == 1) {
-				return true;
-			} else {
-				tmp = calculator(tmp);
-				if (history.contains(tmp)) {
-					return false;
-				} else {
-					history.add(tmp);
-				}
-			}
-
-		}
-	}
-
-	private int calculator(int n) {
-		int result = 0;
-		while (n > 0) {
-			int mod = n % 10;
-			result += mod * mod;
-			n = n / 10;
-		}
-
-		return result;
-	}
+    private int calc(int n) {
+        int result = 0;
+        while (n > 0) {
+            int x = n % 10;
+            n /= 10;
+            result += x * x;
+        }
+        return result;
+    }
 }

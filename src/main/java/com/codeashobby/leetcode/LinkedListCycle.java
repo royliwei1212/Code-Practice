@@ -7,26 +7,22 @@ import com.codeashobby.leetcode.parent.ListNode;
  */
 public class LinkedListCycle {
 
-	public boolean hasCycle(ListNode head) {
-		if (head == null || head.next == null) {
-			return false;
-		}
+    public boolean hasCycle(ListNode head) {
+        if (head == null || head.next == null) {
+            return false;
+        }
 
-		ListNode slow = head;
-		ListNode fast = head.next;
+        ListNode fast = head;
+        ListNode slow = head;
 
-		while (slow != null && fast != null) {
-			if (slow == fast) {
-				return true;
-			}
-			slow = slow.next;
-			if (fast.next != null) {
-				fast = fast.next.next;
-			} else {
-				fast = null;
-			}
-		}
-		return false;
-	}
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast != null && fast == slow) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

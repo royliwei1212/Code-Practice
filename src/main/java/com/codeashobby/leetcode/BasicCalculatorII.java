@@ -17,31 +17,32 @@ public class BasicCalculatorII {
         }
 
         s = s.replaceAll(" ", "");
-        List<String> list = new ArrayList<String>();
-
-        for (int i = 0; i < s.length(); i++) {
+        List<Integer> list = new ArrayList<Integer>();
+        for (int i = 0; i < s.length(); ) {
             char c = s.charAt(i);
             int op = isOperator(c);
+            int end = i + 1;
             if (op == 2) {
-                String a = list.get(list.size() - 1);
+                int a = list.get(list.size() - 1);
                 list.remove(list.size() - 1);
-                int end = readNumber(s, i + 1);
-                list.add(getResult(a, s.substring(i + 1, end), c) + "");
-            } else if (op == 1) {
-                list.add(c + "");
+                end = readNumber(s, i + 1);
+                list.add(getResult(a, Integer.valueOf(s.substring(i + 1, end)), c));
+            } else if (op == 1 && c == '-') {
+                end = readNumber(s, i + 1);
+                list.add(Integer.valueOf(s.substring(i, end)));
             }
 
             if (isNumber(c)) {
-                int end = readNumber(s, i);
-                list.add(s.substring(i, end));
+                end = readNumber(s, i);
+                list.add(Integer.valueOf(s.substring(i, end)));
             }
+
+            i = end;
         }
 
-        int result = Integer.valueOf(list.get(0));
-        for (int i = 1; i < list.size() - 1; i = i + 2) {
-            char c = list.get(i).charAt(0);
-            String b = list.get(i + 1);
-            result = getResult(result, b, c);
+        int result = 0;
+        for (int a : list) {
+            result += a;
         }
 
         return result;
@@ -71,9 +72,7 @@ public class BasicCalculatorII {
         }
     }
 
-    private int getResult(String a, String b, char c) {
-        int x = Integer.valueOf(a);
-        int y = Integer.valueOf(b);
+    private int getResult(int x, int y, char c) {
         switch (c) {
             case '+':
                 return x + y;
@@ -86,25 +85,6 @@ public class BasicCalculatorII {
             default:
                 return 0;
         }
-
-    }
-
-    private int getResult(int a, String b, char c) {
-        int x = a;
-        int y = Integer.valueOf(b);
-        switch (c) {
-            case '+':
-                return x + y;
-            case '-':
-                return x - y;
-            case '*':
-                return x * y;
-            case '/':
-                return x / y;
-            default:
-                return 0;
-        }
-
     }
 
     @Test

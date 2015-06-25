@@ -5,6 +5,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * Created by hzhou on 2015/6/22.
  * Email: i@hzhou.me
@@ -16,17 +18,21 @@ public class BasicCalculatorII {
         }
 
         s = s.replaceAll(" ", "");
+
         List<Integer> list = new ArrayList<Integer>();
+
         for (int i = 0; i < s.length(); ) {
             char c = s.charAt(i);
             int op = isOperator(c);
             int end = i + 1;
             if (op == 2) {
+                // for * and /, just calculate the result and store it in the list
                 int a = list.get(list.size() - 1);
                 list.remove(list.size() - 1);
                 end = readNumber(s, i + 1);
                 list.add(getResult(a, Integer.valueOf(s.substring(i + 1, end)), c));
             } else if (op == 1 && c == '-') {
+                // if minus a number, just store thr negative format number in the list
                 end = readNumber(s, i + 1);
                 list.add(Integer.valueOf(s.substring(i, end)));
             }
@@ -39,6 +45,7 @@ public class BasicCalculatorII {
             i = end;
         }
 
+        // sum up all integers
         int result = 0;
         for (int a : list) {
             result += a;
@@ -47,6 +54,13 @@ public class BasicCalculatorII {
         return result;
     }
 
+    /**
+     * Read number, and find the last index for current number
+     *
+     * @param s     given string
+     * @param start start index to search number
+     * @return last index of current number
+     */
     private int readNumber(String s, int start) {
         while (start < s.length()) {
             if (!isNumber(s.charAt(start))) {
@@ -57,10 +71,22 @@ public class BasicCalculatorII {
         return start;
     }
 
+    /**
+     * check a char is number or not
+     *
+     * @param c char to check
+     * @return true for number otherwise false
+     */
     private boolean isNumber(char c) {
         return c >= '0' && c <= '9';
     }
 
+    /**
+     * Check whether it is a operator
+     *
+     * @param c char
+     * @return 2 for (*, /), 1 for (+,-), otherwise 0
+     */
     private int isOperator(char c) {
         if (c == '*' || c == '/') {
             return 2;
@@ -71,6 +97,14 @@ public class BasicCalculatorII {
         }
     }
 
+    /**
+     * Calculate the result
+     *
+     * @param x first parameter
+     * @param y second parameter
+     * @param c operator
+     * @return result
+     */
     private int getResult(int x, int y, char c) {
         switch (c) {
             case '+':
@@ -89,9 +123,12 @@ public class BasicCalculatorII {
     @Test
     public void test() {
         String s = "3+2*2";
-        int result = calculate(s);
+        assertEquals(7, calculate(s));
 
         s = "3+5 / 2 ";
-        result = calculate(s);
+        assertEquals(5, calculate(s));
+
+        s = "0" + Integer.MIN_VALUE;
+        assertEquals(Integer.MIN_VALUE, calculate(s));
     }
 }

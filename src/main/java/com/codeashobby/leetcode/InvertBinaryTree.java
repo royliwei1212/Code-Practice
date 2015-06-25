@@ -14,12 +14,15 @@ public class InvertBinaryTree {
         if (root == null) {
             return null;
         }
+
         Queue<TreeNode> queue = new LinkedList<TreeNode>();
         queue.add(root);
+
         while (!queue.isEmpty()) {
             TreeNode node = queue.poll();
             TreeNode left = node.left;
             TreeNode right = node.right;
+            // exchange left with right
             node.left = right;
             node.right = left;
             if (left != null) {

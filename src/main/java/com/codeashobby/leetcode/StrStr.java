@@ -5,33 +5,32 @@ package com.codeashobby.leetcode;
  */
 public class StrStr {
 
-	public int strStr(String haystack, String needle) {
-		if ((haystack == null && needle != null) || needle.length() > haystack.length()) {
-			return -1;
-		}
-		if (haystack == needle || haystack.equals(needle) || needle == null || needle.isEmpty()) {
-			return 0;
-		}
+    public int strStr(String haystack, String needle) {
+        if (needle == null || needle.length() == 0) {
+            return 0;
+        }
+        if (haystack == null || haystack.length() == 0) {
+            return -1;
+        }
 
-		for (int i = 0; i < haystack.length(); i++) {
-			char c = haystack.charAt(i);
-			if (haystack.length() - i + 1 < needle.length()) {
-				return -1;
-			}
-			if (c == needle.charAt(0)) {
-				int j = 0;
-				int k = i;
-				for (; j < needle.length() && k < haystack.length(); j++, k++) {
-					if (needle.charAt(j) != haystack.charAt(k)) {
-						break;
-					}
-				}
-				if (j == needle.length()) {
-					return (k - j);
-				}
-			}
+        for (int i = 0; i < haystack.length(); ) {
+            if (haystack.length() - i < needle.length()) {
+                return -1;
+            }
+            int j = 0;
+            for (; j < needle.length(); j++) {
+                if (haystack.charAt(i++) != needle.charAt(j)) {
+                    break;
+                }
+            }
 
-		}
-		return -1;
-	}
+            if (j == needle.length()) {
+                return i - j;
+            } else {
+                // reset i
+                i -= j;
+            }
+        }
+        return -1;
+    }
 }

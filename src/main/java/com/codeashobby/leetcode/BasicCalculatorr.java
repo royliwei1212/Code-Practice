@@ -30,13 +30,13 @@ public class BasicCalculatorr {
             } else {
                 if (sb.length() > 0) {
                     stack.push(sb.toString());
-                    sb = new StringBuilder();
+                    // clean string builder for next iteration
+                    sb.delete(0, sb.length());
                 }
 
                 if (arr[i] != ')') {
                     stack.push(arr[i] + "");
                 } else {
-                    // when meet ')', pop and calculate
                     List<String> t = new ArrayList<String>();
                     while (!stack.isEmpty()) {
                         String top = stack.pop();

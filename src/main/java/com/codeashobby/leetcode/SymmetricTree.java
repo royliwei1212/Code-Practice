@@ -12,26 +12,20 @@ import com.codeashobby.leetcode.parent.TreeNode;
  */
 public class SymmetricTree {
 
-	public boolean isSymmetric(TreeNode root) {
-		if (root == null || (root.left == null && root.right == null)) {
-			return true;
-		}
+    public boolean isSymmetric(TreeNode root) {
+        return root == null || helper(root.left, root.right);
+    }
 
-		return helper(root.left, root.right);
-	}
+    private boolean helper(TreeNode left, TreeNode right) {
+        if (left == null && right == null) {
+            return true;
+        }
 
-	private boolean helper(TreeNode o1, TreeNode o2) {
-		if (o1 == null && o2 == null) {
-			return true;
-		}
-		if ((o1 == null) || ((o2 == null))) {
-			return false;
-		}
+        if (left == null && right != null || left != null && right == null || left.val != right.val) {
+            return false;
+        }
 
-		if (o1.val != o2.val) {
-			return false;
-		} else {
-			return helper(o1.left, o2.right) && helper(o1.right, o2.left);
-		}
-	}
+        return helper(left.left, right.right) && helper(left.right, right.left);
+
+    }
 }

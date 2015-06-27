@@ -5,6 +5,9 @@ package com.codeashobby.leetcode;
 
 import com.codeashobby.leetcode.parent.ListNode;
 
+import java.util.PriorityQueue;
+import java.util.Queue;
+
 /**
  * Description
  *
@@ -12,34 +15,23 @@ import com.codeashobby.leetcode.parent.ListNode;
  */
 public class MergeTwoSortedLists {
 
-	public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-		if (l1 == null) {
-			return l2;
-		}
-		if (l2 == null) {
-			return l1;
-		}
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        Queue<ListNode> queue = new PriorityQueue<>(2, (o1, o2) -> o1.val - o2.val);
 
-		ListNode pre = new ListNode(0);
-		ListNode cursor = pre;
-		while (l1 != null && l2 != null) {
-			if (l1.val > l2.val) {
-				cursor.next = l2;
-				l2 = l2.next;
-			} else {
-				cursor.next = l1;
-				l1 = l1.next;
-			}
+        if (l1 != null) queue.add(l1);
+        if (l2 != null) queue.add(l2);
 
-			cursor = cursor.next;
-		}
-
-		if (l1 == null) {
-			cursor.next = l2;
-		} else {
-			cursor.next = l1;
-		}
-
-		return pre.next;
-	}
+        ListNode pre, cursor;
+        pre = new ListNode(0);
+        cursor = pre;
+        while (!queue.isEmpty()) {
+            ListNode node = queue.poll();
+            cursor.next = node;
+            cursor = cursor.next;
+            if (node.next != null) {
+                queue.add(node.next);
+            }
+        }
+        return pre.next;
+    }
 }

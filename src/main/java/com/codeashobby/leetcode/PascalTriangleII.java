@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author hzhou
  */
-public class PascalTriangleTwo {
+public class PascalTriangleII {
 
 	public List<Integer> getRow(int rowIndex) {
 		if (rowIndex < 0) {

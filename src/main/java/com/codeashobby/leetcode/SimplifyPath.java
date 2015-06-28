@@ -19,7 +19,6 @@ public class SimplifyPath {
 		if (!path.startsWith("/")) {
 			return null;
 		}
-
 		path = path.trim();
 		Stack<String> stack = new Stack<String>();
 		StringBuilder sb = new StringBuilder();

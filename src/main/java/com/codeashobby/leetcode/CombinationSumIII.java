@@ -16,30 +16,28 @@ import org.junit.Test;
 public class CombinationSumIII {
 
 	public List<List<Integer>> combinationSum3(int k, int n) {
-		List<List<Integer>> result = new ArrayList<List<Integer>>();
-		if (k < 0 || n <= 0 || n < k || n > 9 * k) {
+		List<List<Integer>> result = new ArrayList<>();
+
+		if (k < 1 || n < k || n > 9 * k) {
 			return result;
 		}
-		helper(0, k, n, new ArrayList<Integer>(), result);
+		helper(1, n, k, new ArrayList<>(), result);
 		return result;
 	}
 
-	private void helper(int count, int k, int sum, List<Integer> crt, List<List<Integer>> result) {
-		if (count == k) {
+	private void helper(int start, int sum, int k, List<Integer> crt, List<List<Integer>> result) {
+		if (crt.size() == k) {
 			if (sum == 0) {
-				result.add(new ArrayList<Integer>(crt));
+				result.add(crt);
 			}
 			return;
 		}
-		if (sum <= 0) {
-			return;
-		}
-		int lower = crt.isEmpty() ? 1 : crt.get(crt.size() - 1) + 1;
-		for (int i = lower; i < 10; i++) {
+
+		for (int i = start; i < 10; i++) {
 			if (sum >= i) {
-				crt.add(i);
-				helper(count + 1, k, sum - i, crt, result);
-				crt.remove(crt.size() - 1);
+				List<Integer> tmp = new ArrayList<>(crt);
+				tmp.add(i);
+				helper(i + 1, sum - i, k, tmp, result);
 			} else {
 				break;
 			}

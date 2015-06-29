@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE bookstore SYSTEM "bookstore.dtd">
+<bookstore>
+	<name>Mike's Store</name>
+	<topic>
+		<name>XML</name>
+		<book isbn="123-456-789">
+			<title>Mike's Guide To DTD's and XML Schemas</title>
+			<author>Mike Jervis</author>
+		</book>
+	</topic>
+</bookstore>

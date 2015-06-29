@@ -19,7 +19,7 @@ public enum Calculator {
 	SUB("-") {
 		@Override
 		public int exec(int a, int b) {
-			return a - +b;
+			return a - b;
 		}
 	};
 

@@ -10,10 +10,14 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import com.codeashobby.leetcode.parent.ListNode;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import org.apache.log4j.Logger;
 import org.junit.Test;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 /**
  * Description:
@@ -77,6 +81,46 @@ public class SimpleTester {
 
 	@Test
 	public void intTest() {
+		ListNode a = new ListNode(1);
+		ListNode b = a;
+		assertNotNull(getIntersectionNode(a, b));
+	}
 
+	public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+		ListNode ca = headA;
+		ListNode cb = headB;
+		int la, lb;
+		la = lb = 0;
+
+		while (ca != null) {
+			ca = ca.next;
+			la++;
+		}
+
+		while (cb != null) {
+			cb = cb.next;
+			lb++;
+		}
+
+		if (la < lb) {
+			ca = headB;
+			cb = headA;
+		}
+
+		int offSet = Math.abs(la - lb);
+		while (ca != null && offSet > 0) {
+			ca = ca.next;
+			offSet--;
+		}
+
+		while (ca != null) {
+			if (ca == cb) {
+				return ca;
+			} else {
+				ca = ca.next;
+				cb = cb.next;
+			}
+		}
+		return null;
 	}
 }

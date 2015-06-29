@@ -5,7 +5,6 @@ package com.codeashobby.leetcode;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -27,7 +26,7 @@ public class SquareNumber {
 		try {
 			bufferedReader = new BufferedReader(new FileReader(fileName));
 			bufferedWriter = new BufferedWriter(new FileWriter("out.txt"));
-			String s = "";
+			String s;
 			while ((s = bufferedReader.readLine()) != null) {
 				bufferedWriter.write(s);
 				bufferedWriter.newLine();
@@ -53,8 +52,6 @@ public class SquareNumber {
 					break;
 				}
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {

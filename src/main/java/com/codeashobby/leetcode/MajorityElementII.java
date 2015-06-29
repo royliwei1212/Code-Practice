@@ -4,9 +4,13 @@
 package com.codeashobby.leetcode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Description: Given an integer array of size n, find all elements that appear more than ⌊ n/3 ⌋ times. The algorithm
@@ -17,7 +21,7 @@ import java.util.Map;
 public class MajorityElementII {
 
 	public List<Integer> majorityElement(int[] nums) {
-		List<Integer> result = new ArrayList<Integer>();
+		List<Integer> result = new ArrayList<>();
 		if (nums == null || nums.length == 0) {
 			return result;
 		}
@@ -45,4 +49,16 @@ public class MajorityElementII {
 
 		return result;
 	}
+
+	public List<Integer> majorityElement2(int[] nums) {
+		List<Integer> result = new ArrayList<Integer>();
+		if (nums == null || nums.length == 0) {
+			return result;
+		}
+		List<Integer> list = Arrays.stream(nums).boxed().collect(toList());
+		Map<Integer, Long> map = list.stream().collect(Collectors.groupingBy(o -> o, Collectors.counting()));
+		return map.entrySet().parallelStream().filter(v -> v.getValue() >= (int) Math.floor(list.size() / 3.0) + 1)
+				.map(Map.Entry::getKey).collect(toList());
+	}
+
 }

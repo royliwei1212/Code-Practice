@@ -7,7 +7,7 @@ import org.junit.Test;
 
 /**
  * Description:Given two binary strings, return their sum (also a binary string).
- * <p/>
+ * <p>
  * For example, a = "11" b = "1" Return "100".
  *
  * @author hzhou
@@ -26,6 +26,7 @@ public class AddBinary {
 		a = a.trim();
 		b = b.trim();
 
+		// make a is the longer string, b is the shorter one
 		if (a.length() < b.length()) {
 			String tmp = b;
 			b = a;
@@ -36,7 +37,7 @@ public class AddBinary {
 		int i = a.length() - 1;
 		int j = b.length() - 1;
 		boolean inc = false;
-		for (; j >= 0; j--,i--) {
+		for (; j >= 0; j--, i--) {
 			int ia = a.charAt(i) - '0';
 			int ib = b.charAt(j) - '0';
 			int sum = ia + ib + (inc ? 1 : 0);

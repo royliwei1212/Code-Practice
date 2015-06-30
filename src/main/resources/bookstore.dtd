@@ -6,3 +6,4 @@
 <!ELEMENT author (#PCDATA)>
 <!ELEMENT isbn (#PCDATA)>
 <!ATTLIST book isbn CDATA "0">
+<!ATTLIST author gender CDATA "0">

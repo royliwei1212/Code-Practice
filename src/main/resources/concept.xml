@@ -6,7 +6,7 @@
 		<name>XML</name>
 		<book isbn="123-456-789">
 			<title>Mike's Guide To DTD's and XML Schemas</title>
-			<author gender="male">Mike Jervis</author>
+			<author gender="Male">Mike Jervis</author>
 		</book>
 	</topic>
 </bookstore>

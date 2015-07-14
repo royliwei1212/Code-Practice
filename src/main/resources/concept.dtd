@@ -1,13 +1,9 @@
-<!DOCTYPE medas [
+
 		<!ELEMENT medas (concepts,relations?)>
 		<!ELEMENT concepts (concept+)>
 		<!ATTLIST concepts modelPrefix CDATA #REQUIRED>
 		<!ELEMENT concept (prefLabels+, properties)>
 		<!ELEMENT prefLabels (prefLabel+)>
-
-		<!ELEMENT prefLabel (#PCDATA)>
-		<!ATTLIST prefLabel default CDATA #REQUIRED
-				lang CDATA #REQUIRED>
 
 		<!ELEMENT prefLabel (#PCDATA)>
 		<!ATTLIST prefLabel default CDATA #REQUIRED
@@ -33,4 +29,3 @@
 		<!ELEMENT targetConcept (#PCDATA)>
 		<!ATTLIST targetConcept propertyValue CDATA #REQUIRED>
 
-		]>

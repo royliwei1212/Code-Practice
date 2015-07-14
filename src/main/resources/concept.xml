@@ -1,12 +1,18 @@
 <?xml version="1.0"?>
-<!DOCTYPE bookstore SYSTEM "bookstore.dtd">
-<bookstore>
-	<name>Mike's Store</name>
-	<topic>
-		<name>XML</name>
-		<book isbn="123-456-789">
-			<title>Mike's Guide To DTD's and XML Schemas</title>
-			<author gender="Male">Mike Jervis</author>
-		</book>
-	</topic>
-</bookstore>
+<!DOCTYPE medas SYSTEM "concept.dtd">
+<medas>
+	<concepts modelPrefix="ewew">
+		<concept>
+			<prefLabels>
+				<prefLabel default="true" lang="en">ewew</prefLabel>
+			</prefLabels>
+			<properties>
+				<property name="ewew">
+					<value>ewewe</value>
+					<value>fff</value>
+				</property>
+			</properties>
+		</concept>
+
+	</concepts>
+</medas>

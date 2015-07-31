@@ -9,10 +9,10 @@ import java.util.List;
 import com.codeashobby.leetcode.parent.ListNode;
 
 /**
- * Description Given a singly linked list L: L0¡úL1¡ú¡­¡úLn-1¡úLn, reorder it to: L0¡úLn¡úL1¡úLn-1¡úL2¡úLn-2¡ú¡­
- * <p/>
+ * Description: Given a singly linked list L: L0â†’L1â†’â€¦â†’Ln-1â†’Ln, reorder it to: L0â†’Lnâ†’L1â†’Ln-1â†’L2â†’Ln-2â†’â€¦
+ * <p>
  * You must do this in-place without altering the nodes' values.
- * <p/>
+ * <p>
  * For example, Given {1,2,3,4}, reorder it to {1,4,2,3}.
  *
  * @author hzhou

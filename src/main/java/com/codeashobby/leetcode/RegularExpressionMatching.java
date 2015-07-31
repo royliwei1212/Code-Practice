@@ -25,46 +25,45 @@ package com.codeashobby.leetcode;
  */
 public class RegularExpressionMatching {
 
-    public boolean isMatch(String s, String p) {
-        if (s == null || s.isEmpty()) {
-            return emptyable(p);
-        }
+	public boolean isMatch(String s, String p) {
+		if (s == null || s.isEmpty()) {
+			return emptyable(p);
+		}
 
-        if (p == null || p.isEmpty()) {
-            return false;
-        }
+		if (p == null || p.isEmpty()) {
+			return false;
+		}
 
-        char cs = s.charAt(0);
-        char cp = p.charAt(0);
-        char tmp = p.length() > 1 ? p.charAt(1) : '\0';
+		char cs = s.charAt(0);
+		char cp = p.charAt(0);
+		char tmp = p.length() > 1 ? p.charAt(1) : '\0';
 
-        if (tmp == '*') {
-            if (equalChar(cs, cp)) {
-                return isMatch(s.substring(1), p) || isMatch(s, p.substring(2));
-            } else {
-                return isMatch(s, p.substring(2));
-            }
-        } else {
-            return equalChar(cs, cp) && isMatch(s.substring(1), p.substring(1));
-        }
-    }
+		if (tmp == '*') {
+			return equalChar(cs, cp) ? isMatch(s.substring(1), p) || isMatch(s, p.substring(2)) :
+					isMatch(s, p.substring(2));
+		} else {
+			return equalChar(cs, cp) && isMatch(s.substring(1), p.substring(1));
+		}
+	}
 
-    private boolean equalChar(char a, char b) {
-        return b == '.' || a == b;
-    }
+	private boolean equalChar(char a, char b) {
+		return b == '.' || a == b;
+	}
 
-    private boolean emptyable(String s) {
-        if (s == null || s.isEmpty()) {
-            return true;
-        }
-        if (s.length() % 2 != 0) {
-            return false;
-        }
+	private boolean emptyable(String s) {
+		if (s == null || s.isEmpty()) {
+			return true;
+		}
+		if (s.length() % 2 != 0) {
+			return false;
+		}
 
-        for (int i = 1; i < s.length(); i = i + 2) {
-            if (s.charAt(i) != '*') return false;
-        }
+		for (int i = 1; i < s.length(); i = i + 2) {
+			if (s.charAt(i) != '*') {
+				return false;
+			}
+		}
 
-        return true;
-    }
+		return true;
+	}
 }

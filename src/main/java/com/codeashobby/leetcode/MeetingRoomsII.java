@@ -4,6 +4,7 @@
 package com.codeashobby.leetcode;
 
 import java.util.Arrays;
+import java.util.TreeSet;
 
 import com.codeashobby.leetcode.parent.Interval;
 import org.junit.Test;
@@ -20,39 +21,35 @@ public class MeetingRoomsII {
 			return 0;
 		}
 
-		int roomCount = 1;
-		int mostRight = 0;
-		int minCount = 1;
-
 		Arrays.sort(intervals, (o1, o2) -> {
 			int r = o1.start - o2.start;
 			return r == 0 ? o1.end - o2.end : r;
 		});
 
-		for (int i = 0; i < intervals.length - 1; i++) {
-			Interval starter = intervals[i];
-			if (mostRight > starter.end) {
-				continue;
-			}
+		TreeSet<Interval> treeSet = new TreeSet<>((o1, o2) -> o1.end - o2.end);
 
-			mostRight = starter.end;
+		treeSet.add(intervals[0]);
 
-			for (int j = 1 + i; j < intervals.length; j++) {
-				Interval in = intervals[j];
-				if (in.start < mostRight) {
-					roomCount++;
-				} else {
-					minCount = Math.max(minCount, roomCount);
-					roomCount = 1;
-				}
+		for (int i = 1; i < intervals.length; i++) {
+			Interval val = treeSet.first();
+			Interval in = intervals[i];
+			if (in.start >= val.end) {
+				treeSet.remove(val);
 			}
+			treeSet.add(in);
 		}
-		return minCount;
+
+		return treeSet.size();
 	}
 
 	@Test
 	public void test() {
-		Interval[] intervals = new Interval[]{new Interval(0, 30), new Interval(5, 10), new Interval(15, 20)};
-		System.out.println(minMeetingRooms(intervals));
+		Interval[] intervals = new Interval[]{new Interval(5, 8), new Interval(6, 8)};
+		//System.out.println(minMeetingRooms(intervals));
+
+		TreeSet<Interval> treeSet = new TreeSet<>();
+		for(Interval i : intervals) {
+			treeSet.add(i);
+		}
 	}
 }

@@ -1,5 +1,7 @@
 package com.codeashobby.leetcode;
 
+import org.junit.Test;
+
 import java.util.*;
 
 /**
@@ -9,41 +11,39 @@ import java.util.*;
 public class FactorCombinations {
 
     public List<List<Integer>> getFactors(int n) {
-        Set<List<Integer>> result = new HashSet<>();
-
-        int dist = (int) Math.sqrt(n);
-
-        for (int i = 2; i <= dist; i++) {
-            if (n % i == 0) {
-                List<List<Integer>> tmp = helper(n / i);
-                for (List<Integer> l : tmp) {
-                    l.add(i);
-                    Collections.sort(l);
-                    result.add(l);
-                }
-            }
-        }
+        HashSet<List<Integer>> result = new HashSet<>();
+        helper(result, new ArrayList<>(), n, n, 2);
         return new ArrayList<>(result);
     }
 
-    public List<List<Integer>> helper(int n) {
-        List<List<Integer>> result = new ArrayList<>();
-
-        List<Integer> t = new ArrayList<>();
-        t.add(n);
-        result.add(t);
-
-        int dist = (int) Math.sqrt(n);
-
-        for (int i = 2; i <= dist; i++) {
-            if (n % i == 0) {
-                List<List<Integer>> tmp = helper(n / i);
-                for (List<Integer> l : tmp) {
-                    l.add(i);
-                    result.add(l);
-                }
-            }
+    public void helper(HashSet<List<Integer>> result, List<Integer> crt, int remain, int n, int start) {
+        if (remain == 0 || start > n / 2) {
+            return;
         }
-        return result;
+
+        if (remain == 1) {
+            result.add(crt);
+        }
+
+        // TODO: stackOverflow, maybe I can improve it here
+
+        if (remain % start == 0) {
+            int t = start;
+            List<Integer> tmp = new ArrayList<>(crt);
+            while (remain % t == 0) {
+                tmp.add(start);
+                t *= start;
+            }
+            helper(result, tmp, start * remain / t, n, start + 1);
+        }
+
+
+        helper(result, crt, remain, n, start + 1);
+    }
+
+    @Test
+    public void test() {
+        List<List<Integer>> result = getFactors(32);
+        result = getFactors(8192);
     }
 }

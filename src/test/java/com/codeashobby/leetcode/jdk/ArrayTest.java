@@ -21,7 +21,7 @@ public class ArrayTest {
 
 	@Test
 	public void array2List() {
-		int[] data = new int[]{1,2,3,4,5};
+		int[] data = new int[]{1, 2, 3, 4, 5};
 		//List<Integer> list = Arrays.asList(data);
 		List list = Arrays.asList(data);
 	}

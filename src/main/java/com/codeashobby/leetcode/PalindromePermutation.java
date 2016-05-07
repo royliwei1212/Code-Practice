@@ -10,7 +10,7 @@ import java.util.Map;
 public class PalindromePermutation {
 
     public boolean canPermutePalindrome(String s) {
-        if (s == null && s.length() < 2) {
+        if (s == null || s.length() < 2) {
             return true;
         }
 

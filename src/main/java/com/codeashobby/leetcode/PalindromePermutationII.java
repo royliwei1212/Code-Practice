@@ -1,9 +1,6 @@
 package com.codeashobby.leetcode;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by hzhou on 5/4/16.
@@ -23,8 +20,35 @@ public class PalindromePermutationII {
 
         Character center = getMiddleChar(map);
 
-        //TODO
-        return null;
+        List<Character> half = new ArrayList<>();
+        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
+            for (int i = 0; i < entry.getValue() / 2; i++) {
+                half.add(entry.getKey());
+            }
+        }
+        Set<String> halfResult = new HashSet<>();
+        getAllString(halfResult, half, new boolean[half.size()], new StringBuilder());
+
+        List<String> result = new ArrayList<>();
+        halfResult.forEach(str -> result.add(str + (center == null ? "" : center) + new StringBuilder(str).reverse()));
+
+        return result;
+    }
+
+    private void getAllString(Set<String> result, List<Character> half, boolean[] isVisited, StringBuilder sb) {
+        if (sb.length() == half.size()) {
+            result.add(sb.toString());
+        }
+        for (int i = 0; i < half.size(); i++) {
+            if (!isVisited[i]) {
+                StringBuilder tmp = new StringBuilder(sb);
+                tmp.append(half.get(i));
+                isVisited[i] = true;
+                getAllString(result, half, isVisited, tmp);
+                isVisited[i] = false;
+            }
+
+        }
     }
 
     private Map<Character, Integer> getCountMap(String s) {
@@ -60,6 +84,11 @@ public class PalindromePermutationII {
             }
         }
         return null;
+    }
+
+    public static void main(String[] args) {
+        PalindromePermutationII pp = new PalindromePermutationII();
+        System.out.println(pp.generatePalindromes("aabb"));
     }
 
 }

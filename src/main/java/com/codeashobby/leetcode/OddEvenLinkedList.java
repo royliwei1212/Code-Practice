@@ -22,7 +22,7 @@ public class OddEvenLinkedList {
             oddEnd = oddEnd.next.next;
         }
 
-        while ( odd.next != null && even.next != null) {
+        while (odd.next != null && even.next != null) {
             if (even.next != odd) {
                 odd.next = even.next;
                 odd = odd.next;

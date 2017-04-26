@@ -20,7 +20,7 @@ public class Base7 {
         while (a >= 7) {
             int b = a % 7;
             a = a / 7;
-            sb.insert(0, "" + b);
+            sb.insert(0, b);
         }
         sb.insert(0, a);
         if (isNegative) {

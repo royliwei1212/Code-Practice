@@ -1,12 +1,6 @@
 package tech.saltyegg.leetcode;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.junit.Test;
+import java.util.*;
 
 /**
  * Created by hzhou on 5/4/15. codeashobby@gmail.com
@@ -14,9 +8,9 @@ import org.junit.Test;
 public class ThreeSum {
 
 	public List<List<Integer>> threeSum(int[] nums) {
-		Set<List<Integer>> result = new HashSet<List<Integer>>();
+		Set<List<Integer>> result = new HashSet<>();
 		if (nums == null || nums.length < 3) {
-			return new ArrayList<List<Integer>>();
+			return new ArrayList<>();
 		}
 		Arrays.sort(nums);
 		int length = nums.length;
@@ -27,7 +21,7 @@ public class ThreeSum {
 					continue;
 				}
 				if (helper(j + 1, length - 1, nums, s)) {
-					List<Integer> r = new ArrayList<Integer>();
+					List<Integer> r = new ArrayList<>();
 					r.add(nums[i]);
 					r.add(nums[j]);
 					r.add(s);
@@ -36,7 +30,7 @@ public class ThreeSum {
 
 			}
 		}
-		return new ArrayList<List<Integer>>(result);
+		return new ArrayList<>(result);
 	}
 
 	private boolean helper(int start, int end, int[] nums, int target) {
@@ -54,11 +48,5 @@ public class ThreeSum {
 		}
 
 		return false;
-	}
-
-	@Test
-	public void test() {
-		int[] nums = new int[]{0, -4, -1, -4, -2, -3, 2};
-		threeSum(nums);
 	}
 }

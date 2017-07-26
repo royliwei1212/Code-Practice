@@ -1,6 +1,9 @@
 package tech.saltyegg.leetcode;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 /**
  * Created by hzhou on 2015/6/15.
@@ -10,23 +13,17 @@ import java.util.*;
  */
 public class TheSkylineProblem {
     public List<int[]> getSkyline(int[][] buildings) {
-        List<int[]> result = new ArrayList<int[]>();
-        List<int[]> height = new ArrayList<int[]>();
+        List<int[]> result = new ArrayList<>();
+        List<int[]> height = new ArrayList<>();
         for (int[] b : buildings) {
             height.add(new int[]{b[0], -b[2]});
             height.add(new int[]{b[1], b[2]});
         }
-        Collections.sort(height, new Comparator<int[]>() {
-            public int compare(int[] a, int[] b) {
-                if (a[0] != b[0]) return a[0] - b[0];
-                return a[1] - b[1];
-            }
+        height.sort((a, b) -> {
+            if (a[0] != b[0]) return a[0] - b[0];
+            return a[1] - b[1];
         });
-        Queue<Integer> pq = new PriorityQueue<Integer>(new Comparator<Integer>() {
-            public int compare(Integer a, Integer b) {
-                return b - a;
-            }
-        });
+        Queue<Integer> pq = new PriorityQueue<>((a, b) -> b - a);
         pq.offer(0);
         int prev = 0;
         for (int[] h : height) {

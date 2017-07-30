@@ -6,10 +6,14 @@ public class RepeatedSubstringPattern {
         if (s == null || s.length() < 2) {
             return false;
         }
-        for (int i = 1; i <= s.length() / 2; i++) {
-            String sub = s.substring(0, i);
-            if ((s.substring(i, s.length()) + sub).equals(s)) return true;
+
+        StringBuilder sb = new StringBuilder(s);
+        for (int i = 0; i < s.length() / 2; i++) {
+            char c = sb.charAt(0);
+            sb.deleteCharAt(0).append(c);
+            if (sb.toString().equals(s)) return true;
         }
+
         return false;
     }
 

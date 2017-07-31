@@ -1,34 +1,41 @@
 package tech.saltyegg.leetcode;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class FindAllAnagramsInAString {
 
     public List<Integer> findAnagrams(String s, String p) {
         List<Integer> result = new ArrayList<>();
         if (s == null || p.isEmpty() || s.length() < p.length()) return result;
-        char[] cp = p.toCharArray();
-        Arrays.sort(cp);
-        p = String.valueOf(cp);
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("0").append(s.substring(0, p.length() - 1));
+        Map<Character, Integer> dict = new HashMap<>();
+        for (int i = 0; i < p.length(); i++) {
+            char c = p.charAt(i);
+            dict.put(c, dict.getOrDefault(c, 0) + 1);
+        }
+        int count = p.length();
+        int l = 0;
 
-        for (int i = 0; i < s.length() - p.length() + 1; i++) {
-            sb.deleteCharAt(0).append(s.charAt(i + p.length() - 1));
-            if (isAnagram(sb.toString(), p)) {
-                result.add(i);
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (dict.getOrDefault(c, 0) > 0) {
+                count--;
+            }
+            dict.put(c, dict.getOrDefault(c, 0) - 1);
+            if (count == 0) {
+                result.add(l);
+            }
+
+            if (i + 1 - l == p.length()) {
+                char lc = s.charAt(l);
+                if (dict.getOrDefault(lc, 0) >= 0) {
+                    count++;
+                }
+                dict.put(lc, dict.getOrDefault(lc, 0) + 1);
+                l++;
             }
         }
         return result;
-    }
-
-    private boolean isAnagram(String a, String b) {
-        if (a.equals(b)) return true;
-        char[] ca = a.toCharArray();
-        Arrays.sort(ca);
-        return String.valueOf(ca).equals(b);
     }
 }

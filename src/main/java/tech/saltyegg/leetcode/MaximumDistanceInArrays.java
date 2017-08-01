@@ -5,18 +5,15 @@ import java.util.List;
 public class MaximumDistanceInArrays {
 
     public int maxDistance(List<List<Integer>> arrays) {
-        int result = Integer.MIN_VALUE;
-
-        for (int i = 0; i < arrays.size(); i++) {
-            int max = Integer.MIN_VALUE;
-            List<Integer> li = arrays.get(i);
-            for (int j = 0; j < arrays.size(); j++) {
-                if (i != j) {
-                    List<Integer> lj = arrays.get(j);
-                    max = Math.max(max, lj.get(lj.size() - 1) - li.get(0));
-                }
-            }
+        int result = 0;
+        int start = arrays.get(0).get(0);
+        int end = arrays.get(0).get(arrays.get(0).size() - 1);
+        for (int i = 1; i < arrays.size(); i++) {
+            List<Integer> l = arrays.get(i);
+            int max = Math.max(Math.abs(l.get(0) - end), Math.abs(l.get(l.size() - 1) - start));
             result = Math.max(result, max);
+            start = Math.min(start, l.get(0));
+            end = Math.max(end, l.get(l.size() - 1));
         }
         return result;
     }

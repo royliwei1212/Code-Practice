@@ -23,15 +23,8 @@ public class PerfectSquares {
     private void findMin(Map<Integer, Integer> dict, Set<Integer> candidates, int key) {
         int result = dict.getOrDefault(key, Integer.MAX_VALUE);
         for (int c : candidates) {
-            if (dict.containsKey(key - c)) {
-                result = Math.min(result, dict.get(key - c) + 1);
-                dict.put(key, result);
-            }
+            result = Math.min(result, dict.getOrDefault(key - c, Integer.MAX_VALUE - 1) + 1);
         }
-    }
-
-    public static void main(String[] args) {
-        PerfectSquares ps = new PerfectSquares();
-        int x = ps.numSquares(3530);
+        dict.put(key, result);
     }
 }

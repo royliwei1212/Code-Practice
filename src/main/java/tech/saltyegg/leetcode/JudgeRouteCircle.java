@@ -28,9 +28,8 @@ public class JudgeRouteCircle {
                     break;
                 default:
             }
-            if (start[0] == 0 && start[1] == 0) return true;
         }
-        return false;
+        return start[0] == 0 && start[1] == 0;
     }
 
 }

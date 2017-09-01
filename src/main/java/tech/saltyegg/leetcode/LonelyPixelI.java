@@ -1,7 +1,7 @@
 package tech.saltyegg.leetcode;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author hzhou
@@ -14,39 +14,27 @@ public class LonelyPixelI {
             return 0;
         }
 
-        Set<Integer> cs = new HashSet<>();
-        Set<Integer> rs = new HashSet<>();
+        Map<Integer, Integer> colMap = new HashMap<>();
+        Map<Integer, Integer> rowMap = new HashMap<>();
         int result = 0;
 
         for (int i = 0; i < picture.length; i++) {
             for (int j = 0; j < picture[0].length; j++) {
-                if (rs.contains(i)) {
-                    break;
-                }
-                if (cs.contains(j)) {
-                    continue;
-                }
-                char c = picture[i][j];
-                if (c == 'B') {
-                    rs.add(i);
-                    cs.add(j);
-                    boolean hasB = false;
-                    for (int x = 0; x < picture[i].length; x++) {
-                        if (x != j && picture[i][x] == 'B') {
-                            hasB = true;
-                            cs.add(x);
-                        }
-                    }
-                    for (int x = 0; x < picture.length; x++) {
-                        if (x != i && picture[x][j] == 'B') {
-                            hasB = true;
-                            rs.add(x);
-                        }
-                    }
-                    if (!hasB) result++;
+                if (picture[i][j] == 'B') {
+                    colMap.put(j, colMap.getOrDefault(j, 0) + 1);
+                    rowMap.put(i, rowMap.getOrDefault(i, 0) + 1);
                 }
             }
         }
+
+        for (int i = 0; i < picture.length; i++) {
+            for (int j = 0; j < picture[0].length; j++) {
+                if (picture[i][j] == 'B' && colMap.getOrDefault(j, 0) == 1 && rowMap.getOrDefault(i, 0) == 1) {
+                    result++;
+                }
+            }
+        }
+
         return result;
     }
 

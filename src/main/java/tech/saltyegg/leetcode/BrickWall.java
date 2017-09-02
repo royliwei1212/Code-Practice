@@ -1,6 +1,8 @@
 package tech.saltyegg.leetcode;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author hzhou
@@ -9,31 +11,25 @@ import java.util.List;
 public class BrickWall {
 
     public int leastBricks(List<List<Integer>> wall) {
+
         int sum = wall.get(0).stream().mapToInt(Integer::intValue).sum();
 
-        int[][] dict = new int[wall.size()][sum];
-        for (int i = 0; i < dict.length; i++) {
-            for (int j = 0; j < sum; j++) {
-                dict[i][j] = 1;
-            }
-        }
+        Map<Integer, Integer> dict = new HashMap<>();
 
-        for (int i = 0; i < wall.size(); i++) {
-            List<Integer> list = wall.get(i);
+        for (List<Integer> list : wall) {
             int s = 0;
             for (int x : list) {
                 s += x;
-                if (s < sum) dict[i][s] = 0;
+                if (s < sum) {
+                    dict.put(s, dict.getOrDefault(s, 0) + 1);
+                }
             }
         }
 
         int result = wall.size();
-        for (int i = 1; i < sum; i++) {
-            int x = 0;
-            for (int j = 0; j < wall.size(); j++) {
-                x += dict[j][i];
-            }
-            result = Math.min(x, result);
+
+        for (int x : dict.values()) {
+            result = Math.min(result, wall.size() - x);
         }
 
         return result;

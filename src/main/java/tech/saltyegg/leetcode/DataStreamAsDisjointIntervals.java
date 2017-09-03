@@ -5,6 +5,7 @@ import tech.saltyegg.leetcode.parent.Interval;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.TreeSet;
 
 /**
  * @author hzhou
@@ -12,65 +13,69 @@ import java.util.List;
  */
 public class DataStreamAsDisjointIntervals {
 
-    private List<Interval> result;
+    private TreeSet<Interval> treeSet;
 
     /**
      * Initialize your data structure here.
      */
     public DataStreamAsDisjointIntervals() {
-        result = new ArrayList<>();
+        treeSet = new TreeSet<>(Comparator.comparingInt(o -> o.start));
     }
 
     public void addNum(int val) {
 
         Interval in = new Interval(val, val);
 
-        if (result.isEmpty() || val < result.get(0).start - 1 || val > result.get(result.size() - 1).end + 1) {
-            result.add(in);
+        Interval floor = treeSet.floor(in);
+        Interval ceiling = treeSet.ceiling(in);
+
+        if (treeSet.isEmpty()) {
+            treeSet.add(in);
             return;
         }
+        if (floor == ceiling) return;
 
-        if (val == result.get(0).start - 1) {
-            result.get(0).start = val;
-            return;
-        }
+        if (floor == null) {
+            if (val == ceiling.start) {
+                return;
+            } else if (ceiling.start == val + 1) {
+                in.end = ceiling.end;
+                treeSet.remove(ceiling);
+            }
+            treeSet.add(in);
 
-        if (val == result.get(result.size() - 1).end + 1) {
-            result.get(result.size() - 1).end = val;
-            return;
-        }
-
-        for (int i = 0; i < result.size(); i++) {
-            Interval crt = result.get(i);
-            if (crt.start <= val && crt.end >= val) {
+        } else if (ceiling == null) {
+            if (val <= floor.end) {
                 return;
             }
 
-            if (val > crt.end && i < result.size() - 1) {
-                Interval next = result.get(i + 1);
-                if (val == crt.end + 1) {
-                    if (val == next.start - 1) {
-                        crt.end = next.end;
-                        result.remove(next);
-                        i++;
-                    } else {
-                        crt.end = val;
-                    }
-                } else {
-                    if (val == next.start - 1) {
-                        next.start = val;
-                    } else if (val < next.start - 1){
-                        result.add(in);
-                    }
-                }
+            if (floor.end == val - 1) {
+                in.start = floor.start;
+                treeSet.remove(floor);
             }
-        }
+            treeSet.add(in);
 
-        result.sort(Comparator.comparingInt(o -> o.start));
+        } else {
+
+            if (val <= floor.end || val == ceiling.start) return;
+
+            if (val == floor.end + 1 || val == ceiling.start - 1) {
+                if (val == floor.end + 1) {
+                    in.start = floor.start;
+                    treeSet.remove(floor);
+                } else if (val == ceiling.start - 1) {
+                    in.end = ceiling.end;
+                    treeSet.remove(ceiling);
+                }
+
+            }
+            treeSet.add(in);
+
+        }
 
     }
 
     public List<Interval> getIntervals() {
-        return result;
+        return new ArrayList<>(treeSet);
     }
 }

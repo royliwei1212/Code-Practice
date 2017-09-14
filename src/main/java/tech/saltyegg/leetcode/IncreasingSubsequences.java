@@ -13,25 +13,25 @@ public class IncreasingSubsequences {
 
     public List<List<Integer>> findSubsequences(int[] nums) {
         Set<List<Integer>> result = new HashSet<>();
-        go(0, nums, new ArrayList<>(), result);
+        List<List<Integer>> crt = new ArrayList<>();
+        crt.add(new ArrayList<>());
+
+        for (int num : nums) {
+            int n = crt.size();
+
+            for (int j = 0; j < n; j++) {
+                List<Integer> list = crt.get(j);
+                if (list.isEmpty() || num >= list.get(list.size() - 1)) {
+                    crt.add(new ArrayList<>(list));
+                    list.add(num);
+                }
+
+                if (list.size() > 1) {
+                    result.add(new ArrayList<>(list));
+                }
+            }
+        }
+
         return new ArrayList<>(result);
     }
-
-    private void go(int start, int[] nums, List<Integer> crt, Set<List<Integer>> result) {
-
-        if (start == nums.length) {
-            if (crt.size() > 1) {
-                result.add(crt);
-            }
-        }
-
-        for (int i = start; i < nums.length; i++) {
-            if (crt.isEmpty() || nums[i] >= crt.get(crt.size() - 1)) {
-                go(i + 1, nums, new ArrayList<>(crt), result);
-                crt.add(nums[i]);
-                go(i + 1, nums, new ArrayList<>(crt), result);
-            }
-        }
-    }
-
 }

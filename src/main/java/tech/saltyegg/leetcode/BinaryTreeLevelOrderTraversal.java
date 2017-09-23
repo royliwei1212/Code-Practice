@@ -3,13 +3,12 @@
  */
 package tech.saltyegg.leetcode;
 
+import tech.saltyegg.leetcode.parent.TreeNode;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-
-import tech.saltyegg.leetcode.parent.TreeNode;
-import org.junit.Test;
 
 /**
  * Description:
@@ -18,46 +17,27 @@ import org.junit.Test;
  */
 public class BinaryTreeLevelOrderTraversal {
 
-	public List<List<Integer>> levelOrder(TreeNode root) {
-		List<List<Integer>> result = new ArrayList<List<Integer>>();
-		if (root == null) {
-			return result;
-		}
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (root == null) return result;
 
-		Queue<TreeNode> queue = new LinkedList<TreeNode>();
-		queue.offer(root);
-		int crt = 1;
-		int next = 0;
-		List<Integer> list = new ArrayList<Integer>();
-		while (!queue.isEmpty()) {
-			TreeNode node = queue.poll();
-			list.add(node.val);
-			crt--;
-			if (node.left != null) {
-				queue.offer(node.left);
-				next++;
-			}
-			if (node.right != null) {
-				queue.offer(node.right);
-				next++;
-			}
+        Queue<TreeNode> queue = new LinkedList<>();
+        List<Integer> crt = new ArrayList<>();
+        queue.add(root);
+        queue.add(null);
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            if (node == null) {
+                if (!queue.isEmpty()) queue.add(null);
+                result.add(crt);
+                crt = new ArrayList<>();
+            } else {
+                crt.add(node.val);
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
+            }
 
-			if (crt == 0) {
-				result.add(new ArrayList<Integer>(list));
-				list.clear();
-				crt = next;
-				next = 0;
-			}
-		}
-
-		return result;
-	}
-
-	@Test
-	public void test() {
-		TreeNode root = new TreeNode(1);
-		root.left = new TreeNode(2);
-		List<List<Integer>> result = levelOrder(root);
-
-	}
+        }
+        return result;
+    }
 }

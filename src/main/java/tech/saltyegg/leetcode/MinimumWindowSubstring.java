@@ -3,10 +3,10 @@
  */
 package tech.saltyegg.leetcode;
 
+import org.junit.Test;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import org.junit.Test;
 
 /**
  * Description: For example,
@@ -21,65 +21,40 @@ import org.junit.Test;
  */
 public class MinimumWindowSubstring {
 
-	public String minWindow(String s, String t) {
-		if (t == null || t.isEmpty()) {
-			return "";
-		}
-		if (s == null || s.isEmpty()) {
-			return null;
-		}
+    public String minWindow(String s, String t) {
+        if (t == null || t.isEmpty() || s == null || s.isEmpty()) return "";
 
-		Map<Character, Integer> tMap = new HashMap<Character, Integer>();
-		for (int i = 0; i < t.length(); i++) {
-			char c = t.charAt(i);
-			if (tMap.containsKey(c)) {
-				tMap.put(c, tMap.get(c) + 1);
-			} else {
-				tMap.put(c, 1);
-			}
-		}
+        Map<Character, Integer> tMap = new HashMap<>();
+        for (char c : t.toCharArray()) tMap.put(c, tMap.getOrDefault(c, 0) + 1);
 
-		Map<Character, Integer> countMap = new HashMap<Character, Integer>();
-		int matchCount = 0;
-		int start = 0;
-		String min = "";
+        Map<Character, Integer> sMap = new HashMap<>();
+        int start = 0, mc = 0;
+        String result = "";
 
-		for (int i = 0; i < s.length(); i++) {
-			char c = s.charAt(i);
-			if (tMap.containsKey(c)) {
-				if (countMap.containsKey(c)) {
-					if (countMap.get(c) < tMap.get(c)) {
-						matchCount++;
-					}
-					countMap.put(c, countMap.get(c) + 1);
-				} else {
-					countMap.put(c, 1);
-					matchCount++;
-				}
-			}
-			if (matchCount == t.length()) {
-				char tmp = s.charAt(start);
-				while (start < s.length() && (!countMap.containsKey(tmp) || countMap.get(tmp) > tMap.get(tmp))) {
-					if (countMap.containsKey(tmp)) {
-						countMap.put(tmp, countMap.get(tmp) - 1);
-					}
-					start++;
-					tmp = s.charAt(start);
-				}
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (tMap.containsKey(c)) {
+                if (sMap.getOrDefault(c, 0) < tMap.get(c)) mc++;
+                sMap.put(c, sMap.getOrDefault(c, 0) + 1);
+            }
+            if (mc == t.length()) {
+                while (start < s.length() && (!sMap.containsKey(s.charAt(start)) || sMap.get(s.charAt(start)) > tMap.get(s.charAt(start)))) {
+                    if (sMap.containsKey(s.charAt(start))) sMap.put(s.charAt(start), sMap.get(s.charAt(start)) - 1);
+                    start++;
+                }
 
-				if (min.isEmpty() || i + 1 - start < min.length()) {
-					min = s.substring(start, i + 1);
-				}
-			}
-		}
+                if (result.isEmpty() || i - start + 1 < result.length()) {
+                    result = s.substring(start, i + 1);
+                }
+            }
+        }
+        return result;
+    }
 
-		return min;
-	}
-
-	@Test
-	public void test() {
-		String s = "a";
-		String t = "aa";
-		String result = minWindow(s, t);
-	}
+    @Test
+    public void test() {
+        String s = "a";
+        String t = "aa";
+        String result = minWindow(s, t);
+    }
 }

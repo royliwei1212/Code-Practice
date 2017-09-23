@@ -16,22 +16,36 @@ package tech.saltyegg.leetcode;
  */
 public class SearchForARange {
     public int[] searchRange(int[] nums, int target) {
-        int[] result = new int[]{-1, -1};
-        if (nums == null || nums.length == 0 || target < nums[0] || target > nums[nums.length - 1]) {
-            return result;
-        }
+        return new int[]{findLeft(nums, target), findRight(nums, target)};
+    }
 
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] == target) {
-                result[0] = i;
-                int crt = nums[i];
-                while (nums[i] == crt) {
-                    i++;
-                }
-                result[1] = i - 1;
-                break;
+    private int findLeft(int[] nums, int target) {
+        int l = 0, r = nums.length - 1;
+        while (l <= r) {
+            int m = l + (r - l) / 2;
+            if (nums[m] >= target) {
+                r = m - 1;
+            } else {
+                l = m + 1;
             }
         }
-        return result;
+
+        if (l >= 0 && l < nums.length && nums[l] == target) return l;
+        return -1;
+    }
+
+    private int findRight(int[] nums, int target) {
+        int l = 0, r = nums.length - 1;
+        while (l <= r) {
+            int m = l + (r - l) / 2;
+            if (nums[m] > target) {
+                r = m - 1;
+            } else {
+                l = m + 1;
+            }
+        }
+
+        if (r >= 0 && r < nums.length && nums[r] == target) return r;
+        return -1;
     }
 }

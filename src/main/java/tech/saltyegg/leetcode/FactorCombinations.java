@@ -1,8 +1,7 @@
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hzhou on 2015/8/10.
@@ -11,39 +10,20 @@ import java.util.*;
 public class FactorCombinations {
 
     public List<List<Integer>> getFactors(int n) {
-        HashSet<List<Integer>> result = new HashSet<>();
-        helper(result, new ArrayList<>(), n, n, 2);
-        return new ArrayList<>(result);
+        List<List<Integer>> result = new ArrayList<>();
+        helper(n, 2, result, new ArrayList<>());
+        return result;
     }
 
-    public void helper(HashSet<List<Integer>> result, List<Integer> crt, int remain, int n, int start) {
-        if (remain == 0 || start > n / 2) {
-            return;
-        }
-
-        if (remain == 1) {
-            result.add(crt);
-        }
-
-        // TODO: stackOverflow, maybe I can improve it here
-
-        if (remain % start == 0) {
-            int t = start;
-            List<Integer> tmp = new ArrayList<>(crt);
-            while (remain % t == 0) {
-                tmp.add(start);
-                t *= start;
+    private void helper(int n, int start, List<List<Integer>> result, List<Integer> out) {
+        for (int i = start; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) {
+                List<Integer> newOut = new ArrayList<>(out);
+                newOut.add(i);
+                helper(n / i, i, result, newOut);
+                newOut.add(n / i);
+                result.add(newOut);
             }
-            helper(result, tmp, start * remain / t, n, start + 1);
         }
-
-
-        helper(result, crt, remain, n, start + 1);
-    }
-
-    @Test
-    public void test() {
-        List<List<Integer>> result = getFactors(32);
-        result = getFactors(8192);
     }
 }

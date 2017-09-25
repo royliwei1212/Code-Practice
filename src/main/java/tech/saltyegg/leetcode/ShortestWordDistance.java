@@ -12,30 +12,20 @@ import java.util.Map;
 public class ShortestWordDistance {
 
     public int shortestDistance(String[] words, String word1, String word2) {
-        Map<String, List<Integer>> map = new HashMap<>();
-
+        Map<String, List<Integer>> dp = new HashMap<>();
         for (int i = 0; i < words.length; i++) {
             String s = words[i];
-            List<Integer> list;
-            if (map.containsKey(s)) {
-                list = map.get(s);
-            } else {
-                list = new ArrayList<>();
+            if (!dp.containsKey(s)) {
+                dp.put(s, new ArrayList<>());
             }
-            list.add(i);
-            map.put(s, list);
+            dp.get(s).add(i);
         }
-        List<Integer> l1 = map.get(word1);
-        List<Integer> l2 = map.get(word2);
-
-        int min = Integer.MAX_VALUE;
-
-        for (int a : l1) {
-            for (int b : l2) {
-                min = Math.min(Math.abs(b - a), min);
+        int result = words.length;
+        for (int i : dp.get(word1)) {
+            for (int j : dp.get(word2)) {
+                result = Math.min(result, Math.abs(i - j));
             }
         }
-
-        return min;
+        return result;
     }
 }

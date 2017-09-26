@@ -1,71 +1,29 @@
-/**
- * Copyright (c) 2015 hzhou, All rights reserved.
- */
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-
-/**
- * Description:
- * TODO: this algorithm is not elegant
- *
- * @author hzhou
- */
 public class SearchA2DMatrix {
 
-	public boolean searchMatrix(int[][] matrix, int target) {
-		if (matrix == null || matrix.length == 0) {
-			return false;
-		}
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if (matrix == null || matrix.length == 0 || matrix[0] == null || matrix[0].length == 0) return false;
+        int h = matrix.length;
+        int w = matrix[0].length;
 
-		if (target < matrix[0][0] || target > matrix[matrix.length - 1][matrix[0].length - 1]) {
-			return false;
-		}
-		// find the right row
-		int start = 0;
-		int end = matrix.length - 1;
-		while (start <= end) {
-			if (start + 1 == end) {
-				start = (target >= matrix[end][0]) ? end : start;
-				break;
-			}
-			int middle = (start + end) / 2;
-			if (matrix[middle][0] == target) {
-				return true;
-			}
+        int l = 0, r = h * w - 1;
+        while (l <= r) {
+            int m = l + (r - l) / 2;
+            int g = get(m, matrix);
+            if (g == target) return true;
+            if (g > target) {
+                r = m - 1;
+            } else {
+                l = m + 1;
+            }
+        }
+        return false;
+    }
 
-			if (target > matrix[end][0]) {
-				start = end;
-				break;
-			}
-
-			if (matrix[middle][0] > target) {
-				end = middle - 1;
-			} else {
-				start = middle;
-			}
-
-		}
-		int row = start;
-		start = 0;
-		end = matrix[0].length - 1;
-		while (start <= end) {
-			int middle = (start + end) / 2;
-			if (matrix[row][middle] == target) {
-				return true;
-			}
-			if (matrix[row][middle] > target) {
-				end = middle - 1;
-			} else {
-				start = middle + 1;
-			}
-		}
-		return false;
-	}
-
-	@Test
-	public void test() {
-		int[][] matrix = new int[][]{{1}, {3}};
-		searchMatrix(matrix, 3);
-	}
+    private int get(int i, int[][] matrix) {
+        int r = i / matrix[0].length;
+        int c = i % matrix[0].length;
+        return matrix[r][c];
+    }
 }

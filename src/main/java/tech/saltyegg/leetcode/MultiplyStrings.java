@@ -3,8 +3,6 @@
  */
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-
 /**
  * Description: Given two numbers represented as strings, return multiplication of the numbers as a string.
  * <p/>
@@ -14,41 +12,29 @@ import org.junit.Test;
  */
 public class MultiplyStrings {
 
-	public String multiply(String num1, String num2) {
-		if (num1 == null || num1.isEmpty() || num2 == null || num2.isEmpty() || num1.equals("0") || num2.equals("0")) {
-			return "0";
-		}
-		int[] tmp = new int[num1.length() + num2.length()];
-		String t1 = new StringBuilder(num1).reverse().toString();
-		String t2 = new StringBuilder(num2).reverse().toString();
-		for (int i = 0; i < t1.length(); i++) {
-			for (int j = 0; j < t2.length(); j++) {
-				tmp[i + j] += calc(t1.charAt(i), t2.charAt(j));
-			}
-		}
-		int inc = 0;
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < tmp.length; i++) {
-			int sum = inc + tmp[i];
-			inc = sum / 10;
-			tmp[i] = sum % 10;
-			sb.append(tmp[i]);
-		}
-		String result = sb.reverse().toString();
-		int i = 0;
-		while (result.charAt(i) == '0') {
-			i++;
-		}
-		return result.substring(i, result.length());
-	}
+    public String multiply(String num1, String num2) {
+        if (num1 == null || num1.isEmpty() || num2 == null || num2.isEmpty()) return "0";
+        int[] ch1 = new int[num1.length()];
+        int[] ch2 = new int[num2.length()];
+        for (int i = 0; i < num1.length(); i++) ch1[i] = num1.charAt(num1.length() - i - 1) - '0';
+        for (int i = 0; i < num2.length(); i++) ch2[i] = num2.charAt(num2.length() - i - 1) - '0';
 
-	private int calc(char a, char b) {
-		return (a - '0') * (b - '0');
-	}
-
-	@Test
-	public void test() {
-		String r = multiply("0", "0");
-		System.out.println(r);
-	}
+        int[] result = new int[num1.length() + num2.length()];
+        for (int i = 0; i < ch1.length; i++) {
+            for (int j = 0; j < ch2.length; j++) {
+                int m = ch1[i] * ch2[j];
+                result[i + j] += m;
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        int carry = 0;
+        for (int aResult : result) {
+            int x = aResult + carry;
+            sb.append(x % 10);
+            carry = x / 10;
+        }
+        sb.reverse();
+        while (sb.length() > 1 && sb.charAt(0) == '0') sb.deleteCharAt(0);
+        return sb.toString();
+    }
 }

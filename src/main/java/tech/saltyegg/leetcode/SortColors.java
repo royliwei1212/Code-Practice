@@ -14,22 +14,20 @@ package tech.saltyegg.leetcode;
 public class SortColors {
 
     public void sortColors(int[] nums) {
-        if (nums == null || nums.length < 2) {
-            return;
-        }
-
-        int[] counter = new int[3];
-        for (int i : nums) {
-            counter[i]++;
-        }
-
-        int index = 0;
-        for (int i = 0; i < 3; i++) {
-            int count = counter[i];
-            while (count > 0) {
-                nums[index++] = i;
-                count--;
+        if (nums == null || nums.length < 2) return;
+        int red = 0, blue = nums.length - 1;
+        for (int i = red; i <= blue; i++) {
+            if (nums[i] == 0) {
+                swap(red++, i, nums);
+            } else if (nums[i] == 2) {
+                swap(blue--, i--, nums); // note i-- here
             }
         }
+    }
+
+    private void swap(int a, int b, int[] nums) {
+        int t = nums[a];
+        nums[a] = nums[b];
+        nums[b] = t;
     }
 }

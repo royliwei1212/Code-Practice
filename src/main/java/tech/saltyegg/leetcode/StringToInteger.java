@@ -3,8 +3,6 @@
  */
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-
 /**
  * Description
  *
@@ -12,51 +10,30 @@ import org.junit.Test;
  */
 public class StringToInteger {
 
-	public int myAtoi(String str) {
-		if (str == null || str.trim().isEmpty()) {
-			return 0;
-		}
-		str = str.trim();
-		double result = 0;
-		int offSet = 0;
-		boolean positive = true;
+    public int myAtoi(String str) {
+        if (str == null || str.trim().isEmpty()) return 0;
+        str = str.trim();
+        long result = 0;
+        int isNegative = 1;
+        int start = 0;
+        if (str.charAt(0) == '+') {
+            start++;
+        } else if (str.charAt(0) == '-') {
+            isNegative = -1;
+            start++;
+        }
+        if (str.length() == start) {
+            return 0;
+        }
 
-		char c = str.charAt(0);
-		if (c == '-') {
-			positive = false;
-			offSet++;
-		}
-		if (c == '+') {
-			offSet++;
-		}
-		while (offSet < str.length() && isNumber(str.charAt(offSet))) {
-			result = result * 10 + (str.charAt(offSet) - '0');
-			offSet++;
-		}
+        for (int i = start; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (c < '0' || c > '9') return (int) (isNegative * result);
+            result = 10 * result + (c - '0');
+            if (isNegative * result > Integer.MAX_VALUE) return Integer.MAX_VALUE;
+            if (isNegative * result < Integer.MIN_VALUE) return Integer.MIN_VALUE;
+        }
+        return (int) (isNegative * result);
+    }
 
-		result = positive ? result : -1 * result;
-
-		if (result > Integer.MAX_VALUE) {
-			return Integer.MAX_VALUE;
-		}
-		if (result < Integer.MIN_VALUE) {
-			return Integer.MIN_VALUE;
-		}
-
-		return (int) result;
-	}
-
-	private boolean isNumber(char c) {
-		return c >= '0' && c <= '9';
-	}
-
-	@Test
-	public void test() {
-		System.out.println(myAtoi("-212121"));
-		System.out.println(myAtoi(String.valueOf(Integer.MAX_VALUE)));
-		System.out.println(myAtoi(String.valueOf(Integer.MIN_VALUE)));
-		System.out.println(myAtoi("-2147483649"));
-		System.out.println(myAtoi("2147483649"));
-
-	}
 }

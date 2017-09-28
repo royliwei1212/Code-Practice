@@ -7,43 +7,29 @@ package tech.saltyegg.leetcode;
 public class MoveZeroes {
 
     public void moveZeroes(int[] nums) {
-        if (nums == null || nums.length < 2) {
-            return;
-        }
-
-        int firstZero = getFirstZeroIndex(-1, nums);
-        int firstNonZero = getFirstNonZeroIndex(-1, nums);
-        while (firstNonZero != nums.length) {
-            if (firstNonZero > firstZero) {
-                nums[firstZero] = nums[firstNonZero];
-                nums[firstNonZero] = 0;
-                firstZero = getFirstZeroIndex(firstZero, nums);
+        if (nums == null || nums.length < 2) return;
+        int z, nz;
+        z = nz = 0;
+        while (z < nums.length && nz < nums.length) {
+            while (z < nums.length && nums[z] != 0) z++;
+            while (nz < nums.length && nums[nz] == 0) nz++;
+            if (z < nums.length && nz < nums.length && z < nz) {
+                swap(z, nz, nums);
+                z++;
             }
-            firstNonZero = getFirstNonZeroIndex(firstZero, nums);
+            nz++;
         }
     }
 
-    private int getFirstZeroIndex(int start, int[] nums) {
-        for (int i = start + 1; i < nums.length; i++) {
-            if (nums[i] == 0) {
-                return i;
-            }
-        }
-        return nums.length;
-    }
-
-    private int getFirstNonZeroIndex(int start, int[] nums) {
-        for (int i = start + 1; i < nums.length; i++) {
-            if (nums[i] != 0) {
-                return i;
-            }
-        }
-        return nums.length;
+    private void swap(int a, int b, int[] nums) {
+        int t = nums[a];
+        nums[a] = nums[b];
+        nums[b] = t;
     }
 
     public static void main(String[] args) {
         MoveZeroes mz = new MoveZeroes();
-        mz.moveZeroes(new int[]{0, 1, 0, 3, 12});
+        mz.moveZeroes(new int[]{1, 0});
     }
 
 }

@@ -5,25 +5,14 @@ package tech.saltyegg.leetcode;
  */
 public class ExcelSheetColumnTitle {
 
-	public String convertToTitle(int n) {
-		assert n > 0;
-
-		//StringBuilder sb = new StringBuilder();
-		String result = "";
-		while (n > 0) {
-			int mod = n % 26;
-			result = cal(mod) + result;
-
-			n = n / 26;
-			if (mod == 0) {
-				n--;
-			}
-		}
-		return result;
-	}
-
-	private char cal(int i) {
-		i = (i + 26 - 1) % 26;
-		return (char) ('A' + i);
-	}
+    public String convertToTitle(int n) {
+        StringBuilder sb = new StringBuilder();
+        while (n > 0) {
+            n = n - 1;
+            int m = n % 26;
+            sb.insert(0, (char) ('A' + m));
+            n = n / 26;
+        }
+        return sb.toString();
+    }
 }

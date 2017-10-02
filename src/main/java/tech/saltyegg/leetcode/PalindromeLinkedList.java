@@ -1,7 +1,7 @@
 package tech.saltyegg.leetcode;
 
-import tech.saltyegg.leetcode.parent.ListNode;
 import org.junit.Test;
+import tech.saltyegg.leetcode.parent.ListNode;
 
 /**
  * Created by hzhou on 2015/8/10.
@@ -10,59 +10,48 @@ import org.junit.Test;
 public class PalindromeLinkedList {
 
     public boolean isPalindrome(ListNode head) {
-        if (head == null || head.next == null) {
-            return true;
-        }
-
-        ListNode fast = head.next;
-        ListNode slow = head;
-
-        while (fast != null && fast.next != null) {
+        if (head == null || head.next == null) return true;
+        ListNode fast, slow;
+        fast = slow = head;
+        while (fast != null && fast.next != null && fast.next.next != null) {
             fast = fast.next.next;
             slow = slow.next;
         }
+        ;
+        ListNode half = slow.next;
+        if (half.next == null && half.val != head.val) return false;
+        // reverse half now
+        slow.next = null;
+        ListNode p = half;
+        ListNode c = p.next;
+        p.next = null;
 
-        ListNode half = reverse(slow.next);
-        fast = head;
-        while (half != null && fast != null) {
-            if (half.val != fast.val) {
-                return false;
-            }
-            half = half.next;
-            fast = fast.next;
+        while (c != null) {
+            ListNode t = c.next;
+            c.next = p;
+            p = c;
+            c = t;
         }
-
+        slow = head;
+        while (slow != null && p != null) {
+            if (slow.val != p.val) return false;
+            slow = slow.next;
+            p = p.next;
+        }
         return true;
-    }
-
-    private ListNode reverse(ListNode head) {
-        if (head == null || head.next == null) {
-            return head;
-        }
-        ListNode cursor = head;
-        ListNode next = cursor.next;
-        ListNode tmp;
-        cursor.next = null;
-        while (next != null) {
-            //cursor.next = null;
-            tmp = next.next;
-            next.next = cursor;
-            cursor = next;
-            if (tmp != null) {
-                next = tmp;
-            } else {
-                break;
-            }
-        }
-        return next;
     }
 
     @Test
     public void test() {
         ListNode a = new ListNode(1);
-        a.next = new ListNode(2);
+        ListNode b = new ListNode(2);
+        ListNode c = new ListNode(2);
+        ListNode d = new ListNode(4);
+        a.next = b;
+        b.next = c;
+        c.next = d;
         //a.next.next = new ListNode(3);
         //a.next.next.next = new ListNode(4);
-        boolean result = isPalindrome(a);
+        System.out.println(isPalindrome(a));
     }
 }

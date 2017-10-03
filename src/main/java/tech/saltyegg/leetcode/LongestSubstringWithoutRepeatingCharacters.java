@@ -14,18 +14,18 @@ public class LongestSubstringWithoutRepeatingCharacters {
             return 0;
         }
 
-        int pre, crt, max;
+        int pre, result;
         pre = 0;
-        crt = max = 1;
+        result = 1;
 
-        Set<Character> set = new HashSet<Character>();
+        Set<Character> set = new HashSet<>();
         set.add(s.charAt(0));
         for (int i = 1; i < s.length(); i++) {
-            crt = i;
+
             char c = s.charAt(i);
             if (set.contains(c)) {
 
-                while (s.charAt(pre) != s.charAt(crt)) {
+                while (s.charAt(pre) != s.charAt(i)) {
                     set.remove(s.charAt(pre));
                     pre++;
                 }
@@ -33,11 +33,9 @@ public class LongestSubstringWithoutRepeatingCharacters {
             } else {
                 set.add(c);
             }
-            if (max < crt - pre + 1) {
-                max = crt - pre + 1;
-            }
+            result = Math.max(result, i - pre + 1);
         }
-        return max;
+        return result;
     }
 
     @Test

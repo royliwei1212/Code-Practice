@@ -10,34 +10,21 @@ import java.util.List;
  * Email: codeashobby@gmail.com
  */
 public class GenerateParentheses {
-    public List<String> generateParenthesis(int n) {
-        List<String> result = new ArrayList<String>();
-        if (n <= 0) {
-            return result;
-        }
 
-        helper(n, n, new StringBuilder(), result);
+    public List<String> generateParenthesis(int n) {
+        List<String> result = new ArrayList<>();
+        helper(0, 0, n, result, "");
         return result;
     }
 
-    private void helper(int left, int right, StringBuilder sb, List<String> result) {
-        if (left == 0 && right == 0) {
-            result.add(sb.toString());
+    private void helper(int l, int r, int n, List<String> result, String sb) {
+        if (l > n || r > n) return;
+        if (l == n && r == n) {
+            result.add(sb);
             return;
         }
-        if (left > right) {
-            return;
-        }
-        if (left > 0) {
-            StringBuilder sbl = new StringBuilder(sb);
-            sbl.append('(');
-            helper(left - 1, right, sbl, result);
-        }
-        if (right >= left) {
-            StringBuilder sbr = new StringBuilder(sb);
-            sbr.append(')');
-            helper(left, right - 1, sbr, result);
-        }
+        if (l < n) helper(l + 1, r, n, result, sb + "(");
+        if (l > r) helper(l, r + 1, n, result, sb + ")");
     }
 
     @Test

@@ -12,37 +12,25 @@ import java.util.Stack;
  */
 public class SimplifyPath {
 
-	public String simplifyPath(String path) {
-		if (path == null || path.isEmpty()) {
-			return "";
-		}
-		if (!path.startsWith("/")) {
-			return null;
-		}
-		path = path.trim();
-		Stack<String> stack = new Stack<String>();
-		StringBuilder sb = new StringBuilder();
-		String[] splits = path.split("/");
-		for (String s : splits) {
-			s = s.trim();
-			if (isValid(s)) {
-				stack.push(s);
-			} else if (s.equals("..")) {
-				if (!stack.isEmpty()) {
-					stack.pop();
-				}
-			}
-		}
+    public String simplifyPath(String path) {
+        if (path == null || path.isEmpty()) return "/";
+        String[] splits = path.split("/");
 
-		for (String s : stack) {
-			sb.append("/").append(s);
-		}
-
-		return sb.toString().isEmpty() ? "/" : sb.toString();
-	}
-
-	private boolean isValid(String s) {
-		return !(s.isEmpty() || s.equals(".") || s.equals(".."));
-	}
-
+        Stack<String> stack = new Stack<>();
+        for (String s : splits) {
+            if (s.isEmpty() || s.equals(".")) continue;
+            if (s.equals("..")) {
+                if (!stack.isEmpty()) {
+                    stack.pop();
+                }
+                continue;
+            }
+            stack.push(s);
+        }
+        StringBuilder sb = new StringBuilder();
+        for (String s : stack) {
+            sb.append("/").append(s);
+        }
+        return sb.length() == 0 ? "/" : sb.toString();
+    }
 }

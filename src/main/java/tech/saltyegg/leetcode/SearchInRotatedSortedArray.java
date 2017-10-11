@@ -1,9 +1,5 @@
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-
-import static org.junit.Assert.assertSame;
-
 /**
  * Created by hzhou on 2015/5/26.
  * Email: codeashobby@gmail.com
@@ -19,74 +15,29 @@ import static org.junit.Assert.assertSame;
 public class SearchInRotatedSortedArray {
 
     public int search(int[] nums, int target) {
-        if (nums == null || nums.length == 0) {
-            return -1;
-        }
+        if (nums == null || nums.length == 0) return -1;
 
-        int pivot = getPivot(nums);
-        if (pivot == -1) {
-            return binarySearch(0, nums.length - 1, nums, target);
-        } else {
-            int l = binarySearch(0, pivot - 1, nums, target);
-            if (l != -1) {
-                return l;
-            } else {
-                return binarySearch(pivot, nums.length - 1, nums, target);
-            }
-        }
-    }
+        int l = 0;
+        int r = nums.length - 1;
+        while (l <= r) {
+            int m = l + (r - l) / 2;
+            if (nums[m] == target) return m;
 
-    private int getPivot(int[] nums) {
-        int start = 0;
-        int end = nums.length - 1;
-        if (nums[start] < nums[end]) {
-            return -1;
-        }
-        while (start < end) {
-            if (start + 1 >= end) {
-                return nums[start] < nums[end] ? start : end;
-            }
-            int middle = (start + end) / 2;
-            if (nums[middle] < nums[middle - 1] && nums[middle] < nums[middle + 1]) {
-                return middle;
-            }
-            if (nums[start] < nums[middle]) {
-                start = middle;
+            if (nums[l] <= nums[m]) {
+                if (target >= nums[l] && target < nums[m]) {
+                    r = m - 1;
+                } else {
+                    l = m + 1;
+                }
             } else {
-                end = middle;
-            }
-        }
-        return 0;
-    }
-
-    private int binarySearch(int start, int end, int[] nums, int target) {
-        while (start <= end) {
-            int middle = (start + end) / 2;
-            if (nums[middle] == target) {
-                return middle;
-            } else if (nums[middle] > target) {
-                end = middle - 1;
-            } else {
-                start = middle + 1;
+                if (target > nums[m] && target <= nums[r]) {
+                    l = m + 1;
+                } else {
+                    r = m - 1;
+                }
             }
         }
         return -1;
     }
 
-    @Test
-    public void test() {
-        int[] nums = new int[]{4, 5, 6, 7, 9};
-        assertSame(2, binarySearch(0, 5, nums, 6));
-        assertSame(-1, binarySearch(0, 5, nums, 3));
-
-        nums = new int[]{4};
-        assertSame(0,getPivot(nums));
-
-        nums = new int[]{4,1};
-        assertSame(1,getPivot(nums));
-
-        nums = new int[]{4,5};
-        assertSame(-1,getPivot(nums));
-
-    }
 }

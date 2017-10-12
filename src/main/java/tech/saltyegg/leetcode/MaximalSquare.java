@@ -1,7 +1,5 @@
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-
 import java.util.Stack;
 
 /**
@@ -10,61 +8,30 @@ import java.util.Stack;
  */
 public class MaximalSquare {
     public int maximalSquare(char[][] matrix) {
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
-            return 0;
-        }
-
-        int h = matrix.length;
-        int w = matrix[0].length;
-        int[][] map = new int[h][w + 1];
-
-        for (int i = 0; i < h; i++) {
-            for (int j = 0; j < w; j++) {
-                if (i == 0) {
-                    map[i][j] = matrix[i][j] - '0';
-                } else {
-                    if (matrix[i][j] == '0') {
-                        map[i][j] = 0;
-                    } else {
-                        map[i][j] = 1 + map[i - 1][j];
-                    }
-                }
+        if (matrix == null || matrix.length == 0) return 0;
+        int[] nums = new int[matrix[0].length];
+        int result = 0;
+        for (char[] m : matrix) {
+            for (int i = 0; i < m.length; i++) {
+                nums[i] = m[i] == '0' ? 0 : nums[i] + 1;
             }
+            result = Math.max(result, helper(nums));
         }
-
-        int max = 0;
-        for (int i = 0; i < h; i++) {
-            max = Math.max(max, helper(map[i]));
-        }
-
-        return max;
+        return result;
     }
 
-    private int helper(int[] height) {
-        if (height == null || height.length == 0) {
-            return 0;
-        }
-
-        Stack<Integer> stack = new Stack<Integer>();
-        int crt, max;
-        crt = max = 0;
-        while (crt < height.length) {
-            if (stack.isEmpty() || height[crt] >= height[stack.peek()]) {
-                stack.push(crt++);
-            } else {
-                int top = stack.pop();
-                int length = Math.min(height[top], (stack.isEmpty() ? crt : crt - stack.peek() - 1));
-                max = Math.max(max, length * length);
+    private int helper(int[] nums) {
+        Stack<Integer> stack = new Stack<>();
+        int result = 0;
+        for (int i = 0; i <= nums.length; i++) {
+            while (!stack.isEmpty() && (i == nums.length || nums[i] <= nums[stack.peek()])) {
+                int h = nums[stack.pop()];
+                int w = stack.isEmpty() ? i : i - stack.peek() - 1;
+                int s = Math.min(h, w);
+                result = Math.max(result, s * s);
             }
+            stack.push(i);
         }
-
-        return max;
-    }
-
-    @Test
-    public void test() {
-        char[][] map = new char[1][1];
-        map[0][0] = '0';
-        maximalSquare(map);
+        return result;
     }
 }

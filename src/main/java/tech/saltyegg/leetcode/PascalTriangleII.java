@@ -4,6 +4,7 @@
 package tech.saltyegg.leetcode;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -13,29 +14,18 @@ import java.util.List;
  */
 public class PascalTriangleII {
 
-	public List<Integer> getRow(int rowIndex) {
-		if (rowIndex < 0) {
-			return new ArrayList<Integer>();
-		}
-		List<List<Integer>> list = new ArrayList<List<Integer>>();
-		for (int i = 0; i <= rowIndex; i++) {
-			list.add(helper(i, list));
-		}
+    public List<Integer> getRow(int rowIndex) {
+        if (rowIndex < 0) return Collections.emptyList();
+        List<Integer> result = new ArrayList<>(rowIndex + 1);
+        result.add(1);
+        for (int i = 1; i <= rowIndex; i++) result.add(0);
 
-		return list.get(rowIndex);
-	}
-
-	private List<Integer> helper(int num, List<List<Integer>> list) {
-		List<Integer> result = new ArrayList<Integer>();
-		result.add(1);
-		if (num > 0) {
-			List<Integer> tmp = list.get(num - 1);
-			for (int i = 0; i < tmp.size() - 1; i++) {
-				result.add(tmp.get(i) + tmp.get(i + 1));
-			}
-			result.add(1);
-		}
-
-		return result;
-	}
+        for (int i = 1; i <= rowIndex; i++) {
+            result.set(i, 1);
+            for (int j = i - 1; j > 0; j--) {
+                result.set(j, result.get(j) + result.get(j - 1));
+            }
+        }
+        return result;
+    }
 }

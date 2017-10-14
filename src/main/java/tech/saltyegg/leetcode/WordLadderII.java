@@ -5,7 +5,9 @@ package tech.saltyegg.leetcode;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Set;
 
 /**
@@ -16,59 +18,64 @@ import java.util.Set;
 
 public class WordLadderII {
 
-    private int globalMinLength;
-
-    public List<List<String>> findLadders(String start, String end, Set<String> dict) {
+    public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
         List<List<String>> result = new ArrayList<>();
-        if (start == null || end == null || dict == null || dict.isEmpty()) {
-            return result;
-        }
+        if (wordList == null || wordList.isEmpty()) return result;
 
-        dict.add(end);
+        Set<String> wordSet = new HashSet<>(wordList);
+        Set<String> set = new HashSet<>();
         List<String> crt = new ArrayList<>();
-        crt.add(start);
-        Set<String> set = new HashSet<>(crt);
-        globalMinLength = dict.size() + 1;
-        helper(start, end, crt, set, result, dict);
+        crt.add(beginWord);
 
-        int min = Integer.MAX_VALUE;
-        for (List<String> list : result) {
-            min = Math.min(min, list.size());
-        }
+        Queue<List<String>> queue = new LinkedList<>();
+        queue.add(crt);
+        int minLevel = Integer.MAX_VALUE;
+        int level = 1;
+        while (!queue.isEmpty()) {
+            List<String> t = queue.poll();
+            if (t.size() > level) {
+                for (String w : set) wordSet.remove(w);
+                set.clear();
+                level = t.size();
+                if (level > minLevel) break;
+            }
 
-        List<List<String>> result2 = new ArrayList<>();
-        for (List<String> list : result) {
-            if (list.size() == min) {
-                result2.add(list);
+            String last = t.get(t.size() - 1);
+
+            for (int i = 0; i < last.length(); i++) {
+                char[] arr = last.toCharArray();
+
+                for (char c = 'a'; c <= 'z'; c++) {
+                    if (c == arr[i]) continue;
+                    arr[i] = c;
+                    String s = String.valueOf(arr);
+                    if (!wordSet.contains(s)) continue;
+                    set.add(s);
+                    List<String> next = new ArrayList<>(t);
+                    next.add(s);
+                    if (s.equals(endWord)) {
+                        result.add(next);
+                        minLevel = Math.min(minLevel, level);
+                    } else {
+                        queue.add(next);
+                    }
+                    arr[i] = last.charAt(i);
+                }
+
             }
         }
-
-        return result2;
+        return result;
     }
 
-    private void helper(String start, String end, List<String> crt, Set<String> set, List<List<String>> result, Set<String> dict) {
-        if (crt.size() > globalMinLength) {
-            return;
-        }
-        if (start.equals(end)) {
-            globalMinLength = Math.min(globalMinLength, crt.size());
-            result.add(new ArrayList<>(crt));
-            return;
-        }
-
-        for (int i = 0; i < start.length(); i++) {
-            char[] chars = start.toCharArray();
-            for (char k = 'a'; k <= 'z'; k++) {
-                chars[i] = k;
-                String str = String.valueOf(chars);
-                if (dict.contains(str) && !set.contains(str)) {
-                    crt.add(str);
-                    set.add(str);
-                    helper(str, end, crt, set, result, dict);
-                    crt.remove(crt.size() - 1);
-                    set.remove(str);
-                }
-            }
-        }
+    public static void main(String[] args) {
+        WordLadderII wl = new WordLadderII();
+        List<String> list = new ArrayList<>();
+        list.add("hot");
+        list.add("dot");
+        list.add("dog");
+        list.add("lot");
+        list.add("log");
+        list.add("cog");
+        System.out.println(wl.findLadders("hit", "cog", list));
     }
 }

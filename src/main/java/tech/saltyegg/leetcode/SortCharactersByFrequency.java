@@ -1,8 +1,6 @@
 package tech.saltyegg.leetcode;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,20 +9,13 @@ import java.util.Map;
  */
 public class SortCharactersByFrequency {
     public String frequencySort(String s) {
-        Map<Character, Integer> dict = new HashMap<>();
+        if (s == null || s.isEmpty()) return s;
+        Map<Character, StringBuilder> map = new HashMap<>();
         for (char c : s.toCharArray()) {
-            dict.put(c, dict.getOrDefault(c, 0) + 1);
+            map.put(c, map.getOrDefault(c, new StringBuilder()).append(c));
         }
-        List<Map.Entry<Character, Integer>> list = new ArrayList<>(dict.entrySet());
-        list.sort((o1, o2) -> o2.getValue() - o1.getValue());
-        StringBuilder sb = new StringBuilder();
-        for (Map.Entry<Character, Integer> e : list) {
-            int count = e.getValue();
-            while (count > 0) {
-                sb.append(e.getKey());
-                count--;
-            }
-        }
-        return sb.toString();
+        return map.values().stream()
+                .sorted((a, b) -> b.length() - a.length())
+                .reduce((a, b) -> a.append(b.toString())).get().toString();
     }
 }

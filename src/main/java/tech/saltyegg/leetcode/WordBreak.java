@@ -18,29 +18,19 @@ import java.util.Set;
 public class WordBreak {
 
     public boolean wordBreak(String s, Set<String> wordDict) {
-        if (s == null || s.isEmpty()) {
-            return true;
-        }
-        boolean[] map = new boolean[s.length() + 1];
-        map[0] = true;
+        if (s == null || s.isEmpty()) return true;
+        if (wordDict == null || wordDict.isEmpty()) return false;
+
+        boolean[] dp = new boolean[s.length() + 1];
+        dp[0] = true;
         for (int i = 0; i < s.length(); i++) {
-            if (!map[i]) {
-                continue;
-            }
-
-            for (String str : wordDict) {
-                int l = str.length();
-                int end = i + l;
-
-                if (end > s.length() || map[end]) {
-                    continue;
-                }
-                String sub = s.substring(i, end);
-                if (sub.equals(str)) {
-                    map[end] = true;
-                }
+            if (!dp[i]) continue;
+            String sub = s.substring(i);
+            for (String w : wordDict) {
+                if (sub.length() < w.length() || dp[i + w.length()]) continue;
+                if (sub.startsWith(w)) dp[i + w.length()] = true;
             }
         }
-        return map[s.length()];
+        return dp[s.length()];
     }
 }

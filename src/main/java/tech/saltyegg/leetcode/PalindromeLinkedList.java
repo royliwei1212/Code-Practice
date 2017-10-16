@@ -11,32 +11,28 @@ public class PalindromeLinkedList {
 
     public boolean isPalindrome(ListNode head) {
         if (head == null || head.next == null) return true;
-        ListNode fast, slow;
-        fast = slow = head;
-        while (fast != null && fast.next != null && fast.next.next != null) {
+        if (head.next.next == null) return head.val == head.next.val;
+        ListNode fast = head, slow = head;
+        while (fast != null && fast.next != null) {
             fast = fast.next.next;
             slow = slow.next;
         }
-        ;
-        ListNode half = slow.next;
-        if (half.next == null && half.val != head.val) return false;
-        // reverse half now
-        slow.next = null;
-        ListNode p = half;
-        ListNode c = p.next;
-        p.next = null;
+        if (fast != null) slow = slow.next;
 
-        while (c != null) {
-            ListNode t = c.next;
-            c.next = p;
-            p = c;
-            c = t;
+        ListNode pre = slow, crt = slow.next;
+        pre.next = null;
+        while (crt != null) {
+            ListNode t = crt.next;
+            crt.next = pre;
+            pre = crt;
+            crt = t;
         }
-        slow = head;
-        while (slow != null && p != null) {
-            if (slow.val != p.val) return false;
-            slow = slow.next;
-            p = p.next;
+
+        fast = head;
+        while (pre != null) {
+            if (fast.val != pre.val) return false;
+            pre = pre.next;
+            fast = fast.next;
         }
         return true;
     }

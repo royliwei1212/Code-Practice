@@ -1,8 +1,7 @@
 package tech.saltyegg.leetcode;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -12,7 +11,7 @@ import java.util.TreeMap;
  */
 public class LFUCache {
 
-    private TreeMap<Integer, List<Integer>> countMap;
+    private TreeMap<Integer, LinkedHashSet<Integer>> countMap;
     private Map<Integer, Integer> cache;
     private Map<Integer, Integer> keyCount;
     private int capacity;
@@ -29,13 +28,13 @@ public class LFUCache {
         if (!cache.containsKey(key)) return -1;
 
         int preCount = keyCount.get(key);
-        countMap.get(preCount).remove(new Integer(key));
+        countMap.get(preCount).remove(key);
         if (countMap.get(preCount).isEmpty()) countMap.remove(preCount);
 
         int count = keyCount.get(key) + 1;
         keyCount.put(key, count);
 
-        if (!countMap.containsKey(count)) countMap.put(count, new ArrayList<>());
+        if (!countMap.containsKey(count)) countMap.put(count, new LinkedHashSet<>());
         countMap.get(count).add(key);
         return cache.get(key);
     }
@@ -46,12 +45,12 @@ public class LFUCache {
         if (cache.size() >= capacity || cache.containsKey(key)) {
             int val2Del = key;
             if (cache.containsKey(key)) {
-                countMap.get(count).remove(new Integer(key));
+                countMap.get(count).remove(key);
                 if (countMap.get(count).isEmpty()) countMap.remove(count);
             } else {
-                Map.Entry<Integer, List<Integer>> minEntry = countMap.lastEntry();
-                val2Del = minEntry.getValue().get(0);
-                countMap.get(minEntry.getKey()).remove(0);
+                Map.Entry<Integer, LinkedHashSet<Integer>> minEntry = countMap.lastEntry();
+                val2Del = minEntry.getValue().iterator().next();
+                countMap.get(minEntry.getKey()).remove(val2Del);
                 if (minEntry.getValue().isEmpty()) countMap.remove(minEntry.getKey());
             }
             cache.remove(val2Del);
@@ -59,7 +58,7 @@ public class LFUCache {
         }
         cache.put(key, value);
         keyCount.put(key, count + 1);
-        if (!countMap.containsKey(count + 1)) countMap.put(count + 1, new ArrayList<>());
+        if (!countMap.containsKey(count + 1)) countMap.put(count + 1, new LinkedHashSet<>());
         countMap.get(count + 1).add(key);
     }
 

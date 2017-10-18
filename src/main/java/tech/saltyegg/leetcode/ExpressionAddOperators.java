@@ -11,26 +11,28 @@ public class ExpressionAddOperators {
 
     public List<String> addOperators(String num, int target) {
         List<String> result = new ArrayList<>();
-        helper(num, target, 0, 0, "", result);
+        if (num == null || num.isEmpty()) return result;
+        helper(num, target, 0L, 0L, "", result);
         return result;
     }
 
-    public void helper(String num, int target, long diff, long crtNum, String out, List<String> result) {
-        if (crtNum == target && num.length() == 0) {
+    private void helper(String num, int target, long sum, long lastNum, String out, List<String> result) {
+        if (target == sum && num.length() == 0) {
             result.add(out);
+            return;
         }
 
         for (int i = 1; i <= num.length(); i++) {
             String sub = num.substring(0, i);
-            if (sub.length() > 1 && sub.charAt(0) == '0') return;
-            long _diff = Long.valueOf(sub);
-            String next = num.substring(i);
-            if (out.length() > 0) {
-                helper(next, target, _diff, crtNum + _diff, out + "+" + _diff, result);
-                helper(next, target, -1 * _diff, crtNum - _diff, out + "-" + _diff, result);
-                helper(next, target, diff * _diff, crtNum - diff + diff * _diff, out + "*" + _diff, result);
+            if (sub.length() > 1 && sub.charAt(0) == '0') continue;
+            long crtNum = Long.valueOf(sub);
+            String leftNum = num.substring(i);
+            if (!out.isEmpty()) {
+                helper(leftNum, target, sum + crtNum, crtNum, out + "+" + crtNum, result);
+                helper(leftNum, target, sum - crtNum, -crtNum, out + "-" + crtNum, result);
+                helper(leftNum, target, sum - lastNum + lastNum * crtNum, lastNum * crtNum, out + "*" + crtNum, result);
             } else {
-                helper(next, target, _diff, _diff, sub, result);
+                helper(leftNum, target, crtNum, crtNum, sub, result);
             }
         }
     }

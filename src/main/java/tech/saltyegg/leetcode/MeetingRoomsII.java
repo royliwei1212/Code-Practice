@@ -3,11 +3,11 @@
  */
 package tech.saltyegg.leetcode;
 
+import org.junit.Test;
+import tech.saltyegg.leetcode.parent.Interval;
+
 import java.util.Arrays;
 import java.util.PriorityQueue;
-
-import tech.saltyegg.leetcode.parent.Interval;
-import org.junit.Test;
 
 /**
  * Description:

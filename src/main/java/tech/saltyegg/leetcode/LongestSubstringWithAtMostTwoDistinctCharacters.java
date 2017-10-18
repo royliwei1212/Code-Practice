@@ -49,7 +49,7 @@ public class LongestSubstringWithAtMostTwoDistinctCharacters {
 
     @Test
     public void test() {
-        String s ="aab";
+        String s = "aab";
         int i = lengthOfLongestSubstringTwoDistinct(s);
     }
 }

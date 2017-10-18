@@ -10,16 +10,16 @@ package tech.saltyegg.leetcode.parent;
  */
 public class Point {
 
-	public int x;
-	public int y;
+    public int x;
+    public int y;
 
-	public Point() {
-		x = 0;
-		y = 0;
-	}
+    public Point() {
+        x = 0;
+        y = 0;
+    }
 
-	public Point(int a, int b) {
-		x = a;
-		y = b;
-	}
+    public Point(int a, int b) {
+        x = a;
+        y = b;
+    }
 }

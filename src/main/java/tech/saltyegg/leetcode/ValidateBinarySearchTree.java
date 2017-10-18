@@ -3,8 +3,8 @@
  */
 package tech.saltyegg.leetcode;
 
-import tech.saltyegg.leetcode.parent.TreeNode;
 import org.junit.Test;
+import tech.saltyegg.leetcode.parent.TreeNode;
 
 import static org.junit.Assert.assertTrue;
 
@@ -21,38 +21,38 @@ import static org.junit.Assert.assertTrue;
  */
 public class ValidateBinarySearchTree {
 
-	public boolean isValidBST(TreeNode root) {
-		if (root == null || (root.left == null && root.right == null)) {
-			return true;
-		}
+    public boolean isValidBST(TreeNode root) {
+        if (root == null || (root.left == null && root.right == null)) {
+            return true;
+        }
 
-		return helper(root, Long.MIN_VALUE, Long.MAX_VALUE);
-	}
+        return helper(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
 
-	private boolean helper(TreeNode root, long min, long max) {
-		if (root == null) {
-			return true;
-		}
-		if (root.val <= min || root.val >= max) {
-			return false;
-		}
+    private boolean helper(TreeNode root, long min, long max) {
+        if (root == null) {
+            return true;
+        }
+        if (root.val <= min || root.val >= max) {
+            return false;
+        }
 
-		return helper(root.right, root.val, max) && helper(root.left, min, root.val);
-	}
+        return helper(root.right, root.val, max) && helper(root.left, min, root.val);
+    }
 
-	@Test
-	public void test() {
-		TreeNode root = new TreeNode(-2147483648);
-		root.right = new TreeNode(2147483647);
-		assertTrue(isValidBST(root));
+    @Test
+    public void test() {
+        TreeNode root = new TreeNode(-2147483648);
+        root.right = new TreeNode(2147483647);
+        assertTrue(isValidBST(root));
 
-		root = new TreeNode(1);
-		root.left = new TreeNode(1);
-		assertTrue(!isValidBST(root));
+        root = new TreeNode(1);
+        root.left = new TreeNode(1);
+        assertTrue(!isValidBST(root));
 
-		root = new TreeNode(0);
-		root.left = new TreeNode(-1);
-		assertTrue(isValidBST(root));
-	}
+        root = new TreeNode(0);
+        root.left = new TreeNode(-1);
+        assertTrue(isValidBST(root));
+    }
 
 }

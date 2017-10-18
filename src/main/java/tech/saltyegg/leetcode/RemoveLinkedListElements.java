@@ -7,20 +7,20 @@ import tech.saltyegg.leetcode.parent.ListNode;
  */
 public class RemoveLinkedListElements {
 
-	public ListNode removeElements(ListNode head, int val) {
-		ListNode preHeader = new ListNode(val - 1);
-		preHeader.next = head;
-		ListNode cursor = preHeader;
+    public ListNode removeElements(ListNode head, int val) {
+        ListNode preHeader = new ListNode(val - 1);
+        preHeader.next = head;
+        ListNode cursor = preHeader;
 
-		while (cursor != null && cursor.next != null) {
-			if (cursor.next.val == val) {
-				cursor.next = cursor.next.next;
-			} else {
-				cursor = cursor.next;
-			}
-		}
+        while (cursor != null && cursor.next != null) {
+            if (cursor.next.val == val) {
+                cursor.next = cursor.next.next;
+            } else {
+                cursor = cursor.next;
+            }
+        }
 
-		return preHeader.next;
-	}
-	
+        return preHeader.next;
+    }
+
 }

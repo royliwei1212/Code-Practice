@@ -14,24 +14,24 @@ import java.util.Map;
  */
 public class ContainsDuplicateII {
 
-	public boolean containsNearbyDuplicate(int[] nums, int k) {
-		if (nums == null || nums.length < 2 || k < 1) {
-			return false;
-		}
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        if (nums == null || nums.length < 2 || k < 1) {
+            return false;
+        }
 
-		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-		for (int i = 0; i < nums.length; i++) {
-			if (!map.containsKey(nums[i])) {
-				map.put(nums[i], i);
-			} else {
-				if (map.get(nums[i]) < i - k) {
-					map.put(nums[i], i);
-				} else {
-					return true;
-				}
-			}
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for (int i = 0; i < nums.length; i++) {
+            if (!map.containsKey(nums[i])) {
+                map.put(nums[i], i);
+            } else {
+                if (map.get(nums[i]) < i - k) {
+                    map.put(nums[i], i);
+                } else {
+                    return true;
+                }
+            }
 
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 }

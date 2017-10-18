@@ -7,40 +7,40 @@ import tech.saltyegg.leetcode.parent.ListNode;
  */
 public class RotateList {
 
-	public ListNode rotateRight(ListNode head, int k) {
-		if (head == null || k == 0) {
-			return head;
-		}
+    public ListNode rotateRight(ListNode head, int k) {
+        if (head == null || k == 0) {
+            return head;
+        }
 
-		ListNode cursor = head;
+        ListNode cursor = head;
 
-		int l = 0;
-		while (cursor != null) {
-			l++;
-			cursor = cursor.next;
-		}
+        int l = 0;
+        while (cursor != null) {
+            l++;
+            cursor = cursor.next;
+        }
 
-		k = k % l;
+        k = k % l;
 
-		if (k == 0) {
-			return head;
-		}
+        if (k == 0) {
+            return head;
+        }
 
-		int offSet = l - k;
+        int offSet = l - k;
 
-		cursor = head;
-		while (offSet > 1) {
-			cursor = cursor.next;
-			offSet--;
-		}
-		ListNode newHead = cursor.next;
-		cursor.next = null;
-		cursor = newHead;
-		while (cursor.next != null) {
-			cursor = cursor.next;
-		}
-		cursor.next = head;
+        cursor = head;
+        while (offSet > 1) {
+            cursor = cursor.next;
+            offSet--;
+        }
+        ListNode newHead = cursor.next;
+        cursor.next = null;
+        cursor = newHead;
+        while (cursor.next != null) {
+            cursor = cursor.next;
+        }
+        cursor.next = head;
 
-		return newHead;
-	}
+        return newHead;
+    }
 }

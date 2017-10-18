@@ -12,29 +12,29 @@ import tech.saltyegg.leetcode.parent.ListNode;
  */
 public class LinkedListCycleII {
 
-	public ListNode detectCycle(ListNode head) {
-		if (head == null || head.next == null) {
-			return null;
-		}
+    public ListNode detectCycle(ListNode head) {
+        if (head == null || head.next == null) {
+            return null;
+        }
 
-		ListNode fast = head.next.next;
-		ListNode slow = head.next;
+        ListNode fast = head.next.next;
+        ListNode slow = head.next;
 
-		while (fast != null && fast != slow) {
-			slow = slow.next;
-			fast = fast.next != null ? fast.next.next : null;
-		}
+        while (fast != null && fast != slow) {
+            slow = slow.next;
+            fast = fast.next != null ? fast.next.next : null;
+        }
 
-		if (fast == null) {
-			return null;
-		}
+        if (fast == null) {
+            return null;
+        }
 
-		fast = head;
-		while (fast != slow) {
-			fast = fast.next;
-			slow = slow.next;
-		}
+        fast = head;
+        while (fast != slow) {
+            fast = fast.next;
+            slow = slow.next;
+        }
 
-		return fast;
-	}
+        return fast;
+    }
 }

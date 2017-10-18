@@ -5,10 +5,10 @@ package tech.saltyegg.leetcode.parent;
  */
 public class TreeLinkNode {
 
-	public int val;
-	public TreeLinkNode left, right, next;
+    public int val;
+    public TreeLinkNode left, right, next;
 
-	public TreeLinkNode(int x) {
-		val = x;
-	}
+    public TreeLinkNode(int x) {
+        val = x;
+    }
 }

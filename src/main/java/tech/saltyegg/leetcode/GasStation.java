@@ -5,27 +5,27 @@ package tech.saltyegg.leetcode;
  */
 public class GasStation {
 
-	public int canCompleteCircuit(int[] gas, int[] cost) {
-		if (gas == null || cost == null || gas.length != cost.length) {
-			return -1;
-		}
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        if (gas == null || cost == null || gas.length != cost.length) {
+            return -1;
+        }
 
-		int total, start, sumRemain;
-		start = total = sumRemain = 0;
+        int total, start, sumRemain;
+        start = total = sumRemain = 0;
 
-		for (int i = 0; i < gas.length; i++) {
-			int remain = gas[i] - cost[i];
+        for (int i = 0; i < gas.length; i++) {
+            int remain = gas[i] - cost[i];
 
-			if (sumRemain >= 0) {
-				sumRemain += remain;
-			} else {
-				sumRemain = remain;
-				start = i;
-			}
-			total += remain;
-		}
+            if (sumRemain >= 0) {
+                sumRemain += remain;
+            } else {
+                sumRemain = remain;
+                start = i;
+            }
+            total += remain;
+        }
 
-		return total >= 0 ? start : -1;
+        return total >= 0 ? start : -1;
 
-	}
+    }
 }

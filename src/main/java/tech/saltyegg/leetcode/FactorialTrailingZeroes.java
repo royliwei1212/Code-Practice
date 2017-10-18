@@ -5,19 +5,19 @@ package tech.saltyegg.leetcode;
  */
 public class FactorialTrailingZeroes {
 
-	public int trailingZeroes(int n) {
-		if (n <= 0) {
-			return 0;
-		}
+    public int trailingZeroes(int n) {
+        if (n <= 0) {
+            return 0;
+        }
 
-		int result = 0;
-		long factor = 5;
+        int result = 0;
+        long factor = 5;
 
-		while (n / factor > 0) {
-			result += n / factor;
-			factor *= 5;
-		}
+        while (n / factor > 0) {
+            result += n / factor;
+            factor *= 5;
+        }
 
-		return result;
-	}
+        return result;
+    }
 }

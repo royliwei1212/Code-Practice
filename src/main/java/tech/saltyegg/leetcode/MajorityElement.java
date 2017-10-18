@@ -7,9 +7,9 @@ import java.util.Arrays;
  */
 public class MajorityElement {
 
-	public int majorityElement(int[] nums) {
-		assert nums.length > 0;
-		Arrays.sort(nums);
-		return nums[nums.length / 2];
-	}
+    public int majorityElement(int[] nums) {
+        assert nums.length > 0;
+        Arrays.sort(nums);
+        return nums[nums.length / 2];
+    }
 }

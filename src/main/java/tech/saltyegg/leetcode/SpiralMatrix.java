@@ -17,53 +17,53 @@ import java.util.List;
  */
 public class SpiralMatrix {
 
-	public List<Integer> spiralOrder(int[][] matrix) {
-		List<Integer> result = new ArrayList<Integer>();
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> result = new ArrayList<Integer>();
 
-		if (matrix == null || matrix.length == 0) {
-			return result;
-		}
-		int h = matrix.length;
-		int w = matrix[0].length;
-		int x = 0;
-		int y = 0;
-		while (h > 0 && w > 0) {
-			if (h == 1) {
-				for (int i = 0; i < w; i++) {
-					result.add(matrix[x][y++]);
-				}
-				break;
-			} else if (w == 1) {
-				for (int i = 0; i < h; i++) {
-					result.add(matrix[x++][y]);
-				}
-				break;
-			}
+        if (matrix == null || matrix.length == 0) {
+            return result;
+        }
+        int h = matrix.length;
+        int w = matrix[0].length;
+        int x = 0;
+        int y = 0;
+        while (h > 0 && w > 0) {
+            if (h == 1) {
+                for (int i = 0; i < w; i++) {
+                    result.add(matrix[x][y++]);
+                }
+                break;
+            } else if (w == 1) {
+                for (int i = 0; i < h; i++) {
+                    result.add(matrix[x++][y]);
+                }
+                break;
+            }
 
-			// top
-			for (int i = 0; i < w - 1; i++) {
-				result.add(matrix[x][y++]);
-			}
+            // top
+            for (int i = 0; i < w - 1; i++) {
+                result.add(matrix[x][y++]);
+            }
 
-			// right
-			for (int i = 0; i < h - 1; i++) {
-				result.add(matrix[x++][y]);
-			}
+            // right
+            for (int i = 0; i < h - 1; i++) {
+                result.add(matrix[x++][y]);
+            }
 
-			// bottom
-			for (int i = 0; i < w - 1; i++) {
-				result.add(matrix[x][y--]);
-			}
+            // bottom
+            for (int i = 0; i < w - 1; i++) {
+                result.add(matrix[x][y--]);
+            }
 
-			// left
-			for (int i = 0; i < h - 1; i++) {
-				result.add(matrix[x--][y]);
-			}
-			y++;
-			x++;
-			w = w - 2;
-			h = h - 2;
-		}
-		return result;
-	}
+            // left
+            for (int i = 0; i < h - 1; i++) {
+                result.add(matrix[x--][y]);
+            }
+            y++;
+            x++;
+            w = w - 2;
+            h = h - 2;
+        }
+        return result;
+    }
 }

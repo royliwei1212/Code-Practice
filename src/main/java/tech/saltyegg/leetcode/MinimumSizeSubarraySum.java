@@ -7,29 +7,29 @@ package tech.saltyegg.leetcode;
  */
 public class MinimumSizeSubarraySum {
 
-	public int minSubArrayLen(int s, int[] nums) {
-		if (nums == null || nums.length == 0) {
-			return 0;
-		}
-		int length = nums.length;
-		int start, end, crtSum, minLength;
-		start = end = crtSum = 0;
-		minLength = length + 1;
+    public int minSubArrayLen(int s, int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int length = nums.length;
+        int start, end, crtSum, minLength;
+        start = end = crtSum = 0;
+        minLength = length + 1;
 
-		while (end < length) {
+        while (end < length) {
 
-			while (crtSum < s && end < length) {
-				crtSum += nums[end++];
-			}
+            while (crtSum < s && end < length) {
+                crtSum += nums[end++];
+            }
 
-			while (crtSum >= s && start < length) {
-				if (end - start < minLength) {
-					minLength = end - start;
-				}
-				crtSum -= nums[start++];
-			}
-		}
+            while (crtSum >= s && start < length) {
+                if (end - start < minLength) {
+                    minLength = end - start;
+                }
+                crtSum -= nums[start++];
+            }
+        }
 
-		return minLength > length ? 0 : minLength;
-	}
+        return minLength > length ? 0 : minLength;
+    }
 }

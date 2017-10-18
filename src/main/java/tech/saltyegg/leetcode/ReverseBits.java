@@ -7,37 +7,37 @@ import org.junit.Test;
  */
 public class ReverseBits {
 
-	public int reverseBits(int n) {
-		int j;
-		for (int i = 0; i < 16; i++) {
-			j = 31 - i;
-			n = swap(n, i, j);
-		}
+    public int reverseBits(int n) {
+        int j;
+        for (int i = 0; i < 16; i++) {
+            j = 31 - i;
+            n = swap(n, i, j);
+        }
 
-		return n;
-	}
+        return n;
+    }
 
-	private int swap(int n, int left, int right) {
-		boolean leftBit = (n & 1 << left) != 0;
-		boolean rightBit = (n & 1 << right) != 0;
+    private int swap(int n, int left, int right) {
+        boolean leftBit = (n & 1 << left) != 0;
+        boolean rightBit = (n & 1 << right) != 0;
 
-		n = leftBit ? setOne(n, right) : setZero(n, right);
-		n = rightBit ? setOne(n, left) : setZero(n, left);
-		return n;
-	}
+        n = leftBit ? setOne(n, right) : setZero(n, right);
+        n = rightBit ? setOne(n, left) : setZero(n, left);
+        return n;
+    }
 
-	private int setZero(int n, int position) {
-		return n & (~(1 << position));
-	}
+    private int setZero(int n, int position) {
+        return n & (~(1 << position));
+    }
 
-	private int setOne(int n, int position) {
-		return n | (1 << position);
-	}
+    private int setOne(int n, int position) {
+        return n | (1 << position);
+    }
 
-	@Test
-	public void test() {
-		System.out.println(reverseBits(2));
+    @Test
+    public void test() {
+        System.out.println(reverseBits(2));
 
-		System.out.println(setZero(3, 0));
-	}
+        System.out.println(setZero(3, 0));
+    }
 }

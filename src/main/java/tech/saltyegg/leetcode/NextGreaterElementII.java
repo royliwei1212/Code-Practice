@@ -28,7 +28,7 @@ public class NextGreaterElementII {
                     break;
                 }
             }
-            if (nums[index] > nums[(i-1)%nums.length]) queue.add(nums[index]);
+            if (nums[index] > nums[(i - 1) % nums.length]) queue.add(nums[index]);
 
         }
         return result;

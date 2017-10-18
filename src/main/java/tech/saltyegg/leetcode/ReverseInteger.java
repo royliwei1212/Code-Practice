@@ -5,32 +5,32 @@ package tech.saltyegg.leetcode;
  */
 public class ReverseInteger {
 
-	public int reverse(int x) {
-		int positive = x >= 0 ? 1 : -1;
-		if (x == Integer.MIN_VALUE) {
-			return 0;
-		}
-		x *= positive;
+    public int reverse(int x) {
+        int positive = x >= 0 ? 1 : -1;
+        if (x == Integer.MIN_VALUE) {
+            return 0;
+        }
+        x *= positive;
 
-		if (x < 10) {
-			return x;
-		}
+        if (x < 10) {
+            return x;
+        }
 
-		int result = 0;
+        int result = 0;
 
-		do {
-			if (result > Integer.MAX_VALUE / 10 || (result == Integer.MAX_VALUE / 10 && x % 10 > Integer.MAX_VALUE % 10)) {
-				result = 0;
-				break;
-			}
-			result = result * 10 + x % 10;
-			x /= 10;
-		} while (x > 0);
+        do {
+            if (result > Integer.MAX_VALUE / 10 || (result == Integer.MAX_VALUE / 10 && x % 10 > Integer.MAX_VALUE % 10)) {
+                result = 0;
+                break;
+            }
+            result = result * 10 + x % 10;
+            x /= 10;
+        } while (x > 0);
 
-		if (result < 0) {
-			return 0;
-		} else {
-			return positive * result;
-		}
-	}
+        if (result < 0) {
+            return 0;
+        } else {
+            return positive * result;
+        }
+    }
 }

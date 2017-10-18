@@ -7,13 +7,13 @@ import tech.saltyegg.leetcode.parent.TreeNode;
  */
 public class SameTree {
 
-	public boolean isSameTree(TreeNode p, TreeNode q) {
-		return p == q || helper(p, q);
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        return p == q || helper(p, q);
 
-	}
+    }
 
-	private boolean helper(TreeNode p, TreeNode q) {
-		return (p == null && q == null) || !((p == null) || (q == null) || p.val != q.val) && helper(p.left, q.left) && helper(p.right, q.right);
+    private boolean helper(TreeNode p, TreeNode q) {
+        return (p == null && q == null) || !((p == null) || (q == null) || p.val != q.val) && helper(p.left, q.left) && helper(p.right, q.right);
 
-	}
+    }
 }

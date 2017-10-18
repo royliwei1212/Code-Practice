@@ -14,7 +14,7 @@ import java.util.Map;
 public class LetterCombinationsOfAPhoneNumber {
 
     public List<String> letterCombinations(String digits) {
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
         if (digits == null || digits.isEmpty()) {
             return result;
         }
@@ -37,7 +37,7 @@ public class LetterCombinationsOfAPhoneNumber {
     }
 
     private Map<Character, String> getString() {
-        Map<Character, String> map = new HashMap<Character, String>();
+        Map<Character, String> map = new HashMap<>();
         map.put('2', "abc");
         map.put('3', "def");
         map.put('4', "ghi");

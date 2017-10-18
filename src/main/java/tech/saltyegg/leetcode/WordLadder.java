@@ -29,45 +29,45 @@ import java.util.Set;
  */
 public class WordLadder {
 
-	public int ladderLength(String start, String end, Set<String> dict) {
+    public int ladderLength(String start, String end, Set<String> dict) {
 
-		if (start == null || end == null || dict == null || dict.isEmpty()) {
-			return 0;
-		}
-		dict.add(end);
+        if (start == null || end == null || dict == null || dict.isEmpty()) {
+            return 0;
+        }
+        dict.add(end);
 
-		Queue<Info> queue = new LinkedList<Info>();
-		queue.add(new Info(start, 1));
-		int result = Integer.MAX_VALUE;
-		while (!queue.isEmpty()) {
-			Info info = queue.poll();
-			if (info.s.equals(end)) {
-				result = Math.min(result, info.x);
-			}
-			for (int i = 0; i < info.s.length(); i++) {
-				char[] chars = info.s.toCharArray();
-				for (char a = 'a'; a <= 'z'; a++) {
-					chars[i] = a;
-					String str = String.valueOf(chars);
-					if (dict.contains(str)) {
-						queue.add(new Info(str, info.x + 1));
-						dict.remove(str);
-					}
-				}
-			}
-		}
+        Queue<Info> queue = new LinkedList<>();
+        queue.add(new Info(start, 1));
+        int result = Integer.MAX_VALUE;
+        while (!queue.isEmpty()) {
+            Info info = queue.poll();
+            if (info.s.equals(end)) {
+                result = Math.min(result, info.x);
+            }
+            for (int i = 0; i < info.s.length(); i++) {
+                char[] chars = info.s.toCharArray();
+                for (char a = 'a'; a <= 'z'; a++) {
+                    chars[i] = a;
+                    String str = String.valueOf(chars);
+                    if (dict.contains(str)) {
+                        queue.add(new Info(str, info.x + 1));
+                        dict.remove(str);
+                    }
+                }
+            }
+        }
 
-		return result == Integer.MAX_VALUE ? 0 : result;
-	}
+        return result == Integer.MAX_VALUE ? 0 : result;
+    }
 
-	static class Info {
+    static class Info {
 
-		String s;
-		int x;
+        String s;
+        int x;
 
-		Info(String s, int x) {
-			this.s = s;
-			this.x = x;
-		}
-	}
+        Info(String s, int x) {
+            this.s = s;
+            this.x = x;
+        }
+    }
 }

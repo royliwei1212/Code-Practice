@@ -1,9 +1,6 @@
 package tech.saltyegg.leetcode;
 
-/**
- * @author hzhou
- * @since 5/20/17
- */
+
 public class NthDigit {
 
     public int findNthDigit(int n) {

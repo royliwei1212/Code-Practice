@@ -1,9 +1,9 @@
 package tech.saltyegg.leetcode;
 
+import tech.saltyegg.leetcode.parent.ListNode;
+
 import java.util.PriorityQueue;
 import java.util.Queue;
-
-import tech.saltyegg.leetcode.parent.ListNode;
 
 /**
  * Created by hzhou on 5/6/15. codeashobby@gmail.com

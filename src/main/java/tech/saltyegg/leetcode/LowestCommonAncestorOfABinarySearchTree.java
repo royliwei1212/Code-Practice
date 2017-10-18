@@ -7,18 +7,18 @@ import tech.saltyegg.leetcode.parent.TreeNode;
  */
 public class LowestCommonAncestorOfABinarySearchTree {
 
-	public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-		while (true) {
-			int n = root.val;
-			int a = p.val;
-			int b = q.val;
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        while (true) {
+            int n = root.val;
+            int a = p.val;
+            int b = q.val;
 
-			if ((n >= a && n <= b) || (n >= b && n <= a)) {
-				return root;
-			} else {
-				root = n > a && n > b ? root.left : root.right;
-			}
-		}
-	}
+            if ((n >= a && n <= b) || (n >= b && n <= a)) {
+                return root;
+            } else {
+                root = n > a && n > b ? root.left : root.right;
+            }
+        }
+    }
 
 }

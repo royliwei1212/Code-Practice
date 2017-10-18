@@ -3,10 +3,10 @@
  */
 package tech.saltyegg.leetcode;
 
+import tech.saltyegg.leetcode.parent.TreeNode;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import tech.saltyegg.leetcode.parent.TreeNode;
 
 /**
  * Description: Given a binary tree containing digits from 0-9 only, each root-to-leaf path could represent a number.
@@ -29,40 +29,40 @@ import tech.saltyegg.leetcode.parent.TreeNode;
  */
 public class SumRootToLeafNumbers {
 
-	public int sumNumbers(TreeNode root) {
-		if (root == null) {
-			return 0;
-		}
-		if (root.left == null && root.right == null) {
-			return root.val;
-		}
-		List<Integer> result = new ArrayList<Integer>();
-		helper(0, result, root);
+    public int sumNumbers(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        if (root.left == null && root.right == null) {
+            return root.val;
+        }
+        List<Integer> result = new ArrayList<Integer>();
+        helper(0, result, root);
 
-		int sum = 0;
-		for (int i : result) {
-			sum += i;
-		}
-		return sum;
-	}
+        int sum = 0;
+        for (int i : result) {
+            sum += i;
+        }
+        return sum;
+    }
 
-	private void helper(int crt, List<Integer> container, TreeNode root) {
-		if (root == null) {
-			return;
-		}
-		crt = crt * 10 + root.val;
+    private void helper(int crt, List<Integer> container, TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        crt = crt * 10 + root.val;
 
-		if (root.left == null && root.right == null) {
-			container.add(crt);
-			return;
-		}
-		if (root.left != null) {
-			helper(crt, container, root.left);
-		}
+        if (root.left == null && root.right == null) {
+            container.add(crt);
+            return;
+        }
+        if (root.left != null) {
+            helper(crt, container, root.left);
+        }
 
-		if (root.right != null) {
-			helper(crt, container, root.right);
-		}
-	}
+        if (root.right != null) {
+            helper(crt, container, root.right);
+        }
+    }
 
 }

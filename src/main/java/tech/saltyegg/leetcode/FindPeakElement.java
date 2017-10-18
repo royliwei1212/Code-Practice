@@ -18,25 +18,25 @@ package tech.saltyegg.leetcode;
  */
 public class FindPeakElement {
 
-	public int findPeakElement(int[] nums) {
-		if (nums == null || nums.length == 0) {
-			return -1;
-		}
-		if (nums.length == 1 || nums[0] > nums[1]) {
-			return 0;
-		}
+    public int findPeakElement(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+        if (nums.length == 1 || nums[0] > nums[1]) {
+            return 0;
+        }
 
-		int length = nums.length;
-		if (nums[length - 1] > nums[length - 2]) {
-			return length - 1;
-		}
+        int length = nums.length;
+        if (nums[length - 1] > nums[length - 2]) {
+            return length - 1;
+        }
 
-		for (int i = 1; i < length - 1; i++) {
-			if (nums[i] > nums[i - 1] && nums[i] > nums[i + 1]) {
-				return i;
-			}
-		}
+        for (int i = 1; i < length - 1; i++) {
+            if (nums[i] > nums[i - 1] && nums[i] > nums[i + 1]) {
+                return i;
+            }
+        }
 
-		return -1;
-	}
+        return -1;
+    }
 }

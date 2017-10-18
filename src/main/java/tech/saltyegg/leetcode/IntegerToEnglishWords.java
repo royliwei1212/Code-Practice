@@ -59,7 +59,7 @@ public class IntegerToEnglishWords {
             index++;
         }
 
-        return sb.length() == 0 ? "Zero" : sb.toString().replace("  "," ").trim();
+        return sb.length() == 0 ? "Zero" : sb.toString().replace("  ", " ").trim();
     }
 
     // num < 1000

@@ -1,7 +1,6 @@
 package tech.saltyegg.leetcode;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 /**
  * Created by hzhou on 2015/5/13.

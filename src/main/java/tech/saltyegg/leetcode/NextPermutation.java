@@ -3,9 +3,9 @@
  */
 package tech.saltyegg.leetcode;
 
-import java.util.Arrays;
-
 import org.junit.Test;
+
+import java.util.Arrays;
 
 /**
  * Description: Implement next permutation, which rearranges numbers into the lexicographically next greater permutation
@@ -28,50 +28,50 @@ import org.junit.Test;
  */
 public class NextPermutation {
 
-	public void nextPermutation(int[] nums) {
-		if (nums == null || nums.length < 2) {
-			return;
-		}
-		int length = nums.length - 1;
+    public void nextPermutation(int[] nums) {
+        if (nums == null || nums.length < 2) {
+            return;
+        }
+        int length = nums.length - 1;
 
-		while (length > 0 && nums[length - 1] >= nums[length]) {
-			length--;
-		}
+        while (length > 0 && nums[length - 1] >= nums[length]) {
+            length--;
+        }
 
-		if (length == 0) {
-			Arrays.sort(nums);
-			return;
-		}
+        if (length == 0) {
+            Arrays.sort(nums);
+            return;
+        }
 
-		if (length == nums.length - 1) {
-			int tmp = nums[length];
-			nums[length] = nums[length - 1];
-			nums[length - 1] = tmp;
-			return;
-		}
+        if (length == nums.length - 1) {
+            int tmp = nums[length];
+            nums[length] = nums[length - 1];
+            nums[length - 1] = tmp;
+            return;
+        }
 
-		// find the larger one than nums[length-1]
-		int target = length + 1;
-		while (target < nums.length && nums[target] > nums[length - 1]) {
-			target++;
-		}
-		target--;
-		int tmp = nums[length - 1];
-		nums[length - 1] = nums[target];
-		nums[target] = tmp;
-		Arrays.sort(nums, length, nums.length);
-	}
+        // find the larger one than nums[length-1]
+        int target = length + 1;
+        while (target < nums.length && nums[target] > nums[length - 1]) {
+            target++;
+        }
+        target--;
+        int tmp = nums[length - 1];
+        nums[length - 1] = nums[target];
+        nums[target] = tmp;
+        Arrays.sort(nums, length, nums.length);
+    }
 
-	@Test
-	public void test() {
-		int[] nums = new int[]{5,1,1};
-		nextPermutation(nums);
+    @Test
+    public void test() {
+        int[] nums = new int[]{5, 1, 1};
+        nextPermutation(nums);
 /*
-		nums = new int[]{3, 2, 1};
+        nums = new int[]{3, 2, 1};
 		nextPermutation(nums);
 
 		nums = new int[]{1, 1, 5};
 		nextPermutation(nums);
 */
-	}
+    }
 }

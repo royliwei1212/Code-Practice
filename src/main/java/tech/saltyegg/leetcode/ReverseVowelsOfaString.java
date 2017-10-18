@@ -56,7 +56,7 @@ public class ReverseVowelsOfaString {
             }
         }
         StringBuilder sb = new StringBuilder();
-        for(char c : chars){
+        for (char c : chars) {
             sb.append(c);
         }
         return sb.toString();

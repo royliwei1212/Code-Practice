@@ -19,39 +19,39 @@ import org.junit.Test;
  */
 public class ReverseWordsInAStringII {
 
-	public void reverseWords(char[] s) {
-		if (s == null || s.length == 0) {
-			return;
-		}
-		arrayReverse(s, 0, s.length - 1);
+    public void reverseWords(char[] s) {
+        if (s == null || s.length == 0) {
+            return;
+        }
+        arrayReverse(s, 0, s.length - 1);
 
-		for (int i = 0; i < s.length - 1; ) {
-			int j = i + 1;
-			while (j < s.length && s[j] != ' ') {
-				j++;
-			}
-			arrayReverse(s, i, j - 1);
-			i = j + 1;
-		}
+        for (int i = 0; i < s.length - 1; ) {
+            int j = i + 1;
+            while (j < s.length && s[j] != ' ') {
+                j++;
+            }
+            arrayReverse(s, i, j - 1);
+            i = j + 1;
+        }
 
-	}
+    }
 
-	private void arrayReverse(char[] s, int start, int end) {
-		if (s == null || s.length == 0 || start >= end) {
-			return;
-		}
+    private void arrayReverse(char[] s, int start, int end) {
+        if (s == null || s.length == 0 || start >= end) {
+            return;
+        }
 
-		char tmp;
-		for (int i = start; i <= (end + start) / 2; i++) {
-			tmp = s[i];
-			s[i] = s[end + start - i];
-			s[end + start - i] = tmp;
-		}
-	}
+        char tmp;
+        for (int i = start; i <= (end + start) / 2; i++) {
+            tmp = s[i];
+            s[i] = s[end + start - i];
+            s[end + start - i] = tmp;
+        }
+    }
 
-	@Test
-	public void test() {
-		char[] s = new char[]{'a', 'f', ' ', 'g'};
-		reverseWords(s);
-	}
+    @Test
+    public void test() {
+        char[] s = new char[]{'a', 'f', ' ', 'g'};
+        reverseWords(s);
+    }
 }

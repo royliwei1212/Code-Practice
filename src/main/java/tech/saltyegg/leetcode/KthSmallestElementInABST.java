@@ -14,29 +14,29 @@ import tech.saltyegg.leetcode.parent.TreeNode;
  */
 public class KthSmallestElementInABST {
 
-	private int counter = 0;
-	private int result = -1;
+    private int counter = 0;
+    private int result = -1;
 
-	public int kthSmallest(TreeNode root, int k) {
-		counter = 0;
-		helper(root, k);
-		return result;
-	}
+    public int kthSmallest(TreeNode root, int k) {
+        counter = 0;
+        helper(root, k);
+        return result;
+    }
 
-	private void helper(TreeNode root, int k) {
+    private void helper(TreeNode root, int k) {
 
-		if (root.left != null) {
-			helper(root.left, k);
-		}
-		counter++;
-		if (k == counter) {
-			this.result = root.val;
-			return;
-		}
+        if (root.left != null) {
+            helper(root.left, k);
+        }
+        counter++;
+        if (k == counter) {
+            this.result = root.val;
+            return;
+        }
 
-		if (root.right != null) {
-			helper(root.right, k);
-		}
+        if (root.right != null) {
+            helper(root.right, k);
+        }
 
-	}
+    }
 }

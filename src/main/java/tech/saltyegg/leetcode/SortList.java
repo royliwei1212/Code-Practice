@@ -3,8 +3,8 @@
  */
 package tech.saltyegg.leetcode;
 
-import tech.saltyegg.leetcode.parent.ListNode;
 import org.junit.Test;
+import tech.saltyegg.leetcode.parent.ListNode;
 
 /**
  * Description
@@ -13,67 +13,67 @@ import org.junit.Test;
  */
 public class SortList {
 
-	public ListNode sortList(ListNode head) {
-		if (head == null || head.next == null) {
-			return head;
-		}
+    public ListNode sortList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
 
-		ListNode fast = head;
-		ListNode slow = head;
+        ListNode fast = head;
+        ListNode slow = head;
 
-		while (fast.next != null && fast.next.next != null) {
-			fast = fast.next.next;
-			slow = slow.next;
-		}
+        while (fast.next != null && fast.next.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
 
-		fast = slow;
-		slow = slow.next;
-		fast.next = null;
+        fast = slow;
+        slow = slow.next;
+        fast.next = null;
 
-		fast = sortList(head);
-		slow = sortList(slow);
+        fast = sortList(head);
+        slow = sortList(slow);
 
-		return merge(fast, slow);
-	}
+        return merge(fast, slow);
+    }
 
-	private ListNode merge(ListNode a, ListNode b) {
-		ListNode result;
-		if (a == null) {
-			return b;
-		}
-		if (b == null) {
-			return a;
-		}
+    private ListNode merge(ListNode a, ListNode b) {
+        ListNode result;
+        if (a == null) {
+            return b;
+        }
+        if (b == null) {
+            return a;
+        }
 
-		if (a.val >= b.val) {
-			result = b;
-			b = b.next;
-		} else {
-			result = a;
-			a = a.next;
-		}
+        if (a.val >= b.val) {
+            result = b;
+            b = b.next;
+        } else {
+            result = a;
+            a = a.next;
+        }
 
-		ListNode cursor = result;
-		while (a != null && b != null) {
-			if (a.val >= b.val) {
-				cursor.next = b;
-				b = b.next;
-			} else {
-				cursor.next = a;
-				a = a.next;
-			}
-			cursor = cursor.next;
-		}
+        ListNode cursor = result;
+        while (a != null && b != null) {
+            if (a.val >= b.val) {
+                cursor.next = b;
+                b = b.next;
+            } else {
+                cursor.next = a;
+                a = a.next;
+            }
+            cursor = cursor.next;
+        }
 
-		cursor.next = a == null ? b : a;
+        cursor.next = a == null ? b : a;
 
-		return result;
-	}
+        return result;
+    }
 
-	@Test
-	public void test() {
-		ListNode head = new ListNode(1);
-		head.next = new ListNode(2);
-		sortList(head);
-	}
+    @Test
+    public void test() {
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        sortList(head);
+    }
 }

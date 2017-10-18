@@ -1,6 +1,11 @@
 package tech.saltyegg.leetcode;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by hzhou on 2015/6/8.
@@ -8,9 +13,9 @@ import java.util.*;
  */
 public class WordSearchII {
     public List<String> findWords(char[][] board, String[] words) {
-        Set<String> result = new HashSet<String>();
+        Set<String> result = new HashSet<>();
         if (board == null || board.length == 0 || words == null || words.length == 0) {
-            return new ArrayList<String>();
+            return new ArrayList<>();
         }
 
         Trie trie = new Trie();
@@ -26,7 +31,7 @@ public class WordSearchII {
             }
         }
 
-        return new ArrayList<String>(result);
+        return new ArrayList<>(result);
     }
 
     private void helper(Set<String> result, char[][] board, String str, int x, int y, Trie trie, boolean[][] visited) {
@@ -130,7 +135,7 @@ public class WordSearchII {
 
             // Initialize your data structure here.
             public TrieNode() {
-                children = new HashMap<Character, TrieNode>();
+                children = new HashMap<>();
                 isLeaf = false;
             }
 

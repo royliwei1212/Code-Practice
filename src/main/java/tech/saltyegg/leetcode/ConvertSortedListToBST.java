@@ -11,43 +11,43 @@ import tech.saltyegg.leetcode.parent.TreeNode;
  * BST.
  *
  * @author hzhou
- *
+ * <p>
  * http://www.programcreek.com/2013/01/leetcode-convert-sorted-list-to-binary-search-tree-java/
  */
 
 // TODO: Important
 public class ConvertSortedListToBST {
 
-	ListNode crtHead;
+    ListNode crtHead;
 
-	public TreeNode sortedListToBST(ListNode head) {
-		if (head == null) {
-			return null;
-		}
-		crtHead = head;
-		int length = 0;
-		ListNode cursor = head;
-		while (cursor != null) {
-			length++;
-			cursor = cursor.next;
-		}
+    public TreeNode sortedListToBST(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+        crtHead = head;
+        int length = 0;
+        ListNode cursor = head;
+        while (cursor != null) {
+            length++;
+            cursor = cursor.next;
+        }
 
-		return helper(0, length - 1);
+        return helper(0, length - 1);
 
-	}
+    }
 
-	private TreeNode helper(int start, int end) {
-		if (start > end) {
-			return null;
-		}
+    private TreeNode helper(int start, int end) {
+        if (start > end) {
+            return null;
+        }
 
-		int middle = (start + end) / 2;
-		TreeNode left = helper(start, middle - 1);
-		TreeNode root = new TreeNode(crtHead.val);
-		crtHead = crtHead.next;
-		TreeNode right = helper(middle + 1, end);
-		root.left = left;
-		root.right = right;
-		return root;
-	}
+        int middle = (start + end) / 2;
+        TreeNode left = helper(start, middle - 1);
+        TreeNode root = new TreeNode(crtHead.val);
+        crtHead = crtHead.next;
+        TreeNode right = helper(middle + 1, end);
+        root.left = left;
+        root.right = right;
+        return root;
+    }
 }

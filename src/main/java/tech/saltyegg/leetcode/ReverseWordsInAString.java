@@ -12,21 +12,21 @@ package tech.saltyegg.leetcode;
  */
 public class ReverseWordsInAString {
 
-	public String reverseWords(String s) {
-		if (s == null) {
-			return s;
-		}
+    public String reverseWords(String s) {
+        if (s == null) {
+            return s;
+        }
 
-		String[] splits = s.split(" ");
-		StringBuilder sb = new StringBuilder();
+        String[] splits = s.split(" ");
+        StringBuilder sb = new StringBuilder();
 
-		for (int i = splits.length - 1; i >= 0; i--) {
-			String str = splits[i].trim();
-			if (!str.isEmpty() && !str.equals(" ")) {
-				sb.append(str).append(' ');
-			}
-		}
+        for (int i = splits.length - 1; i >= 0; i--) {
+            String str = splits[i].trim();
+            if (!str.isEmpty() && !str.equals(" ")) {
+                sb.append(str).append(' ');
+            }
+        }
 
-		return sb.toString().trim();
-	}
+        return sb.toString().trim();
+    }
 }

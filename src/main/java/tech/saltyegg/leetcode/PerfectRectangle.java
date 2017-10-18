@@ -28,10 +28,14 @@ public class PerfectRectangle {
             String lt = p[0] + "_" + p[3];
             String rb = p[2] + "_" + p[1];
             String rt = p[2] + "_" + p[3];
-            if (!set.contains(lb))  set.add(lb); else  set.remove(lb);
-            if (!set.contains(lt))  set.add(lt); else  set.remove(lt);
-            if (!set.contains(rb))  set.add(rb); else  set.remove(rb);
-            if (!set.contains(rt))  set.add(rt); else  set.remove(rt);
+            if (!set.contains(lb)) set.add(lb);
+            else set.remove(lb);
+            if (!set.contains(lt)) set.add(lt);
+            else set.remove(lt);
+            if (!set.contains(rb)) set.add(rb);
+            else set.remove(rb);
+            if (!set.contains(rt)) set.add(rt);
+            else set.remove(rt);
 
             area += (p[2] - p[0]) * (p[3] - p[1]);
         }

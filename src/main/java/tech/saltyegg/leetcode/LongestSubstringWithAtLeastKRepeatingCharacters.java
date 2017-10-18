@@ -32,7 +32,7 @@ public class LongestSubstringWithAtLeastKRepeatingCharacters {
 
         int result = 0;
         int pre = 0;
-        for (int i = 0; i < s.length() ; i++) {
+        for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
             if (set.contains(c)) {
                 result = Math.max(result, longestSubstring(s.substring(pre, i), k));

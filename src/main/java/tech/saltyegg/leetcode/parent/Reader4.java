@@ -10,8 +10,8 @@ package tech.saltyegg.leetcode.parent;
  */
 public class Reader4 {
 
-	// this function is only used to remove the error from ReadNCharactersGivenReadFour
-	protected int read4(char[] buffer) {
-		return 1;
-	}
+    // this function is only used to remove the error from ReadNCharactersGivenReadFour
+    protected int read4(char[] buffer) {
+        return 1;
+    }
 }

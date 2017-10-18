@@ -8,8 +8,8 @@ import java.util.Queue;
  * Email: i@hzhou.me
  */
 public class ImplementStackUsingQueues {
-    private Queue<Integer> q1 = new LinkedList<Integer>();
-    private Queue<Integer> q2 = new LinkedList<Integer>();
+    private Queue<Integer> q1 = new LinkedList<>();
+    private Queue<Integer> q2 = new LinkedList<>();
 
     // Push element x onto stack.
     public void push(int x) {

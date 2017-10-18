@@ -105,7 +105,7 @@ public class BasicCalculator {
         String s = "(7)-(0)+(4)";
         int result = calculate(s);
 
-        s=  "(1+(4+5+2)-3)+(6+8)";
+        s = "(1+(4+5+2)-3)+(6+8)";
         result = calculate(s);
     }
 }

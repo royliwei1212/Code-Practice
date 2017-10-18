@@ -15,7 +15,7 @@ public class FindTheDifference {
             }
         }
 
-        return ta[ta.length-1];
+        return ta[ta.length - 1];
     }
 
 }

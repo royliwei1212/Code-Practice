@@ -5,18 +5,18 @@ package tech.saltyegg.leetcode;
  */
 public class ExcelSheetColumnNumber {
 
-	public int titleToNumber(String s) {
-		assert (s != null && !s.isEmpty());
+    public int titleToNumber(String s) {
+        assert (s != null && !s.isEmpty());
 
-		char[] chars = s.toCharArray();
-		int result = 0;
-		for (char aChar : chars) {
-			result = result * 26 + getValue(aChar);
-		}
-		return result;
-	}
+        char[] chars = s.toCharArray();
+        int result = 0;
+        for (char aChar : chars) {
+            result = result * 26 + getValue(aChar);
+        }
+        return result;
+    }
 
-	private int getValue(char c) {
-		return c - 'A' + 1;
-	}
+    private int getValue(char c) {
+        return c - 'A' + 1;
+    }
 }

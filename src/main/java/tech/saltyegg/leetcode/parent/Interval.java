@@ -18,28 +18,28 @@ public class Interval {
         end = e;
     }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
-		Interval interval = (Interval) o;
+        Interval interval = (Interval) o;
 
-		if (start != interval.start) {
-			return false;
-		}
-		return end == interval.end;
+        if (start != interval.start) {
+            return false;
+        }
+        return end == interval.end;
 
-	}
+    }
 
-	@Override
-	public int hashCode() {
-		int result = start;
-		result = 31 * result + end;
-		return result;
-	}
+    @Override
+    public int hashCode() {
+        int result = start;
+        result = 31 * result + end;
+        return result;
+    }
 }

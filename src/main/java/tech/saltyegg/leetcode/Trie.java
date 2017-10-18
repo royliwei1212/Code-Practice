@@ -34,11 +34,13 @@ class TrieNode {
     public void putChild(char c) {
         this.children.put(c, new TrieNode(c));
     }
+
     public boolean containsChild(char c) {
         return this.children.containsKey(c);
     }
+
     public TrieNode getChild(char c) {
-        return containsChild(c)? this.children.get(c) : null;
+        return containsChild(c) ? this.children.get(c) : null;
     }
 
     public void setLeaf() {
@@ -60,14 +62,14 @@ public class Trie {
 
     // Inserts a word into the trie.
     public void insert(String word) {
-        if(word == null || word.isEmpty()) {
+        if (word == null || word.isEmpty()) {
             return;
         }
 
         char[] chars = word.toCharArray();
         TrieNode tmp = root;
-        for(char c : chars) {
-            if(!tmp.containsChild(c)) {
+        for (char c : chars) {
+            if (!tmp.containsChild(c)) {
                 tmp.putChild(c);
             }
             tmp = tmp.getChild(c);
@@ -77,13 +79,13 @@ public class Trie {
 
     // Returns if the word is in the trie.
     public boolean search(String word) {
-        if(word == null || word.isEmpty()) {
+        if (word == null || word.isEmpty()) {
             return true;
         }
         char[] chars = word.toCharArray();
         TrieNode tmp = root;
-        for(char c : chars) {
-            if(!tmp.containsChild(c)) {
+        for (char c : chars) {
+            if (!tmp.containsChild(c)) {
                 return false;
             }
             tmp = tmp.getChild(c);
@@ -94,13 +96,13 @@ public class Trie {
     // Returns if there is any word in the trie
     // that starts with the given prefix.
     public boolean startsWith(String prefix) {
-        if(prefix == null || prefix.isEmpty()) {
+        if (prefix == null || prefix.isEmpty()) {
             return true;
         }
         char[] chars = prefix.toCharArray();
         TrieNode tmp = root;
-        for(char c : chars) {
-            if(!tmp.containsChild(c)) {
+        for (char c : chars) {
+            if (!tmp.containsChild(c)) {
                 return false;
             }
             tmp = tmp.getChild(c);

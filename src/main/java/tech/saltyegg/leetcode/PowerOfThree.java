@@ -22,7 +22,7 @@ public class PowerOfThree {
                 return false;
             }
             n = n / 3;
-            if(n == 1){
+            if (n == 1) {
                 return true;
             }
         }

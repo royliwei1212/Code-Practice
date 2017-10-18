@@ -12,49 +12,49 @@ import java.util.Stack;
  */
 public class ValidParentheses {
 
-	public boolean isValid(String s) {
-		if (s == null || s.isEmpty()) {
-			return true;
-		}
+    public boolean isValid(String s) {
+        if (s == null || s.isEmpty()) {
+            return true;
+        }
 
-		s = s.trim();
+        s = s.trim();
 
-		if (s.length() % 2 == 1) {
-			return false;
-		}
+        if (s.length() % 2 == 1) {
+            return false;
+        }
 
-		Stack<Character> stack = new Stack<Character>();
-		for (int i = 0; i < s.length(); i++) {
-			char c = s.charAt(i);
-			if (isPre(c)) {
-				stack.push(c);
-			} else {
-				if (stack.isEmpty()) {
-					return false;
-				}
-				char t = stack.pop();
-				if (c != findPair(t)) {
-					return false;
-				}
-			}
-		}
-		return stack.isEmpty();
-	}
+        Stack<Character> stack = new Stack<Character>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (isPre(c)) {
+                stack.push(c);
+            } else {
+                if (stack.isEmpty()) {
+                    return false;
+                }
+                char t = stack.pop();
+                if (c != findPair(t)) {
+                    return false;
+                }
+            }
+        }
+        return stack.isEmpty();
+    }
 
-	private char findPair(char c) {
-		switch (c) {
-			case '(':
-				return ')';
-			case '[':
-				return ']';
-			case '{':
-				return '}';
-			default:
-				return 0;
-		}
-	}
+    private char findPair(char c) {
+        switch (c) {
+            case '(':
+                return ')';
+            case '[':
+                return ']';
+            case '{':
+                return '}';
+            default:
+                return 0;
+        }
+    }
 
-	private boolean isPre(char c) {
-		return c == '(' || c == '{' || c == '[';
-	}
+    private boolean isPre(char c) {
+        return c == '(' || c == '{' || c == '[';
+    }
 }

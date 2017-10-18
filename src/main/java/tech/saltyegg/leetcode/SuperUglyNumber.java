@@ -53,6 +53,6 @@ public class SuperUglyNumber {
 
     public static void main(String[] args) {
         SuperUglyNumber sun = new SuperUglyNumber();
-        System.out.println(sun.nthSuperUglyNumber(10, new int[]{3,5,7,13,17,19,29,31,37,41,47,59,71,73,79,83,97,127,131,137}));
+        System.out.println(sun.nthSuperUglyNumber(10, new int[]{3, 5, 7, 13, 17, 19, 29, 31, 37, 41, 47, 59, 71, 73, 79, 83, 97, 127, 131, 137}));
     }
 }

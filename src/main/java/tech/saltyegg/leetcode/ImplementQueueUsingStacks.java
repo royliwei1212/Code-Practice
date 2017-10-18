@@ -30,78 +30,78 @@ import java.util.Stack;
  */
 public class ImplementQueueUsingStacks {
 
-	private Stack<Integer> s1 = new Stack<>();
-	private Stack<Integer> s2 = new Stack<>();
-	private boolean pushable = true;
+    private Stack<Integer> s1 = new Stack<>();
+    private Stack<Integer> s2 = new Stack<>();
+    private boolean pushable = true;
 
-	// Push element x to the back of queue.
-	public void push(int x) {
-		if (!pushable) {
-			if (s1.isEmpty()) {
-				while (!s2.isEmpty()) {
-					s1.push(s2.pop());
-				}
-			} else {
-				while (!s1.isEmpty()) {
-					s2.push(s1.pop());
-				}
-			}
-			pushable = true;
-		}
+    // Push element x to the back of queue.
+    public void push(int x) {
+        if (!pushable) {
+            if (s1.isEmpty()) {
+                while (!s2.isEmpty()) {
+                    s1.push(s2.pop());
+                }
+            } else {
+                while (!s1.isEmpty()) {
+                    s2.push(s1.pop());
+                }
+            }
+            pushable = true;
+        }
 
-		if (s2.isEmpty()) {
-			s1.push(x);
-		} else {
-			s2.push(x);
-		}
-	}
+        if (s2.isEmpty()) {
+            s1.push(x);
+        } else {
+            s2.push(x);
+        }
+    }
 
-	// Removes the element from in front of queue.
-	public void pop() {
-		if (pushable) {
-			pushable = false;
-			if (s1.isEmpty()) {
-				while (!s2.isEmpty()) {
-					s1.push(s2.pop());
-				}
-				s1.pop();
-			} else {
-				while (!s1.isEmpty()) {
-					s2.push(s1.pop());
-				}
-				s2.pop();
-			}
-		} else {
-			if (s1.isEmpty()) {
-				s2.pop();
-			} else {
-				s1.pop();
-			}
-		}
-	}
+    // Removes the element from in front of queue.
+    public void pop() {
+        if (pushable) {
+            pushable = false;
+            if (s1.isEmpty()) {
+                while (!s2.isEmpty()) {
+                    s1.push(s2.pop());
+                }
+                s1.pop();
+            } else {
+                while (!s1.isEmpty()) {
+                    s2.push(s1.pop());
+                }
+                s2.pop();
+            }
+        } else {
+            if (s1.isEmpty()) {
+                s2.pop();
+            } else {
+                s1.pop();
+            }
+        }
+    }
 
-	// Get the front element.
-	public int peek() {
-		if (pushable) {
-			pushable = false;
-			if (s1.isEmpty()) {
-				while (!s2.isEmpty()) {
-					s1.push(s2.pop());
-				}
-				return s1.peek();
-			} else {
-				while (!s1.isEmpty()) {
-					s2.push(s1.pop());
-				}
-				return s2.peek();
-			}
-		} else {
-			return s1.isEmpty() ? s2.peek() : s1.peek();
-		}
-	}
+    // Get the front element.
+    public int peek() {
+        if (pushable) {
+            pushable = false;
+            if (s1.isEmpty()) {
+                while (!s2.isEmpty()) {
+                    s1.push(s2.pop());
+                }
+                return s1.peek();
+            } else {
+                while (!s1.isEmpty()) {
+                    s2.push(s1.pop());
+                }
+                return s2.peek();
+            }
+        } else {
+            return s1.isEmpty() ? s2.peek() : s1.peek();
+        }
+    }
 
-	// Return whether the queue is empty.
-	public boolean empty() {
-		return s1.isEmpty() && s2.isEmpty();
-	}
+    // Return whether the queue is empty.
+    public boolean empty() {
+        return s1.isEmpty() && s2.isEmpty();
+    }
 }

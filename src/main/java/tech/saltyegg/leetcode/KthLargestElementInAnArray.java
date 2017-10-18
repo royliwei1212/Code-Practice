@@ -12,12 +12,12 @@ import java.util.Arrays;
  */
 public class KthLargestElementInAnArray {
 
-	public int findKthLargest(int[] nums, int k) {
-		if (nums == null || k > nums.length) {
-			return 0;
-		}
+    public int findKthLargest(int[] nums, int k) {
+        if (nums == null || k > nums.length) {
+            return 0;
+        }
 
-		Arrays.sort(nums);
-		return nums[nums.length - k];
-	}
+        Arrays.sort(nums);
+        return nums[nums.length - k];
+    }
 }

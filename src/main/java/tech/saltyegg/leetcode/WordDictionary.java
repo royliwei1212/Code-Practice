@@ -6,34 +6,6 @@ package tech.saltyegg.leetcode;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Description:
- * <p/>
- * Design a data structure that supports the following two operations:
- * <p/>
- * <pre>
- * void addWord(word)
- * bool search(word)
- * </pre>
- * search(word) can search a literal word or a regular expression string containing
- * <p/>
- * only letters a-z or .. A . means it can represent any one letter.
- * <p/>
- * For example:
- * <p/>
- * <pre>
- * addWord("bad")
- * addWord("dad")
- * addWord("mad")
- * search("pad") -> false
- * search("bad") -> true
- * search(".ad") -> true
- * search("b..") -> true
- * </pre>
- * Note: You may assume that all words are consist of lowercase letters a-z.
- *
- * @author hzhou
- */
 public class WordDictionary {
 
     private Node root;

@@ -3,12 +3,8 @@
  */
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-
 import java.util.HashMap;
 import java.util.Map;
-
-import static junit.framework.TestCase.assertEquals;
 
 /**
  * Description:
@@ -109,34 +105,6 @@ public class WordDictionary {
         return result;
     }
 
-    @Test
-    public void test() {
-
-        addWord("bad");
-        addWord("dad");
-        addWord("mad");
-        addWord("ran");
-        addWord("rune");
-        addWord("runner");
-        addWord("runs");
-        addWord("add");
-        addWord("adds");
-        addWord("adder");
-        addWord("addee");
-
-        addWord("a");
-        addWord("a");
-
-        assertEquals(false, search("a."));
-
-        assertEquals(true, search("r.n"));
-        assertEquals(false, search("pad"));
-        assertEquals(true, search("bad"));
-        assertEquals(true, search(".ad"));
-        assertEquals(true, search("b.."));
-
-    }
-
     static class WordLinkNode {
 
         private Map<Character, WordLinkNode> children;
@@ -145,7 +113,7 @@ public class WordDictionary {
 
         // Initialize your data structure here.
         public WordLinkNode() {
-            children = new HashMap<Character, WordLinkNode>();
+            children = new HashMap<>();
             isLeaf = false;
         }
 

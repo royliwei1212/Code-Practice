@@ -10,39 +10,28 @@ import java.util.Queue;
 public class CourseSchedule {
 
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-        int length = prerequisites.length;
-        if (numCourses < 2) {
-            return true;
+        if (numCourses < 2) return true;
+        int[] dp = new int[numCourses];
+        for (int[] p : prerequisites) {
+            dp[p[0]]++;
         }
-
-        int[] counter = new int[numCourses];
-        for (int[] prerequisite : prerequisites) {
-            counter[prerequisite[0]]++;
-        }
-
         Queue<Integer> queue = new LinkedList<>();
-        for (int i = 0; i < numCourses; i++) {
-            if (counter[i] == 0) {
-                queue.add(i);
-            }
+        for (int i = 0; i < dp.length; i++) {
+            if (dp[i] == 0) queue.add(i);
         }
-
-        int ind = queue.size();
-
+        int result = queue.size();
         while (!queue.isEmpty()) {
             int c = queue.poll();
-            for (int[] prerequisite : prerequisites) {
-                int crtC = prerequisite[0];
-                if (prerequisite[1] == c) {
-                    counter[crtC]--;
-                    if (counter[crtC] == 0) {
-                        ind++;
-                        queue.add(crtC);
+            for (int[] p : prerequisites) {
+                if (p[1] == c) {
+                    dp[p[0]]--;
+                    if (dp[p[0]] == 0) {
+                        result++;
+                        queue.add(p[0]);
                     }
                 }
             }
         }
-
-        return ind == numCourses;
+        return result == numCourses;
     }
 }

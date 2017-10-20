@@ -4,30 +4,25 @@ import tech.saltyegg.leetcode.parent.TreeNode;
 
 public class MaximumBinaryTree {
     public TreeNode constructMaximumBinaryTree(int[] nums) {
-        int max = findMax(0, nums.length - 1, nums);
-        TreeNode root = new TreeNode(nums[max]);
-        root.left = helper(0, max - 1, nums);
-        root.right = helper(max + 1, nums.length - 1, nums);
-        return root;
+        if (nums == null || nums.length == 0) return null;
+        return helper(0, nums.length - 1, nums);
     }
 
-    private int findMax(int start, int end, int[] nums) {
-        int max = start;
+    private int findMaxIndex(int start, int end, int[] nums) {
+        int result = start;
         for (int i = start + 1; i <= end; i++) {
-            if (nums[i] > nums[max]) {
-                max = i;
-            }
+            if (nums[i] > nums[result]) result = i;
         }
-        return max;
+        return result;
     }
 
-    private TreeNode helper(int start, int end, int[] nums) {
-        if (start > end) return null;
-        if (start == end) return new TreeNode(nums[start]);
-        int max = findMax(start, end, nums);
-        TreeNode n = new TreeNode(nums[max]);
-        n.left = helper(start, max - 1, nums);
-        n.right = helper(max + 1, end, nums);
-        return n;
+    private TreeNode helper(int l, int r, int[] nums) {
+        if (l > r) return null;
+
+        int max = findMaxIndex(l, r, nums);
+        TreeNode root = new TreeNode(nums[max]);
+        root.left = helper(l, max - 1, nums);
+        root.right = helper(max + 1, r, nums);
+        return root;
     }
 }

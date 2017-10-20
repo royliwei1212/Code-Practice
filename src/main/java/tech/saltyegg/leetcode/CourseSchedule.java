@@ -20,7 +20,7 @@ public class CourseSchedule {
             counter[prerequisite[0]]++;
         }
 
-        Queue<Integer> queue = new LinkedList<Integer>();
+        Queue<Integer> queue = new LinkedList<>();
         for (int i = 0; i < numCourses; i++) {
             if (counter[i] == 0) {
                 queue.add(i);
@@ -33,7 +33,7 @@ public class CourseSchedule {
             int c = queue.poll();
             for (int[] prerequisite : prerequisites) {
                 int crtC = prerequisite[0];
-                if (crtC == c) {
+                if (prerequisite[1] == c) {
                     counter[crtC]--;
                     if (counter[crtC] == 0) {
                         ind++;

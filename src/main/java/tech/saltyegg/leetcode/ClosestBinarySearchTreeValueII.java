@@ -2,11 +2,11 @@ package tech.saltyegg.leetcode;
 
 import tech.saltyegg.leetcode.parent.TreeNode;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
-import java.util.stream.Collectors;
 
 /**
  * Created by hzhou on 2016/5/11.
@@ -47,6 +47,6 @@ public class ClosestBinarySearchTreeValueII {
             }
         }
 
-        return result.stream().collect(Collectors.toList());
+        return new ArrayList<>(result);
     }
 }

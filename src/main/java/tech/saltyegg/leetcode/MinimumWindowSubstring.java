@@ -3,8 +3,6 @@
  */
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,10 +49,4 @@ public class MinimumWindowSubstring {
         return result;
     }
 
-    @Test
-    public void test() {
-        String s = "a";
-        String t = "aa";
-        String result = minWindow(s, t);
-    }
 }

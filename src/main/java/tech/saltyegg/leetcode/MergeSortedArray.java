@@ -11,23 +11,18 @@ package tech.saltyegg.leetcode;
 public class MergeSortedArray {
 
     public void merge(int[] nums1, int m, int[] nums2, int n) {
-        for (int i = n + m - 1, j = m - 1; i >= n; i--, j--) {
-            nums1[i] = nums1[j];
+        if (n == 0) return;
+
+        for (int i = m + n - 1; i >= n; i--) {
+            nums1[i] = nums1[i - n];
         }
 
-        int i = n;
-        int j = 0;
-        int k = 0;
-
-        while (i < m + n || j < n) {
-            int a = i == m + n ? Integer.MAX_VALUE : nums1[i];
-            int b = j == n ? Integer.MAX_VALUE : nums2[j];
-            if (a >= b) {
-                nums1[k++] = b;
-                j++;
+        int l = n, r = 0, start = 0;
+        while (r < n) {
+            if (l < m + n && nums1[l] < nums2[r]) {
+                nums1[start++] = nums1[l++];
             } else {
-                nums1[k++] = a;
-                i++;
+                nums1[start++] = nums2[r++];
             }
         }
     }

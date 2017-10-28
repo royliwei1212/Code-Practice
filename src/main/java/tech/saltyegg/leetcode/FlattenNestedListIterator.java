@@ -2,9 +2,9 @@ package tech.saltyegg.leetcode;
 
 import tech.saltyegg.leetcode.parent.NestedInteger;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Created by hzhou on 2016/5/21.
@@ -12,34 +12,33 @@ import java.util.List;
  */
 public class FlattenNestedListIterator implements Iterator<Integer> {
 
-    private int currentIndex = 0;
-    private List<Integer> list;
+    private Stack<NestedInteger> stack;
 
     public FlattenNestedListIterator(List<NestedInteger> nestedList) {
-        list = new ArrayList<>();
-        load(nestedList);
-    }
-
-    private void load(List<NestedInteger> nestedList) {
-        for (NestedInteger nestedInteger : nestedList) {
-            if (nestedInteger.isInteger()) {
-                list.add(nestedInteger.getInteger());
-            } else {
-                load(nestedInteger.getList());
-            }
+        stack = new Stack<>();
+        if (nestedList == null || nestedList.isEmpty()) return;
+        for (int i = nestedList.size() - 1; i >= 0; i--) {
+            stack.push(nestedList.get(i));
         }
     }
 
     @Override
     public Integer next() {
-        if (currentIndex >= list.size()) {
-            return null;
-        }
-        return list.get(currentIndex++);
+        if (hasNext()) return stack.pop().getInteger();
+        return null;
     }
 
     @Override
     public boolean hasNext() {
-        return currentIndex < list.size();
+        while (!stack.isEmpty()) {
+            NestedInteger ni = stack.peek();
+            if (ni.isInteger()) return true;
+            stack.pop();
+            List<NestedInteger> list = ni.getList();
+            for (int i = list.size() - 1; i >= 0; i--) {
+                stack.push(list.get(i));
+            }
+        }
+        return false;
     }
 }

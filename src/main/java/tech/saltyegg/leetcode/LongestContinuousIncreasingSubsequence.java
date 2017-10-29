@@ -8,20 +8,18 @@ public class LongestContinuousIncreasingSubsequence {
 
     public int findLengthOfLCIS(int[] nums) {
         if (nums == null || nums.length == 0) return 0;
-
         int result = 1;
-        for (int i = 0; i < nums.length - 1; i++) {
-            for (int j = i + 1; j < nums.length; j++) {
-                if (nums[j] <= nums[j - 1]) {
-                    result = Math.max(result, j - i);
-                    i = j - 1;
-                    break;
-                }
-
-                if (j == nums.length - 1) result = Math.max(result, j - i + 1);
+        int max = 1;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] > nums[i - 1]) {
+                max++;
+            } else {
+                result = Math.max(result, max);
+                max = 1;
             }
+
         }
-        return result;
+        return Math.max(result, max);
     }
 
 }

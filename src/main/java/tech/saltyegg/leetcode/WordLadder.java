@@ -1,11 +1,6 @@
-/**
- * Copyright (c) 2015 hzhou, All rights reserved.
- */
 package tech.saltyegg.leetcode;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Description: Medium Word Ladder
@@ -29,45 +24,34 @@ import java.util.Set;
  */
 public class WordLadder {
 
-    public int ladderLength(String start, String end, Set<String> dict) {
-
-        if (start == null || end == null || dict == null || dict.isEmpty()) {
-            return 0;
-        }
-        dict.add(end);
-
-        Queue<Info> queue = new LinkedList<>();
-        queue.add(new Info(start, 1));
-        int result = Integer.MAX_VALUE;
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        Set<String> wordSet = new HashSet<>(wordList);
+        Queue<String> queue = new LinkedList<>();
+        queue.add(beginWord);
+        queue.add(null);
+        int result = 1;
         while (!queue.isEmpty()) {
-            Info info = queue.poll();
-            if (info.s.equals(end)) {
-                result = Math.min(result, info.x);
-            }
-            for (int i = 0; i < info.s.length(); i++) {
-                char[] chars = info.s.toCharArray();
-                for (char a = 'a'; a <= 'z'; a++) {
-                    chars[i] = a;
-                    String str = String.valueOf(chars);
-                    if (dict.contains(str)) {
-                        queue.add(new Info(str, info.x + 1));
-                        dict.remove(str);
+            String s = queue.poll();
+            if (s == null) {
+                result++;
+                if (!queue.isEmpty()) queue.add(null);
+            } else {
+                if (s.equals(endWord)) return result;
+                char[] arr = s.toCharArray();
+                for (int i = 0; i < arr.length; i++) {
+                    for (char c = 'a'; c <= 'z'; c++) {
+                        if (c == s.charAt(i)) continue;
+                        arr[i] = c;
+                        String x = String.valueOf(arr);
+                        if (wordSet.contains(x)) {
+                            wordSet.remove(x);
+                            queue.add(x);
+                        }
                     }
+                    arr[i] = s.charAt(i);
                 }
             }
         }
-
-        return result == Integer.MAX_VALUE ? 0 : result;
-    }
-
-    static class Info {
-
-        String s;
-        int x;
-
-        Info(String s, int x) {
-            this.s = s;
-            this.x = x;
-        }
+        return 0;
     }
 }

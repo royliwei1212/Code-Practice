@@ -7,23 +7,23 @@ package tech.saltyegg.leetcode;
 public class ValidPalindromeII {
 
     public boolean validPalindrome(String s) {
-        for (int i = 0; i <= s.length(); i++) {
-            if (isPalindrome(s, i)) return true;
+        if (s == null || s.length() < 3) return true;
+        int l = 0, r = s.length() - 1;
+        while (l < r) {
+            if (s.charAt(l) != s.charAt(r)) {
+                return isValid(s, l + 1, r) || isValid(s, l, r - 1);
+            }
+            l++;
+            r--;
         }
-        return false;
+        return true;
     }
 
-
-    private boolean isPalindrome(String s, int ignoreIndex) {
-        int l = 0;
-        int r = s.length() - 1;
-
+    private boolean isValid(String s, int l, int r) {
         while (l < r) {
-            if (l == ignoreIndex) l++;
-            if (r == ignoreIndex) r--;
-
-            if (l < r && s.charAt(l++) != s.charAt(r--)) return false;
-
+            if (s.charAt(l) != s.charAt(r)) return false;
+            l++;
+            r--;
         }
         return true;
     }

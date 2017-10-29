@@ -3,10 +3,7 @@
  */
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
 import tech.saltyegg.leetcode.parent.TreeNode;
-
-import static org.junit.Assert.assertTrue;
 
 /**
  * Description: Given a binary tree, determine if it is a valid binary search tree (BST).
@@ -22,10 +19,6 @@ import static org.junit.Assert.assertTrue;
 public class ValidateBinarySearchTree {
 
     public boolean isValidBST(TreeNode root) {
-        if (root == null || (root.left == null && root.right == null)) {
-            return true;
-        }
-
         return helper(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }
 
@@ -38,21 +31,6 @@ public class ValidateBinarySearchTree {
         }
 
         return helper(root.right, root.val, max) && helper(root.left, min, root.val);
-    }
-
-    @Test
-    public void test() {
-        TreeNode root = new TreeNode(-2147483648);
-        root.right = new TreeNode(2147483647);
-        assertTrue(isValidBST(root));
-
-        root = new TreeNode(1);
-        root.left = new TreeNode(1);
-        assertTrue(!isValidBST(root));
-
-        root = new TreeNode(0);
-        root.left = new TreeNode(-1);
-        assertTrue(isValidBST(root));
     }
 
 }

@@ -11,34 +11,23 @@ package tech.saltyegg.leetcode;
 public class OneEditDistance {
 
     public boolean isOneEditDistance(String s, String t) {
-        if (s == t || s.equals(t)) {
-            return true;
-        }
-
-        int ls = s.length();
-        int lt = t.length();
-
-        return Math.abs(ls - lt) <= 1 && (ls > lt ? helper(s, t) : helper(t, s));
-
+        if (Math.abs(s.length() - t.length()) > 1) return false;
+        return s.length() > t.length() ? helper(s, t) : helper(t, s);
     }
 
-    private boolean helper(String l, String s) {
-        boolean dup = false;
-        int i = 0;
-        int j = 0;
-        char[] cl = l.toCharArray();
-        char[] cs = s.toCharArray();
-        for (; j < s.length(); i++, j++) {
-            if (cs[j] != cl[i]) {
-                if (dup) {
-                    return false;
-                }
-                dup = true;
-                if (s.length() < l.length()) {
-                    i--;
+    private boolean helper(String lng, String sot) {
+        boolean alreadyOneDistance = false;
+        int i = 0, j = 0;
+        for (; i < lng.length() && j < sot.length(); i++, j++) {
+            if (lng.charAt(i) != sot.charAt(j)) {
+                if (alreadyOneDistance) return false;
+                alreadyOneDistance = true;
+
+                if (lng.length() > sot.length()) {
+                    j--;
                 }
             }
         }
-        return dup || l.length() > s.length();
+        return alreadyOneDistance || lng.length() > sot.length();
     }
 }

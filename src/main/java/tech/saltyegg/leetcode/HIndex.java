@@ -6,12 +6,11 @@ import java.util.Arrays;
  * @author hzhou
  * @since 9/4/17
  */
+@SuppressWarnings("Duplicates")
 public class HIndex {
 
     public int hIndex(int[] citations) {
-        if (citations == null || citations.length == 0) {
-            return 0;
-        }
+        if (citations == null || citations.length == 0) return 0;
 
         Arrays.sort(citations);
 
@@ -21,7 +20,6 @@ public class HIndex {
             int citation = citations[i];
             if (citation < index) {
                 return index - 1;
-
             } else {
                 result = index;
             }

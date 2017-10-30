@@ -1,9 +1,5 @@
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-
-import static org.junit.Assert.assertSame;
-
 /**
  * Created by hzhou on 5/18/15. codeashobby@gmail.com
  * <p/>
@@ -52,10 +48,5 @@ public class DecodeWays {
         }
         int value = Integer.valueOf(s);
         return value > 0 && value < 27;
-    }
-
-    @Test
-    public void test() {
-        assertSame(2, numDecodings("12"));
     }
 }

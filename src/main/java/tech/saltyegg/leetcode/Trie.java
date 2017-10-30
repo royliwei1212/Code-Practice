@@ -14,99 +14,68 @@ import java.util.Map;
  * <p/>
  * http://www.programcreek.com/2014/05/leetcode-implement-trie-prefix-tree-java/
  */
-class TrieNode {
 
-    private boolean isLeaf;
-    private Map<Character, TrieNode> children;
-    private char value;
 
-    // Initialize your data structure here.
-    public TrieNode() {
-        this.isLeaf = false;
-        this.children = new HashMap<Character, TrieNode>();
-    }
-
-    public TrieNode(char value) {
-        this();
-        this.value = value;
-    }
-
-    public void putChild(char c) {
-        this.children.put(c, new TrieNode(c));
-    }
-
-    public boolean containsChild(char c) {
-        return this.children.containsKey(c);
-    }
-
-    public TrieNode getChild(char c) {
-        return containsChild(c) ? this.children.get(c) : null;
-    }
-
-    public void setLeaf() {
-        this.isLeaf = true;
-    }
-
-    public boolean isLeaf() {
-        return this.isLeaf;
-    }
-}
-
+@SuppressWarnings("Duplicates")
 public class Trie {
 
-    private TrieNode root;
+    private Node root;
 
+    /**
+     * Initialize your data structure here.
+     */
     public Trie() {
-        root = new TrieNode();
+        root = new Node();
     }
 
-    // Inserts a word into the trie.
+    /**
+     * Inserts a word into the trie.
+     */
     public void insert(String word) {
-        if (word == null || word.isEmpty()) {
-            return;
+        if (word == null || word.isEmpty()) return;
+        Map<Character, Node> children = root.children;
+        for (int i = 0; i < word.length(); i++) {
+            char c = word.charAt(i);
+            Node node = children.getOrDefault(c, new Node());
+            node.val = c;
+            children.put(c, node);
+            children = node.children;
+            if (i == word.length() - 1) node.isLeaf = true;
         }
-
-        char[] chars = word.toCharArray();
-        TrieNode tmp = root;
-        for (char c : chars) {
-            if (!tmp.containsChild(c)) {
-                tmp.putChild(c);
-            }
-            tmp = tmp.getChild(c);
-        }
-        tmp.setLeaf();
     }
 
-    // Returns if the word is in the trie.
+    /**
+     * Returns if the word is in the trie.
+     */
     public boolean search(String word) {
-        if (word == null || word.isEmpty()) {
-            return true;
+        if (word == null || word.isEmpty()) return true;
+        Map<Character, Node> children = root.children;
+        for (int i = 0; i < word.length(); i++) {
+            char c = word.charAt(i);
+            if (!children.containsKey(c)) return false;
+            if (i + 1 == word.length()) return children.get(c).isLeaf;
+            children = children.get(c).children;
         }
-        char[] chars = word.toCharArray();
-        TrieNode tmp = root;
-        for (char c : chars) {
-            if (!tmp.containsChild(c)) {
-                return false;
-            }
-            tmp = tmp.getChild(c);
-        }
-        return tmp.isLeaf();
+        return false;
     }
 
-    // Returns if there is any word in the trie
-    // that starts with the given prefix.
+    /**
+     * Returns if there is any word in the trie that starts with the given prefix.
+     */
     public boolean startsWith(String prefix) {
-        if (prefix == null || prefix.isEmpty()) {
-            return true;
-        }
-        char[] chars = prefix.toCharArray();
-        TrieNode tmp = root;
-        for (char c : chars) {
-            if (!tmp.containsChild(c)) {
-                return false;
-            }
-            tmp = tmp.getChild(c);
+        if (prefix == null || prefix.isEmpty()) return true;
+        Map<Character, Node> children = root.children;
+        for (char c : prefix.toCharArray()) {
+            if (!children.containsKey(c)) return false;
+            children = children.get(c).children;
         }
         return true;
+    }
+
+    private static class Node {
+        char val = '\0';
+        Map<Character, Node> children = new HashMap<>();
+        boolean isLeaf = false;
+
     }
 }

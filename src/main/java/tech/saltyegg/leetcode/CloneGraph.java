@@ -3,7 +3,6 @@
  */
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
 import tech.saltyegg.leetcode.parent.UndirectedGraphNode;
 
 import java.util.HashMap;
@@ -23,8 +22,8 @@ public class CloneGraph {
             return null;
         }
 
-        Queue<UndirectedGraphNode> queue = new LinkedList<UndirectedGraphNode>();
-        Map<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<UndirectedGraphNode, UndirectedGraphNode>();
+        Queue<UndirectedGraphNode> queue = new LinkedList<>();
+        Map<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<>();
 
         UndirectedGraphNode newHead = new UndirectedGraphNode(node.label);
 
@@ -44,10 +43,5 @@ public class CloneGraph {
             }
         }
         return newHead;
-    }
-
-    @Test
-    public void test() {
-        UndirectedGraphNode node = new UndirectedGraphNode(1);
     }
 }

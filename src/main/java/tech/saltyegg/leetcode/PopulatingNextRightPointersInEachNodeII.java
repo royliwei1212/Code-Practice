@@ -1,9 +1,9 @@
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
 import tech.saltyegg.leetcode.parent.TreeLinkNode;
 
-import static org.junit.Assert.assertSame;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Created by hzhou on 4/27/15. codeashobby@gmail.com
@@ -13,51 +13,19 @@ import static org.junit.Assert.assertSame;
 public class PopulatingNextRightPointersInEachNodeII {
 
     public void connect(TreeLinkNode root) {
-        if (root == null) {
-            return;
-        }
-
-        TreeLinkNode head = null; // the head node of the next level
-        TreeLinkNode prev = null; // the previous node of the current node in the same level
-        TreeLinkNode curr = root;
-        while (curr != null) {
-            while (curr != null) {
-                if (curr.left != null) {
-                    if (prev == null) {
-                        head = curr.left;
-                    } else {
-                        prev.next = curr.left;
-                    }
-                    prev = curr.left;
-                }
-                if (curr.right != null) {
-                    if (prev == null) {
-                        head = curr.right;
-                    } else {
-                        prev.next = curr.right;
-                    }
-                    prev = curr.right;
-                }
-                curr = curr.next;
+        if (root == null) return;
+        Queue<TreeLinkNode> queue = new LinkedList<>();
+        queue.add(root);
+        queue.add(null);
+        while (!queue.isEmpty()) {
+            TreeLinkNode node = queue.poll();
+            if (node == null) {
+                if (!queue.isEmpty()) queue.add(null);
+            } else {
+                node.next = queue.peek();
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
             }
-            // go to next level
-            curr = head;
-            head = null;
-            prev = null;
         }
-    }
-
-    @Test
-    public void test() {
-        TreeLinkNode root = new TreeLinkNode(1);
-        root.left = new TreeLinkNode(2);
-        root.right = new TreeLinkNode(3);
-        root.left.left = new TreeLinkNode(4);
-        root.left.right = new TreeLinkNode(5);
-        root.right.right = new TreeLinkNode(7);
-
-        connect(root);
-
-        assertSame(root.left.right.next, root.right.right);
     }
 }

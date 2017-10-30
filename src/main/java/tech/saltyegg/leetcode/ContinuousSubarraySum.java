@@ -1,5 +1,8 @@
 package tech.saltyegg.leetcode;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @author hzhou
  * @since 9/11/17
@@ -8,18 +11,15 @@ public class ContinuousSubarraySum {
 
     public boolean checkSubarraySum(int[] nums, int k) {
         if (nums == null || nums.length < 2) return false;
-
-        int[] sum = new int[nums.length + 1];
-        sum[0] = 0;
-        for (int i = 1; i <= nums.length; i++) {
-            sum[i] = sum[i - 1] + nums[i - 1];
-        }
-
-        for (int i = 1; i < sum.length; i++) {
-            for (int j = 0; j < i - 1; j++) {
-                int val = sum[i] - sum[j];
-                if ((k == 0 && val == 0) || (k != 0 && val % k == 0)) return true;
-            }
+        Set<Integer> set = new HashSet<>();
+        int sum = 0;
+        int pre = 0;
+        for (int n : nums) {
+            sum += n;
+            int x = (k == 0) ? sum : sum % k;
+            if (set.contains(x)) return true;
+            set.add(pre);
+            pre = x;
         }
         return false;
     }

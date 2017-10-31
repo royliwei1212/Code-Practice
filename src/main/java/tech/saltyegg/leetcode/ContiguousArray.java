@@ -17,7 +17,7 @@ public class ContiguousArray {
         Map<Integer, Integer> dict = new HashMap<>();
         dict.put(0, -1);
         for (int i = 0; i < nums.length; i++) {
-            sum += (nums[i] << 1) - 1;
+            sum += (nums[i] == 1) ? 1 : -1;
             if (dict.containsKey(sum)) {
                 result = Math.max(result, i - dict.get(sum));
             } else {

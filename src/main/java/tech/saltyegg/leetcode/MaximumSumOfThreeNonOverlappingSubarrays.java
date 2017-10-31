@@ -2,50 +2,50 @@ package tech.saltyegg.leetcode;
 
 public class MaximumSumOfThreeNonOverlappingSubarrays {
 
-    public static int[] maxSumOfThreeSubarrays(int[] nums, int k) {
-        int n = nums.length, maxsum = 0;
+    public int[] maxSumOfThreeSubarrays(int[] nums, int k) {
+        if (nums == null || nums.length == 0 || k * 3 > nums.length || k == 0) return new int[0];
 
-        int[] sum = new int[n + 1], posLeft = new int[n], posRight = new int[n], ans = new int[3];
+        int[] sum = new int[nums.length + 1];
+        for (int i = 1; i < sum.length; i++) sum[i] = sum[i - 1] + nums[i - 1];
 
-        for (int i = 0; i < n; i++) {
-            sum[i + 1] = sum[i] + nums[i];
-        }
+        int[] left = new int[nums.length];
+        int[] right = new int[nums.length];
+        int[] result = new int[3];
 
-        // DP for starting index of the left max sum interval
-        for (int i = k, tot = sum[k] - sum[0]; i < n; i++) {
-            if (sum[i + 1] - sum[i + 1 - k] > tot) {
-                posLeft[i] = i + 1 - k;
-                tot = sum[i + 1] - sum[i + 1 - k];
+        for (int i = k, max = sum[k] - sum[0]; i < nums.length; i++) {
+            int t = sum[i + 1] - sum[i - k + 1];
+            if (t > max) {
+                max = t;
+                left[i] = i - k + 1;
             } else {
-                posLeft[i] = posLeft[i - 1];
-            }
-        }
-        // DP for starting index of the right max sum interval
-        posRight[n - k] = n - k;
-        for (int i = n - k - 1, tot = sum[n] - sum[n - k]; i >= 0; i--) {
-            if (sum[i + k] - sum[i] > tot) {
-                posRight[i] = i;
-                tot = sum[i + k] - sum[i];
-            } else {
-                posRight[i] = posRight[i + 1];
+                left[i] = left[i - 1];
             }
         }
 
-        // test all possible middle interval
-        for (int i = k; i <= n - 2 * k; i++) {
-            int l = posLeft[i - 1], r = posRight[i + k];
-            int tot = (sum[i + k] - sum[i]) + (sum[l + k] - sum[l]) + (sum[r + k] - sum[r]);
-            if (tot > maxsum) {
-                maxsum = tot;
-                ans[0] = l;
-                ans[1] = i;
-                ans[2] = r;
+        right[nums.length - k] = nums.length - k;
+        for (int i = nums.length - k - 1, max = sum[nums.length] - sum[nums.length - k]; i >= 0; i--) {
+            int t = sum[i + k] - sum[i];
+            if (t > max) {
+                right[i] = i;
+                max = t;
+            } else {
+                right[i] = right[i + 1];
             }
         }
-        return ans;
+
+        int max = 0;
+        for (int i = k; i <= nums.length - 2 * k; i++) {
+            int l = left[i - 1];
+            int r = right[i + k];
+            int t = sum[l + k] - sum[l] + sum[r + k] - sum[r] + sum[i + k] - sum[i];
+            if (t > max) {
+                max = t;
+                result[0] = l;
+                result[1] = i;
+                result[2] = r;
+            }
+        }
+        return result;
     }
 
-    public static void main(String[] args) {
-        maxSumOfThreeSubarrays(new int[]{1, 2, 1, 2, 6, 7, 5, 1}, 2);
-    }
 }

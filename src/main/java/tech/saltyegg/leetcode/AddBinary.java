@@ -3,8 +3,6 @@
  */
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-
 /**
  * Description:Given two binary strings, return their sum (also a binary string).
  * <p>
@@ -15,52 +13,22 @@ import org.junit.Test;
 public class AddBinary {
 
     public String addBinary(String a, String b) {
-        if (a == null || a.trim().isEmpty()) {
-            return b;
-        }
-
-        if (b == null || b.trim().isEmpty()) {
-            return a;
-        }
-
-        a = a.trim();
-        b = b.trim();
-
-        // make a is the longer string, b is the shorter one
-        if (a.length() < b.length()) {
-            String tmp = b;
-            b = a;
-            a = tmp;
-        }
-        // a is the longer one
+        if (a == null || a.isEmpty() || a.equals("0")) return b;
+        if (b == null || b.isEmpty() || b.equals("0")) return a;
         StringBuilder sb = new StringBuilder();
-        int i = a.length() - 1;
-        int j = b.length() - 1;
-        boolean inc = false;
-        for (; j >= 0; j--, i--) {
-            int ia = a.charAt(i) - '0';
-            int ib = b.charAt(j) - '0';
-            int sum = ia + ib + (inc ? 1 : 0);
-            sb.insert(0, sum % 2);
-            inc = sum > 1;
+        int l = Math.max(a.length(), b.length());
+        int c = 0;
+        a = new StringBuilder(a).reverse().toString();
+        b = new StringBuilder(b).reverse().toString();
+        for (int i = 0; i < l; i++) {
+            int x = (i >= a.length()) ? 0 : a.charAt(i) - '0';
+            int y = (i >= b.length()) ? 0 : b.charAt(i) - '0';
+
+            int m = x + y + c;
+            sb.append(m % 2);
+            c = m / 2;
         }
-
-        while (i >= 0) {
-            int sum = a.charAt(i) - '0' + (inc ? 1 : 0);
-            sb.insert(0, sum % 2);
-            inc = sum > 1;
-            i--;
-        }
-
-        if (i < 0 && inc) {
-            sb.insert(0, '1');
-        }
-
-        return sb.toString();
-    }
-
-    @Test
-    public void test() {
-        String result = addBinary("1", "11");
+        if (c == 1) sb.append(c);
+        return sb.reverse().toString();
     }
 }

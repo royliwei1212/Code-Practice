@@ -1,10 +1,6 @@
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
 import tech.saltyegg.leetcode.parent.ListNode;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by hzhou on 2015/5/21.
@@ -13,56 +9,28 @@ import java.util.List;
 public class ReverseNodesInKGroup {
 
     public ListNode reverseKGroup(ListNode head, int k) {
-        if (head == null || head.next == null) {
-            return head;
-        }
-
+        if (head == null || k == 1) return head;
         int length = 0;
-        ListNode pre = head;
-        while (pre != null) {
+        ListNode c = head;
+        while (c != null) {
             length++;
-            pre = pre.next;
+            c = c.next;
         }
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode pre = dummy;
 
-        if (k > length) {
-            return head;
-        }
-        int count = length / k;
-        if (k == 1 || count < 1) {
-            return head;
-        }
-
-        ListNode preHead = new ListNode(0);
-        preHead.next = head;
-
-        pre = preHead;
-        ListNode cursor = head;
-        List<ListNode> list = new ArrayList<ListNode>(k);
-        while (count > 0) {
-            list.clear();
-            for (int i = 0; i < k; i++) {
-                list.add(cursor);
-                cursor = cursor.next;
-                if (i > 0) {
-                    list.get(i).next = list.get(i - 1);
-                }
+        while (length >= k) {
+            c = pre.next;
+            for (int i = 1; i < k; i++) {
+                ListNode t = c.next;
+                c.next = t.next;
+                t.next = pre.next;
+                pre.next = t;
             }
-            list.get(0).next = cursor;
-            pre.next = list.get(k - 1);
-            pre = list.get(0);
-            count--;
+            pre = c;
+            length -= k;
         }
-
-        return preHead.next;
-    }
-
-    @Test
-    public void test() {
-        ListNode l = new ListNode(1);
-        l.next = new ListNode(2);
-        l.next.next = new ListNode(3);
-        l.next.next.next = new ListNode(4);
-        l.next.next.next.next = new ListNode(5);
-        ListNode result = reverseKGroup(l, 5);
+        return dummy.next;
     }
 }

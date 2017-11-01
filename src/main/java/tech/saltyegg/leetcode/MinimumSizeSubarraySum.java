@@ -1,10 +1,8 @@
 package tech.saltyegg.leetcode;
 
-/**
- * Created by hzhou on 5/11/15. codeashobby@gmail.com
- * <p/>
- * http://www.geeksforgeeks.org/minimum-length-subarray-sum-greater-given-value/
- */
+import java.util.Map;
+import java.util.TreeMap;
+
 public class MinimumSizeSubarraySum {
 
     public int minSubArrayLen(int s, int[] nums) {
@@ -35,5 +33,21 @@ public class MinimumSizeSubarraySum {
             }
         }
         return r;
+    }
+
+    // solution 2
+    public int minSubArrayLen2(int s, int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+        int[] sum = new int[nums.length + 1];
+        for (int i = 1; i < sum.length; i++) sum[i] = sum[i - 1] + nums[i - 1];
+        if (sum[nums.length] < s) return 0;
+        TreeMap<Integer, Integer> map = new TreeMap<>();
+        for (int i = 0; i < sum.length; i++) map.put(sum[i], i);
+        int result = nums.length;
+        for (int i = 0; i < sum.length; i++) {
+            Map.Entry<Integer, Integer> e = map.ceilingEntry(sum[i] + s);
+            if (e != null) result = Math.min(result, e.getValue() - i);
+        }
+        return result;
     }
 }

@@ -1,7 +1,6 @@
 package tech.saltyegg.leetcode;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by hzhou on 2016/5/8.
@@ -37,6 +36,29 @@ public class GraphValidTree {
         } else {
             return findRoot(map, root);
         }
+    }
+
+    public boolean validTree2(int n, int[][] edges) {
+        Map<Integer, Set<Integer>> map = new HashMap<>();
+        for (int i = 0; i < n; i++) map.put(i, new HashSet<>());
+        Set<Integer> visited = new HashSet();
+        for (int[] e : edges) {
+            map.get(e[0]).add(e[1]);
+            map.get(e[1]).add(e[0]);
+        }
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(1);
+        visited.add(1);
+        while (!queue.isEmpty()) {
+            Integer x = queue.poll();
+            for (int y : map.get(x)) {
+                if (visited.contains(y)) return false;
+                queue.add(y);
+                visited.add(y);
+                map.get(y).remove(x);
+            }
+        }
+        return visited.size() == n;
     }
 
 }

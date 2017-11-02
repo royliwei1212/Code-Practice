@@ -41,7 +41,7 @@ public class GraphValidTree {
     public boolean validTree2(int n, int[][] edges) {
         Map<Integer, Set<Integer>> map = new HashMap<>();
         for (int i = 0; i < n; i++) map.put(i, new HashSet<>());
-        Set<Integer> visited = new HashSet();
+        Set<Integer> visited = new HashSet<>();
         for (int[] e : edges) {
             map.get(e[0]).add(e[1]);
             map.get(e[1]).add(e[0]);

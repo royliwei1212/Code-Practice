@@ -3,48 +3,29 @@
  */
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
 import tech.saltyegg.leetcode.parent.Interval;
 
-import java.util.Arrays;
-import java.util.PriorityQueue;
+import java.util.Map;
+import java.util.TreeMap;
 
-/**
- * Description:
- *
- * @author hzhou
- */
 public class MeetingRoomsII {
 
+    // find the overlap count
+
     public int minMeetingRooms(Interval[] intervals) {
-        if (intervals == null || intervals.length == 0) {
-            return 0;
+        if (intervals == null || intervals.length == 0) return 0;
+        Map<Integer, Integer> map = new TreeMap<>();
+        for (Interval i : intervals) {
+            map.put(i.start, map.getOrDefault(i.start, 0) + 1);
+            map.put(i.end, map.getOrDefault(i.end, 0) - 1);
         }
 
-        Arrays.sort(intervals, (o1, o2) -> {
-            int r = o1.start - o2.start;
-            return r == 0 ? o1.end - o2.end : r;
-        });
-
-        PriorityQueue<Integer> queue = new PriorityQueue<>();
-
-        queue.add(intervals[0].end);
-
-        for (int i = 1; i < intervals.length; i++) {
-            int val = queue.peek();
-            Interval in = intervals[i];
-            if (in.start >= val) {
-                queue.remove(val);
-            }
-            queue.add(in.end);
+        int result = 0, room = 0;
+        for (Map.Entry<Integer, Integer> e : map.entrySet()) {
+            room += e.getValue();
+            result = Math.max(result, room);
         }
-        return queue.size();
+        return result;
     }
 
-    @Test
-    public void test() {
-        Interval[] intervals = new Interval[]{new Interval(5, 8), new Interval(6, 8)};
-        System.out.println(minMeetingRooms(intervals));
-
-    }
 }

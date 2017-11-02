@@ -1,12 +1,6 @@
 package tech.saltyegg.leetcode;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by hzhou on 2016/5/8.
@@ -14,89 +8,60 @@ import java.util.Set;
  */
 public class AlienDictionary {
     public String alienOrder(String[] words) {
-        if (words == null || words.length == 0) {
-            return "";
-        }
+        if (words == null || words.length == 0) return "";
+        if (words.length == 1) return words[0];
 
-        if (words.length == 1) {
-            return words[0];
-        }
-
-        Map<Character, Set<Character>> graph = new HashMap<>();
-        Map<Character, Integer> toCount = new HashMap<>();
+        Set<Character> allChars = new HashSet<>();
         StringBuilder sb = new StringBuilder();
+        Set<Map.Entry<Character, Character>> set = new HashSet<>();
 
-        init(graph, toCount, words);
-        process(graph, toCount, words);
-        build(sb, graph, toCount);
-        return sb.length() == toCount.size() ? sb.toString() : "";
-    }
+        for (String w : words) {
+            for (char c : w.toCharArray()) allChars.add(c);
+        }
 
-    private void init(Map<Character, Set<Character>> graph, Map<Character, Integer> toCount, String[] words) {
-        Arrays.stream(words).forEach(word -> {
-            for (char c : word.toCharArray()) {
-                graph.putIfAbsent(c, new HashSet<>());
-                toCount.putIfAbsent(c, 0);
-            }
-        });
-    }
-
-    private void process(Map<Character, Set<Character>> graph, Map<Character, Integer> toCount, String[] words) {
-        Set<String> edges = new HashSet<>();
         for (int i = 0; i < words.length - 1; i++) {
-            String s1 = words[i];
-            String s2 = words[i + 1];
+            String crt = words[i];
+            String next = words[i + 1];
+            int min = Math.min(crt.length(), next.length());
+            int k = 0;
+            while (k < min && crt.charAt(k) == next.charAt(k)) {
+                k++;
+            }
+            if (k < min) set.add(new AbstractMap.SimpleEntry<>(crt.charAt(k), next.charAt(k)));
+            if (k == min && crt.length() > next.length()) return "";
+        }
 
-            // TODO: what if s1 or s2 is null
-            for (int j = 0; j < s1.length() && j < s2.length(); j++) {
-                char c1 = s1.charAt(j);
-                char c2 = s2.charAt(j);
-                if (c1 == c2) {
-                    continue;
-                }
-                String edge = "" + c1 + c2;
-                if (!edges.contains(edge)) {
-                    toCount.put(c2, toCount.get(c2) + 1);
-                    Set<Character> val = graph.get(c1);
-                    val.add(c2);
-                    graph.put(c1, val);
-                    edges.add(edge);
-                    break;
-                }
+        int[] cnt = new int[256];
+        for (Map.Entry<Character, Character> e : set) {
+            cnt[e.getValue() - 'a']++;
+        }
+
+        Queue<Character> queue = new LinkedList<>();
+        for (char c : allChars) {
+            if (cnt[c - 'a'] == 0) {
+                queue.add(c);
+                sb.append(c);
             }
         }
-    }
-
-    private void build(StringBuilder sb, Map<Character, Set<Character>> graph, Map<Character, Integer> toCount) {
-        Queue<Character> queue = new LinkedList<>();
-        toCount.forEach((key, value) -> {
-            if (value == 0) {
-                queue.add(key);
-            }
-        });
 
         while (!queue.isEmpty()) {
             char c = queue.poll();
-            sb.append(c);
-            graph.get(c).forEach(ch -> {
-                int value = toCount.get(ch) - 1;
-                toCount.put(ch, value);
-                if (value == 0) {
-                    queue.add(ch);
-                }
-            });
-        }
-    }
 
-    public static void main(String[] args) {
-        String[] words = new String[]{
-                "wrt",
-                "wrf",
-                "er",
-                "ett",
-                "rftt"};
-        AlienDictionary ad = new AlienDictionary();
-        System.out.println(ad.alienOrder(words));
+            for (Map.Entry<Character, Character> e : set) {
+                char key = e.getKey();
+                char val = e.getValue();
+
+                if (key == c) {
+                    cnt[val - 'a']--;
+                    if (cnt[val - 'a'] == 0) {
+                        queue.add(val);
+                        sb.append(val);
+                    }
+                }
+            }
+        }
+
+        return sb.length() == allChars.size() ? sb.toString() : "";
     }
 
 }

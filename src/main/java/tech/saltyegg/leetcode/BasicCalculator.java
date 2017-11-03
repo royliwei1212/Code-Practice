@@ -9,14 +9,44 @@ import java.util.Stack;
  * Email: i@hzhou.me
  */
 public class BasicCalculator {
+
     public int calculate(String s) {
+        if (s == null || s.isEmpty()) return 0;
+        Stack<Integer> stack = new Stack<>();
+        int num = 0;
+        int flag = 1;
+        int result = 0;
+        for (char c : s.toCharArray()) {
+            if (c >= '0' && c <= '9') {
+                num = 10 * num + (c - '0');
+            } else if (c == '+' || c == '-') {
+                result += flag * num;
+                num = 0;
+                flag = c == '+' ? 1 : -1;
+            } else if (c == '(') {
+                stack.push(result);
+                stack.push(flag);
+                result = 0;
+                flag = 1;
+            } else if (c == ')') {
+                result += flag * num;
+                num = 0;
+                result *= stack.pop();
+                result += stack.pop();
+            }
+        }
+        return result;
+    }
+
+    // solution 2
+    public int calculate2(String s) {
         if (s == null || s.length() == 0) {
             return 0;
         }
 
         String str = convertReversePolishNotation(s);
 
-        Stack<Integer> stack = new Stack<Integer>();
+        Stack<Integer> stack = new Stack<>();
         for (int i = 0; i < str.length(); i++) {
             char c = str.charAt(i);
             if (c == ' ') {

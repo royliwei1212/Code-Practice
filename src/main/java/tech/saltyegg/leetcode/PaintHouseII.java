@@ -1,5 +1,7 @@
 package tech.saltyegg.leetcode;
 
+import java.util.Arrays;
+
 /**
  * Created by hzhou on 2016/5/4.
  * Email: i@hzhou.me
@@ -7,31 +9,26 @@ package tech.saltyegg.leetcode;
 public class PaintHouseII {
 
     public int minCostII(int[][] costs) {
-        if (costs == null || costs.length == 0 || costs[0].length == 0) {
-            return 0;
+        if (costs == null || costs.length == 0 || costs[0] == null || costs[0].length == 0 || costs[0].length == 1 && costs.length > 1) return 0;
+        if (costs[0].length == 1 && costs.length == 1) return costs[0][0];
+        int[][] dp = new int[costs.length + 1][costs[0].length];
+        for (int i = 1; i < dp.length; i++) {
+            Arrays.fill(dp[i], Integer.MAX_VALUE);
         }
-        int h = costs.length;
-        int c = costs[0].length;
 
-        int[][] dp = new int[h][c];
-
-        System.arraycopy(costs[0], 0, dp[0], 0, c);
-
-        for (int i = 1; i < h; i++) {
-            for (int j = 0; j < c; j++) {
-                dp[i][j] = Integer.MAX_VALUE;
-                for (int k = 0; k < c; k++) {
-                    if (k != j) {
-                        dp[i][j] = Math.min(dp[i][j], dp[i - 1][k] + costs[i][j]);
-                    }
+        for (int i = 0; i < dp.length - 1; i++) {
+            for (int j = 0; j < dp[0].length; j++) {
+                for (int k = 0; k < dp[0].length; k++) {
+                    if (j == k) continue;
+                    dp[i + 1][j] = Math.min(dp[i + 1][j], dp[i][k] + costs[i][j]);
                 }
             }
         }
-        int min = Integer.MAX_VALUE;
-        for (int i = 0; i < c; i++) {
-            min = Math.min(min, dp[h - 1][i]);
-        }
 
-        return min;
+        int result = Integer.MAX_VALUE;
+        for (int n : dp[costs.length]) {
+            result = Math.min(result, n);
+        }
+        return result;
     }
 }

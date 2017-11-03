@@ -10,44 +10,28 @@ import java.util.Map;
 public class LongestSubstringWithAtMostKDistinctCharacters {
 
     public int lengthOfLongestSubstringKDistinct(String s, int k) {
-        if (s == null || s.isEmpty() || k == 0) {
-            return 0;
-        }
+        if (s == null || s.isEmpty() || k < 1) return 0;
+        if (s.length() <= k) return s.length();
 
-        Map<Character, Integer> dict = new HashMap<>();
+        int result = k;
         int pre = 0;
-        int crt = 1;
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            map.put(c, map.getOrDefault(c, 0) + 1);
 
-        int result = 1;
-        dict.put(s.charAt(0), 1);
-        while (crt < s.length()) {
-            Character c = s.charAt(crt);
-            crt++;
-
-            dict.put(c, dict.containsKey(c) ? dict.get(c) + 1 : 1);
-
-            Character start = s.charAt(pre);
-            while (dict.size() > k) {
-                int count = dict.get(start);
-                if (count == 1) {
-                    dict.remove(start);
+            while (map.size() > k) {
+                char p = s.charAt(pre++);
+                int count = map.get(p) - 1;
+                if (count == 0) {
+                    map.remove(p);
                 } else {
-                    dict.put(start, count - 1);
+                    map.put(p, count);
                 }
-                pre++;
-                start = s.charAt(pre);
             }
-
-            result = Math.max(result, crt - pre);
+            result = Math.max(result, i - pre + 1);
         }
-
         return result;
-    }
-
-    public static void main(String[] args) {
-        LongestSubstringWithAtMostKDistinctCharacters l = new LongestSubstringWithAtMostKDistinctCharacters();
-        l.lengthOfLongestSubstringKDistinct("eceba", 2);
-
     }
 
 }

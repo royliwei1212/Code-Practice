@@ -42,7 +42,7 @@ public class BasicCalculator {
 
     private String convertReversePolishNotation(String s) {
         StringBuilder sb = new StringBuilder();
-        Stack<Character> stack = new Stack<Character>();
+        Stack<Character> stack = new Stack<>();
 
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);

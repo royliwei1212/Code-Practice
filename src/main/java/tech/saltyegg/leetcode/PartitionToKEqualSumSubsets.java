@@ -6,49 +6,25 @@ import java.util.Arrays;
  * http://www.voidcn.com/article/p-pyoxzvmf-bpb.html
  */
 public class PartitionToKEqualSumSubsets {
+
     public boolean canPartitionKSubsets(int[] nums, int k) {
-        if (nums == null || nums.length == 0 || k <= 0) return false;
-        Arrays.sort(nums);
-        reverse(nums);
+        if (nums == null || nums.length == 0 || k <= 0 || k > nums.length) return false;
         int sum = Arrays.stream(nums).sum();
         if (sum % k != 0) return false;
-        int target = sum / k;
-        if (nums[0] > target) return false;
 
-        int[] container = new int[k];
-        boolean[] result = new boolean[]{false};
-        helper(0, nums, k, target, container, result);
-        return result[0];
+        return helper(nums, k, new boolean[nums.length], 0, sum / k, 0);
     }
 
-    private void helper(int start, int[] nums, int k, int target, int[] container, boolean[] result) {
-        if (result[0]) return;
-        if (start == nums.length) {
-            int i = 0;
-            for (; i < container.length; i++) {
-                if (container[i] != target) break;
-            }
-            if (i == container.length) result[0] = true;
-            return;
+    private boolean helper(int[] nums, int k, boolean[] visited, int start, int target, int sum) {
+        if (k == 1) return true;
+        if (sum > target) return false;
+        if (sum == target) return helper(nums, k - 1, visited, 0, target, 0);
+        for (int i = start; i < nums.length; i++) {
+            if (visited[i]) continue;
+            visited[i] = true;
+            if (helper(nums, k, visited, i + 1, target, sum + nums[i])) return true;
+            visited[i] = false;
         }
-
-        for (int i = 0; i < container.length; i++) {
-            if (container[i] + nums[start] <= target) {
-                container[i] += nums[start];
-                helper(start + 1, nums, k, target, container, result);
-                container[i] -= nums[start];
-            }
-        }
-    }
-
-    private void reverse(int[] nums) {
-        int l = 0, r = nums.length - 1;
-        while (l < r) {
-            int t = nums[l];
-            nums[l] = nums[r];
-            nums[r] = t;
-            l++;
-            r--;
-        }
+        return false;
     }
 }

@@ -1,55 +1,28 @@
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-
-import javafx.util.Pair;
+import java.util.Stack;
 
 public class AsteroidCollision {
 
     public int[] asteroidCollision(int[] asteroids) {
         if (asteroids == null || asteroids.length < 2) return asteroids;
-        int l = 0;
-        while (l < asteroids.length) {
-
-            if (asteroids[l] > 0) {
-                Pair<Boolean, Integer> pair = isNextNeg(asteroids, l + 1);
-                if (pair.getKey()) {
-                    int sum = asteroids[l] + asteroids[pair.getValue()];
-                    if (sum == 0) {
-                        asteroids[l] = asteroids[pair.getValue()] = 0;
-                    } else if (sum > 0) {
-                        asteroids[pair.getValue()] = 0;
-                    } else {
-                        asteroids[l] = 0;
-                    }
-                    l = -1;
-                }
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < asteroids.length; i++) {
+            int a = asteroids[i];
+            if (a > 0 || stack.isEmpty() || stack.peek() < 0) {
+                stack.push(a);
+            } else if (stack.peek() + a <= 0) {
+                if (stack.peek() + a < 0) i--;
+                stack.pop();
             }
-            l++;
         }
-        int len = 0;
-        for (int i : asteroids) {
-            if (i != 0) len++;
-        }
-        int[] result = new int[len];
+        int[] result = new int[stack.size()];
         int index = 0;
-        for (int i : asteroids) {
-            if (i != 0) {
-                result[index++] = i;
-            }
+        for (int s : stack) {
+            result[index++] = s;
         }
         return result;
     }
 
-    private Pair<Boolean, Integer> isNextNeg(int[] asteroids, int start) {
-        while (start < asteroids.length && asteroids[start] == 0) {
-            start++;
-        }
-        return new Pair<>(start < asteroids.length && asteroids[start] < 0, start);
-    }
 
-    @Test
-    public void test() {
-        asteroidCollision(new int[]{10, 2, -5});
-    }
 }

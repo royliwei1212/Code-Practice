@@ -3,10 +3,10 @@
  */
 package tech.saltyegg.leetcode;
 
-import tech.saltyegg.leetcode.parent.RandomListNode;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import tech.saltyegg.leetcode.parent.RandomListNode;
 
 /**
  * Description: A linked list is given such that each node contains an additional random pointer which could point to

@@ -17,22 +17,22 @@ import tech.saltyegg.dp.chain.handler.Son;
  */
 public class Client {
 
-	public static void main(String[] args) {
-		RequestType[] types = RequestType.values();
-		List<IWomen> list = new ArrayList<IWomen>();
-		for (RequestType type : types) {
-			list.add(new Women(type, "test request string"));
-		}
+    public static void main(String[] args) {
+        RequestType[] types = RequestType.values();
+        List<IWomen> list = new ArrayList<IWomen>();
+        for (RequestType type : types) {
+            list.add(new Women(type, "test request string"));
+        }
 
-		Handler father = new Father();
-		Handler husband = new Husband();
-		Handler son = new Son();
+        Handler father = new Father();
+        Handler husband = new Husband();
+        Handler son = new Son();
 
-		father.setNext(husband);
-		husband.setNext(son);
+        father.setNext(husband);
+        husband.setNext(son);
 
-		for (IWomen women : list) {
-			father.handleMessage(women);
-		}
-	}
+        for (IWomen women : list) {
+            father.handleMessage(women);
+        }
+    }
 }

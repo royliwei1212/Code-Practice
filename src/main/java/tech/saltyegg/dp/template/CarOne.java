@@ -10,34 +10,34 @@ package tech.saltyegg.dp.template;
  */
 public class CarOne extends AbsCarModel {
 
-	private boolean isAlarm = false;
+    private boolean isAlarm = false;
 
-	@Override
-	protected void start() {
-		System.out.println("car 1 starts ...");
-	}
+    @Override
+    protected void start() {
+        System.out.println("car 1 starts ...");
+    }
 
-	@Override
-	protected void stop() {
-		System.out.println("car 1 stops ...");
-	}
+    @Override
+    protected void stop() {
+        System.out.println("car 1 stops ...");
+    }
 
-	@Override
-	protected void engineBoom() {
-		System.out.println("car 1 engine booms ...");
-	}
+    @Override
+    protected void engineBoom() {
+        System.out.println("car 1 engine booms ...");
+    }
 
-	@Override
-	protected void alarm() {
-		System.out.println("car 1 alarms ...");
-	}
+    @Override
+    protected void alarm() {
+        System.out.println("car 1 alarms ...");
+    }
 
-	@Override
-	protected boolean isAlarm() {
-		return this.isAlarm;
-	}
+    @Override
+    protected boolean isAlarm() {
+        return this.isAlarm;
+    }
 
-	public void setAlarm(boolean isAlarm) {
-		this.isAlarm = isAlarm;
-	}
+    public void setAlarm(boolean isAlarm) {
+        this.isAlarm = isAlarm;
+    }
 }

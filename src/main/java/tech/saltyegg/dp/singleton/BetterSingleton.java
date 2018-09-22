@@ -9,10 +9,10 @@ package tech.saltyegg.dp.singleton;
  * @author hzhou
  */
 public enum BetterSingleton {
-	INSTANCE;
+    INSTANCE;
 
-	public void doStuff() {
-		System.out.println("Singleton using Enum");
-	}
+    public void doStuff() {
+        System.out.println("Singleton using Enum");
+    }
 
 }

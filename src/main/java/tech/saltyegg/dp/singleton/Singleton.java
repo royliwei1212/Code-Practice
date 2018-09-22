@@ -10,12 +10,12 @@ package tech.saltyegg.dp.singleton;
  */
 public class Singleton {
 
-	private static Singleton ourInstance = new Singleton();
+    private static Singleton ourInstance = new Singleton();
 
-	public static Singleton getInstance() {
-		return ourInstance;
-	}
+    public static Singleton getInstance() {
+        return ourInstance;
+    }
 
-	private Singleton() {
-	}
+    private Singleton() {
+    }
 }

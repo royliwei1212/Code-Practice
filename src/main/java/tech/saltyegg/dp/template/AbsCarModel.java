@@ -10,24 +10,24 @@ package tech.saltyegg.dp.template;
  */
 public abstract class AbsCarModel {
 
-	protected abstract void start();
+    protected abstract void start();
 
-	protected abstract void stop();
+    protected abstract void stop();
 
-	protected abstract void engineBoom();
+    protected abstract void engineBoom();
 
-	protected abstract void alarm();
+    protected abstract void alarm();
 
-	protected boolean isAlarm() {
-		return true;
-	}
+    protected boolean isAlarm() {
+        return true;
+    }
 
-	public void run() {
-		this.start();
-		this.engineBoom();
-		if (this.isAlarm()) {
-			this.alarm();
-		}
-		this.stop();
-	}
+    public void run() {
+        this.start();
+        this.engineBoom();
+        if (this.isAlarm()) {
+            this.alarm();
+        }
+        this.stop();
+    }
 }

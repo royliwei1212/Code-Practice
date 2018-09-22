@@ -10,12 +10,12 @@ package tech.saltyegg.dp.template;
  */
 public class Client {
 
-	public static void main(String[] args) {
-		CarOne carOne = new CarOne();
-		carOne.setAlarm(true);
-		carOne.run();
+    public static void main(String[] args) {
+        CarOne carOne = new CarOne();
+        carOne.setAlarm(true);
+        carOne.run();
 
-		CarTwo carTwo = new CarTwo();
-		carTwo.run();
-	}
+        CarTwo carTwo = new CarTwo();
+        carTwo.run();
+    }
 }

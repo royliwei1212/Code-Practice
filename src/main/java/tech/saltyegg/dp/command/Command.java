@@ -14,9 +14,9 @@ import tech.saltyegg.dp.command.grp.RequirementGroup;
  */
 public abstract class Command {
 
-	protected CodeGroup codeGroup = new CodeGroup();
-	protected RequirementGroup requirementGroup = new RequirementGroup();
-	protected PageGroup pageGroup = new PageGroup();
+    protected CodeGroup codeGroup = new CodeGroup();
+    protected RequirementGroup requirementGroup = new RequirementGroup();
+    protected PageGroup pageGroup = new PageGroup();
 
-	public abstract void execute();
+    public abstract void execute();
 }

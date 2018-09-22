@@ -10,5 +10,5 @@ package tech.saltyegg.dp.factory;
  */
 public abstract class AbsHumanFactory {
 
-	public abstract <T extends Human> T createHuman(Class<T> clz);
+    public abstract <T extends Human> T createHuman(Class<T> clz);
 }

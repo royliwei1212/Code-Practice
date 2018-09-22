@@ -3,9 +3,9 @@
  */
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-
 import java.util.TreeSet;
+
+import org.junit.Test;
 
 /**
  * Description:

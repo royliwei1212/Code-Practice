@@ -19,12 +19,13 @@ public class StackReverse {
         }
     }
 
-    public static void reverse(Stack<Integer> stack){
+    public static void reverse(Stack<Integer> stack) {
         if (stack == null || stack.isEmpty()) return;
         int val = getAndRemoveLast(stack);
         reverse(stack);
         stack.push(val);
     }
+
     public static void main(String[] args) {
         Stack<Integer> stack = new Stack<>();
         stack.push(1);

@@ -4,6 +4,7 @@
 package tech.saltyegg.leetcode;
 
 import org.junit.Test;
+
 import tech.saltyegg.leetcode.parent.ListNode;
 
 /**

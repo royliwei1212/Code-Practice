@@ -9,7 +9,7 @@ package tech.saltyegg.dp.chain;
  * @author hzhou
  */
 public enum RequestType {
-	FATHER_LEVEL,
-	HUSBAND_LEVEL,
-	SON_LEVEL
+    FATHER_LEVEL,
+    HUSBAND_LEVEL,
+    SON_LEVEL
 }

@@ -23,7 +23,7 @@ public class SolutionIter implements Iterable<Integer> {
             for (String line; (line = br.readLine()) != null; ) {
                 // process the line
                 line = line.trim();
-                if(line.isEmpty()) continue;
+                if (line.isEmpty()) continue;
                 if (!line.matches(REGX)) {
                     continue;
                 }

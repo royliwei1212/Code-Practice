@@ -14,13 +14,13 @@ import tech.saltyegg.dp.chain.RequestType;
  */
 public class Son extends Handler {
 
-	public Son() {
-		super(RequestType.SON_LEVEL);
-	}
+    public Son() {
+        super(RequestType.SON_LEVEL);
+    }
 
-	@Override
-	public void response(IWomen women) {
-		System.out.println(women.getRequest());
-		System.out.println("Son handles request now...");
-	}
+    @Override
+    public void response(IWomen women) {
+        System.out.println(women.getRequest());
+        System.out.println("Son handles request now...");
+    }
 }

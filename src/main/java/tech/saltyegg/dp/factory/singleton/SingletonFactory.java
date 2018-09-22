@@ -13,20 +13,20 @@ import java.lang.reflect.Constructor;
 @SuppressWarnings({"unchecked", "CallToPrintStackTrace", "StaticNonFinalField"})
 public class SingletonFactory {
 
-	private static Singleton singleton = null;
+    private static Singleton singleton = null;
 
-	static {
-		try {
-			Class clz = Class.forName(Singleton.class.getName());
-			Constructor constructor = clz.getDeclaredConstructor();
-			constructor.setAccessible(true);
-			singleton = (Singleton) constructor.newInstance();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    static {
+        try {
+            Class clz = Class.forName(Singleton.class.getName());
+            Constructor constructor = clz.getDeclaredConstructor();
+            constructor.setAccessible(true);
+            singleton = (Singleton) constructor.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-	public static Singleton getSingleton() {
-		return singleton;
-	}
+    public static Singleton getSingleton() {
+        return singleton;
+    }
 }

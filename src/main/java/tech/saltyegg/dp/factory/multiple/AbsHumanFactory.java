@@ -12,5 +12,5 @@ import tech.saltyegg.dp.factory.Human;
  */
 public abstract class AbsHumanFactory {
 
-	public abstract Human createHuman();
+    public abstract Human createHuman();
 }

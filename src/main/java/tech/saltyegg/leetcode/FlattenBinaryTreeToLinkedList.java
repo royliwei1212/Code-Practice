@@ -1,8 +1,8 @@
 package tech.saltyegg.leetcode;
 
-import tech.saltyegg.leetcode.parent.TreeNode;
-
 import java.util.Stack;
+
+import tech.saltyegg.leetcode.parent.TreeNode;
 
 public class FlattenBinaryTreeToLinkedList {
 

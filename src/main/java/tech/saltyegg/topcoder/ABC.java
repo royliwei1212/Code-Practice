@@ -10,8 +10,8 @@ package tech.saltyegg.topcoder;
  */
 public class ABC {
 
-	public String createString(int N, int K) {
+    public String createString(int N, int K) {
 
-		return null;
-	}
+        return null;
+    }
 }

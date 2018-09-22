@@ -1,10 +1,10 @@
 package tech.saltyegg.leetcode;
 
-import tech.saltyegg.leetcode.parent.TreeNode;
-
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
+
+import tech.saltyegg.leetcode.parent.TreeNode;
 
 /**
  * @author hzhou

@@ -3,10 +3,10 @@
  */
 package tech.saltyegg.leetcode;
 
-import tech.saltyegg.leetcode.parent.Interval;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import tech.saltyegg.leetcode.parent.Interval;
 
 /**
  * Description:

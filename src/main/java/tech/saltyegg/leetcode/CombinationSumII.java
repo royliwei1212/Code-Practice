@@ -1,11 +1,11 @@
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+
+import org.junit.Test;
 
 /**
  * Created by hzhou on 5/10/15. codeashobby@gmail.com

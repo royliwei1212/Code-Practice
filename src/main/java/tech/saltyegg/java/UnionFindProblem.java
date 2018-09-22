@@ -165,11 +165,11 @@ public class UnionFindProblem {
     }
 
     /*
-        * 200.Number of Islands
-        * 2016-4-3 by Mingyang
-        * union 什么：两个相邻的1元素
+     * 200.Number of Islands
+     * 2016-4-3 by Mingyang
+     * union 什么：两个相邻的1元素
      * union 目的：union后计数union集合数量（通过计数union数组中根节点数量）
-        */
+     */
     class UF {
         public int count = 0;
         public int[] id = null;
@@ -337,14 +337,14 @@ public class UnionFindProblem {
     }
 
     /*
-  * 305    Number of Islands II
-  * 2016-4-3 by Mingyang
-  * Given a n,m which means the row and column of the 2D matrix and an array of pair A( size k ).
-  * Originally, the 2D matrix is all 0 which means there is only sea in the matrix.
-  * The list pair has k operator and each operator has two integer A[i].x, A[i].y means
-  * that you can change the grid matrix[A[i].x][A[i].y] from sea to island.
-  * Return how many island are there in the matrix after each operator.
-  */
+     * 305    Number of Islands II
+     * 2016-4-3 by Mingyang
+     * Given a n,m which means the row and column of the 2D matrix and an array of pair A( size k ).
+     * Originally, the 2D matrix is all 0 which means there is only sea in the matrix.
+     * The list pair has k operator and each operator has two integer A[i].x, A[i].y means
+     * that you can change the grid matrix[A[i].x][A[i].y] from sea to island.
+     * Return how many island are there in the matrix after each operator.
+     */
     private int[][] dir = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
 
     public List<Integer> numIslands2(int m, int n, int[][] positions) {

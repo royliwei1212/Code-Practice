@@ -3,10 +3,10 @@
  */
 package tech.saltyegg.leetcode;
 
-import tech.saltyegg.leetcode.parent.Interval;
-
 import java.util.Map;
 import java.util.TreeMap;
+
+import tech.saltyegg.leetcode.parent.Interval;
 
 public class MeetingRoomsII {
 

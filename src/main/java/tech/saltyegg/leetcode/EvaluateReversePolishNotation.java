@@ -3,9 +3,9 @@
  */
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-
 import java.util.Stack;
+
+import org.junit.Test;
 
 import static org.junit.Assert.assertSame;
 

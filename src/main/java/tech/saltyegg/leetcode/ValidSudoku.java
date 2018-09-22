@@ -1,9 +1,9 @@
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-
 import java.util.HashSet;
 import java.util.Set;
+
+import org.junit.Test;
 
 /**
  * Created by hzhou on 5/11/15. codeashobby@gmail.com

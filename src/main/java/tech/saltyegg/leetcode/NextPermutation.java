@@ -3,9 +3,9 @@
  */
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-
 import java.util.Arrays;
+
+import org.junit.Test;
 
 /**
  * Description: Implement next permutation, which rearranges numbers into the lexicographically next greater permutation

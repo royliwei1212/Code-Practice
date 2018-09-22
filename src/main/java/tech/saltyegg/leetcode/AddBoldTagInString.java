@@ -32,7 +32,7 @@ public class AddBoldTagInString {
             while (j < s.length() && bools[j]) {
                 j++;
             }
-            sb.append("<b>").append(s.substring(i, j)).append("</b>");
+            sb.append("<b>").append(s, i, j).append("</b>");
             i = j - 1;
         }
         return sb.toString();

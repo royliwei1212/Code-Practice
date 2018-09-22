@@ -18,53 +18,53 @@ import org.junit.Test;
  */
 public class AB {
 
-	public String createString(int N, int K) {
-		if (N < 1 || K < 0 || K > (N / 2.0) * (N / 2.0)) {
-			return "";
-		}
+    public String createString(int N, int K) {
+        if (N < 1 || K < 0 || K > (N / 2.0) * (N / 2.0)) {
+            return "";
+        }
 
-		if (K == 0) {
-			return strFactory('A', N);
-		}
+        if (K == 0) {
+            return strFactory('A', N);
+        }
 
-		StringBuilder sb = new StringBuilder();
-		int a = 1;
-		while (a <= N / 2) {
-			int x = N - a;
-			if (K == a * x) {
-				return strFactory('A', a) + strFactory('B', N - a);
-			}
+        StringBuilder sb = new StringBuilder();
+        int a = 1;
+        while (a <= N / 2) {
+            int x = N - a;
+            if (K == a * x) {
+                return strFactory('A', a) + strFactory('B', N - a);
+            }
 
-			if (K > (a - 1) * (x + 1) && K < a * x) {
-				break;
-			}
-			a++;
-		}
+            if (K > (a - 1) * (x + 1) && K < a * x) {
+                break;
+            }
+            a++;
+        }
 
-		// divide K into a parts
-		int last = K % (N-a);
-		if (last != 0) {
-			sb.append(strFactory('A', a - 1)).append(strFactory('B', N - a - last)).append('A')
-					.append(strFactory('B', last));
-		} else {
-			sb.append(strFactory('A', a)).append(strFactory('B', N - a));
-		}
+        // divide K into a parts
+        int last = K % (N - a);
+        if (last != 0) {
+            sb.append(strFactory('A', a - 1)).append(strFactory('B', N - a - last)).append('A')
+                    .append(strFactory('B', last));
+        } else {
+            sb.append(strFactory('A', a)).append(strFactory('B', N - a));
+        }
 
-		return sb.toString();
-	}
+        return sb.toString();
+    }
 
-	private String strFactory(char c, int count) {
-		StringBuilder sb = new StringBuilder();
-		while (count > 0) {
-			sb.append(c);
-			count--;
-		}
-		return sb.toString();
-	}
+    private String strFactory(char c, int count) {
+        StringBuilder sb = new StringBuilder();
+        while (count > 0) {
+            sb.append(c);
+            count--;
+        }
+        return sb.toString();
+    }
 
-	@Test
-	public void test() {
-		String x = createString(10, 15);
-		x = createString(10, 12);
-	}
+    @Test
+    public void test() {
+        String x = createString(10, 15);
+        x = createString(10, 12);
+    }
 }

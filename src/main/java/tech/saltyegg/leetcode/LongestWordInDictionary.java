@@ -1,6 +1,12 @@
 package tech.saltyegg.leetcode;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class LongestWordInDictionary {
     public String longestWord(String[] words) {
@@ -25,7 +31,8 @@ public class LongestWordInDictionary {
                     if (x.startsWith(max)) queue.add(x);
                 }
             }
-            if (max.length() > result.length() || max.length() == result.length() && max.compareTo(result) < 0) result = max;
+            if (max.length() > result.length() || max.length() == result.length() && max.compareTo(result) < 0)
+                result = max;
         }
 
         return result;

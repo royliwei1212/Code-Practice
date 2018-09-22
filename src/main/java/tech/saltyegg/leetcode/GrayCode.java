@@ -1,10 +1,10 @@
 package tech.saltyegg.leetcode;
 
-import org.apache.log4j.Logger;
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.junit.Test;
 
 /**
  * Created by hzhou on 4/21/15. codeashobby@gmail.com

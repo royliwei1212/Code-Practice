@@ -10,19 +10,19 @@ package tech.saltyegg.dp.chain;
  */
 public class Women implements IWomen {
 
-	private RequestType type;
-	private String request;
+    private RequestType type;
+    private String request;
 
-	public Women(RequestType type, String request) {
-		this.type = type;
-		this.request = request;
-	}
+    public Women(RequestType type, String request) {
+        this.type = type;
+        this.request = request;
+    }
 
-	public RequestType getType() {
-		return this.type;
-	}
+    public RequestType getType() {
+        return this.type;
+    }
 
-	public String getRequest() {
-		return this.request;
-	}
+    public String getRequest() {
+        return this.request;
+    }
 }

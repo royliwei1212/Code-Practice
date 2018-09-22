@@ -13,24 +13,24 @@ import tech.saltyegg.dp.state.LiftState;
  */
 public class RunningState extends LiftState {
 
-	@Override
-	public void open() {
-		// do nothing
-	}
+    @Override
+    public void open() {
+        // do nothing
+    }
 
-	@Override
-	public void close() {
-		// do nothing
-	}
+    @Override
+    public void close() {
+        // do nothing
+    }
 
-	@Override
-	public void run() {
-		System.out.println("Lift is running");
-	}
+    @Override
+    public void run() {
+        System.out.println("Lift is running");
+    }
 
-	@Override
-	public void stop() {
-		super.context.setLiftState(Context.stoppingState);
-		super.context.getLiftState().stop();
-	}
+    @Override
+    public void stop() {
+        super.context.setLiftState(Context.stoppingState);
+        super.context.getLiftState().stop();
+    }
 }

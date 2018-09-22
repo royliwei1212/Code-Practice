@@ -1,11 +1,11 @@
 package tech.saltyegg.leetcode;
 
-import tech.saltyegg.leetcode.parent.Interval;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
+
+import tech.saltyegg.leetcode.parent.Interval;
 
 /**
  * @author hzhou

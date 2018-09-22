@@ -1,12 +1,12 @@
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.junit.Test;
 
 /**
  * Created by hzhou on 2015/8/8.

@@ -10,7 +10,7 @@ package tech.saltyegg.dp.factory;
  */
 public interface Human {
 
-	void getColor();
+    void getColor();
 
-	void talk();
+    void talk();
 }

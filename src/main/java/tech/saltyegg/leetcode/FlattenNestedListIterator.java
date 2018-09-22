@@ -1,10 +1,10 @@
 package tech.saltyegg.leetcode;
 
-import tech.saltyegg.leetcode.parent.NestedInteger;
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
+
+import tech.saltyegg.leetcode.parent.NestedInteger;
 
 /**
  * Created by hzhou on 2016/5/21.

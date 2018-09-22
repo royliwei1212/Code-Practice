@@ -1,9 +1,9 @@
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Test;
 
 /**
  * Created by hzhou on 2015/5/21.

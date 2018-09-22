@@ -9,7 +9,8 @@ import java.util.Arrays;
 public class PaintHouseII {
 
     public int minCostII(int[][] costs) {
-        if (costs == null || costs.length == 0 || costs[0] == null || costs[0].length == 0 || costs[0].length == 1 && costs.length > 1) return 0;
+        if (costs == null || costs.length == 0 || costs[0] == null || costs[0].length == 0 || costs[0].length == 1 && costs.length > 1)
+            return 0;
         if (costs[0].length == 1 && costs.length == 1) return costs[0][0];
         int[][] dp = new int[costs.length + 1][costs[0].length];
         for (int i = 1; i < dp.length; i++) {

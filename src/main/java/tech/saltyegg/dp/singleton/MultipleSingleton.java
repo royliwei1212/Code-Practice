@@ -14,21 +14,21 @@ import java.util.Random;
  */
 public class MultipleSingleton {
 
-	private static final List<MultipleSingleton> instanceList = new ArrayList<>();
-	private static final int COUNT = 2;
+    private static final List<MultipleSingleton> instanceList = new ArrayList<>();
+    private static final int COUNT = 2;
 
-	static {
-		for (int i = 0; i < COUNT; i++) {
-			instanceList.add(new MultipleSingleton());
-		}
-	}
+    static {
+        for (int i = 0; i < COUNT; i++) {
+            instanceList.add(new MultipleSingleton());
+        }
+    }
 
-	private MultipleSingleton() {
-	}
+    private MultipleSingleton() {
+    }
 
-	// For demo usage
-	public static MultipleSingleton getInstance() {
-		Random random = new Random();
-		return instanceList.get(random.nextInt(COUNT));
-	}
+    // For demo usage
+    public static MultipleSingleton getInstance() {
+        Random random = new Random();
+        return instanceList.get(random.nextInt(COUNT));
+    }
 }

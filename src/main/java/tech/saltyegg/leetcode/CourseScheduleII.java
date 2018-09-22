@@ -1,9 +1,9 @@
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-
 import java.util.LinkedList;
 import java.util.Queue;
+
+import org.junit.Test;
 
 /**
  * Created by hzhou on 2015/6/8.

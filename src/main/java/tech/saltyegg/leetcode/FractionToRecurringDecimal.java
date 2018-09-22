@@ -1,9 +1,9 @@
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import org.junit.Test;
 
 /**
  * Created by hzhou on 5/10/15. codeashobby@gmail.com

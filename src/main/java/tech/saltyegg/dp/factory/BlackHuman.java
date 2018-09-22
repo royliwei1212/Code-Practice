@@ -12,15 +12,15 @@ import org.apache.log4j.Logger;
  */
 public class BlackHuman implements Human {
 
-	private static final Logger log = Logger.getLogger(BlackHuman.class);
+    private static final Logger log = Logger.getLogger(BlackHuman.class);
 
-	@Override
-	public void getColor() {
-		log.info("I am black");
-	}
+    @Override
+    public void getColor() {
+        log.info("I am black");
+    }
 
-	@Override
-	public void talk() {
-		log.info("I like rap");
-	}
+    @Override
+    public void talk() {
+        log.info("I like rap");
+    }
 }

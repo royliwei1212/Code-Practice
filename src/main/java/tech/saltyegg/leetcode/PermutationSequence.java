@@ -3,10 +3,10 @@
  */
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Test;
 
 /**
  * Description: The set [1,2,3,…,n] contains a total of n! unique permutations.

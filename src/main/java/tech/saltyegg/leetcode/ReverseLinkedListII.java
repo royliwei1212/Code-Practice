@@ -1,10 +1,11 @@
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-import tech.saltyegg.leetcode.parent.ListNode;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Test;
+
+import tech.saltyegg.leetcode.parent.ListNode;
 
 /**
  * Created by hzhou on 2015/5/26.

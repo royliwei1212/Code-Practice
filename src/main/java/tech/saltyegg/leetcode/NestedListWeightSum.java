@@ -1,8 +1,8 @@
 package tech.saltyegg.leetcode;
 
-import tech.saltyegg.leetcode.parent.NestedInteger;
-
 import java.util.List;
+
+import tech.saltyegg.leetcode.parent.NestedInteger;
 
 /**
  * Created by hzhou on 2016/5/14.

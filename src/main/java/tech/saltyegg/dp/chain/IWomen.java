@@ -10,7 +10,7 @@ package tech.saltyegg.dp.chain;
  */
 public interface IWomen {
 
-	RequestType getType();
+    RequestType getType();
 
-	String getRequest();
+    String getRequest();
 }

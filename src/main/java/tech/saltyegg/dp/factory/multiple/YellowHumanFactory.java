@@ -13,8 +13,8 @@ import tech.saltyegg.dp.factory.YellowHuman;
  */
 public class YellowHumanFactory extends AbsHumanFactory {
 
-	@Override
-	public Human createHuman() {
-		return new YellowHuman();
-	}
+    @Override
+    public Human createHuman() {
+        return new YellowHuman();
+    }
 }

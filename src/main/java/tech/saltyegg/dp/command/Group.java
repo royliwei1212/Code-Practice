@@ -10,13 +10,13 @@ package tech.saltyegg.dp.command;
  */
 public interface Group {
 
-	void find();
+    void find();
 
-	void add();
+    void add();
 
-	void delete();
+    void delete();
 
-	void change();
+    void change();
 
-	void plan();
+    void plan();
 }

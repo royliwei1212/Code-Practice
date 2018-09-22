@@ -1,6 +1,11 @@
 package tech.saltyegg.leetcode;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
 
 /**
  * Created by hzhou on 2016/5/8.

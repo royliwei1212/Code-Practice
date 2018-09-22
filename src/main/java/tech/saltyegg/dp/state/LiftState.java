@@ -10,17 +10,17 @@ package tech.saltyegg.dp.state;
  */
 public abstract class LiftState {
 
-	protected Context context;
+    protected Context context;
 
-	public void setContext(Context context) {
-		this.context = context;
-	}
+    public void setContext(Context context) {
+        this.context = context;
+    }
 
-	public abstract void open();
+    public abstract void open();
 
-	public abstract void close();
+    public abstract void close();
 
-	public abstract void run();
+    public abstract void run();
 
-	public abstract void stop();
+    public abstract void stop();
 }

@@ -3,9 +3,9 @@
  */
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-
 import java.util.Arrays;
+
+import org.junit.Test;
 
 public class SearchA2DMatrixII {
 

@@ -12,9 +12,9 @@ import tech.saltyegg.dp.command.Command;
  */
 public class DeletePageCommand extends Command {
 
-	@Override
-	public void execute() {
-		super.codeGroup.delete();
-		// ...
-	}
+    @Override
+    public void execute() {
+        super.codeGroup.delete();
+        // ...
+    }
 }

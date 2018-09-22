@@ -1,9 +1,9 @@
 package tech.saltyegg.leetcode;
 
-import tech.saltyegg.leetcode.parent.Point;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import tech.saltyegg.leetcode.parent.Point;
 
 /**
  * Created by hzhou on 2015/6/1. Email: codeashobby@gmail.com

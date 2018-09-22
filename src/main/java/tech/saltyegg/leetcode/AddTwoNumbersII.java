@@ -1,9 +1,9 @@
 package tech.saltyegg.leetcode;
 
-import tech.saltyegg.leetcode.parent.ListNode;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import tech.saltyegg.leetcode.parent.ListNode;
 
 /**
  * @author hzhou

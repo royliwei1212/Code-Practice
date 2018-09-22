@@ -1,8 +1,8 @@
 package tech.saltyegg.leetcode;
 
-import tech.saltyegg.leetcode.parent.TreeLinkNode;
-
 import java.util.Stack;
+
+import tech.saltyegg.leetcode.parent.TreeLinkNode;
 
 /**
  * Created by hzhou on 4/27/15. codeashobby@gmail.com

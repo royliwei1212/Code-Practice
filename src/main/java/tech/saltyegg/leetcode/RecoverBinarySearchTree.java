@@ -3,9 +3,9 @@
  */
 package tech.saltyegg.leetcode;
 
-import tech.saltyegg.leetcode.parent.TreeNode;
-
 import java.util.Stack;
+
+import tech.saltyegg.leetcode.parent.TreeNode;
 
 /**
  * Description: Two elements of a binary search tree (BST) are swapped by mistake.

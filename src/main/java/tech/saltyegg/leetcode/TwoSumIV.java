@@ -1,11 +1,11 @@
 package tech.saltyegg.leetcode;
 
-import tech.saltyegg.leetcode.parent.TreeNode;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
+
+import tech.saltyegg.leetcode.parent.TreeNode;
 
 /**
  * @author hzhou

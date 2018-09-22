@@ -47,7 +47,7 @@ public class StackWithFindMiddle {
           prev is always NULL */
         new_DLLNode.prev = null;
 
-         /* link the old list off the new DLLNode */
+        /* link the old list off the new DLLNode */
         new_DLLNode.next = ms.head;
 
         /* Increment count of items in stack */

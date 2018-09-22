@@ -12,8 +12,8 @@ import tech.saltyegg.dp.command.Command;
  */
 public class AddRequirementCommand extends Command {
 
-	@Override
-	public void execute() {
+    @Override
+    public void execute() {
 
-	}
+    }
 }

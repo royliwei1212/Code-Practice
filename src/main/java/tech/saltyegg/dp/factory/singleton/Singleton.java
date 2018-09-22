@@ -10,10 +10,10 @@ package tech.saltyegg.dp.factory.singleton;
  */
 public class Singleton {
 
-	private Singleton() {
-	}
+    private Singleton() {
+    }
 
-	public void doStuff() {
-		
-	}
+    public void doStuff() {
+
+    }
 }

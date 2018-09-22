@@ -10,14 +10,14 @@ package tech.saltyegg.dp.prototype;
  */
 public class PrototypeClass implements Cloneable {
 
-	@Override
-	public PrototypeClass clone() {
-		PrototypeClass cloned = null;
-		try {
-			cloned = (PrototypeClass) super.clone();
-		} catch (CloneNotSupportedException e) {
-			//e.printStackTrace();
-		}
-		return cloned;
-	}
+    @Override
+    public PrototypeClass clone() {
+        PrototypeClass cloned = null;
+        try {
+            cloned = (PrototypeClass) super.clone();
+        } catch (CloneNotSupportedException e) {
+            //e.printStackTrace();
+        }
+        return cloned;
+    }
 }

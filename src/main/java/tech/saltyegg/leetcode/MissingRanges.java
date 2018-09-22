@@ -3,10 +3,10 @@
  */
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Test;
 
 /**
  * Description: Given a sorted integer array where the range of elements are [lower, upper] inclusive, return its

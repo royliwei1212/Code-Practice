@@ -3,9 +3,9 @@
  */
 package tech.saltyegg.leetcode;
 
-import tech.saltyegg.leetcode.parent.Interval;
-
 import java.util.Arrays;
+
+import tech.saltyegg.leetcode.parent.Interval;
 
 /**
  * Description:

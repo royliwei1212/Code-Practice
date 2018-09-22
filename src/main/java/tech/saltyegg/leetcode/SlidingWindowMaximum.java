@@ -1,8 +1,8 @@
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
-
 import java.util.PriorityQueue;
+
+import org.junit.Test;
 
 /**
  * Created by hzhou on 2015/8/9.

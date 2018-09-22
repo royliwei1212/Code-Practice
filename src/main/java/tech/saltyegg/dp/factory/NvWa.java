@@ -12,11 +12,11 @@ import tech.saltyegg.dp.factory.simple.StaticHumanFactory;
  */
 public class NvWa {
 
-	public static void main(String[] args) {
-		AbsHumanFactory yinYangLu = new HumanFactory();
-		//Human human = yinYangLu.createHuman(WhiteHuman.class);
-		Human human = StaticHumanFactory.createHuman(WhiteHuman.class);
-		human.getColor();
-		human.talk();
-	}
+    public static void main(String[] args) {
+        AbsHumanFactory yinYangLu = new HumanFactory();
+        //Human human = yinYangLu.createHuman(WhiteHuman.class);
+        Human human = StaticHumanFactory.createHuman(WhiteHuman.class);
+        human.getColor();
+        human.talk();
+    }
 }

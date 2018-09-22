@@ -12,17 +12,17 @@ import org.apache.log4j.Logger;
  */
 public class HumanFactory extends AbsHumanFactory {
 
-	private static final Logger log = Logger.getLogger(HumanFactory.class);
+    private static final Logger log = Logger.getLogger(HumanFactory.class);
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T extends Human> T createHuman(Class<T> clz) {
-		T human = null;
-		try {
-			human = (T) Class.forName(clz.getName()).newInstance();
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-			log.error(e);
-		}
-		return human;
-	}
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T extends Human> T createHuman(Class<T> clz) {
+        T human = null;
+        try {
+            human = (T) Class.forName(clz.getName()).newInstance();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            log.error(e);
+        }
+        return human;
+    }
 }

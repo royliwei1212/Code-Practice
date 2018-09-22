@@ -1,9 +1,9 @@
 package tech.saltyegg.leetcode;
 
-import tech.saltyegg.leetcode.parent.Interval;
-
 import java.util.Arrays;
 import java.util.Comparator;
+
+import tech.saltyegg.leetcode.parent.Interval;
 
 public class NonOverlappingIntervals {
 

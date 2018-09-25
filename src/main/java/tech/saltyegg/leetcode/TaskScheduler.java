@@ -1,8 +1,7 @@
 package tech.saltyegg.leetcode;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author hzhou
@@ -12,29 +11,20 @@ public class TaskScheduler {
 
     public int leastInterval(char[] tasks, int n) {
         if (tasks == null || tasks.length == 0) return 0;
-        int[] count = new int[26];
-        for (char c : tasks) count[c - 'A']++;
+        if (n == 0) return tasks.length;
 
-        int result = 0;
-        PriorityQueue<Integer> queue = new PriorityQueue<>((o1, o2) -> o2 - o1);
-        for (int c : count) {
-            if (c != 0) queue.add(c);
+        int max = 1;
+        Map<Character, Integer> map = new HashMap<>();
+        for (char c : tasks) {
+            int s = map.getOrDefault(c, 0) + 1;
+            max = Math.max(max, s);
+            map.put(c, s);
         }
-        while (!queue.isEmpty()) {
-            int cnt = 0;
-            List<Integer> list = new ArrayList<>();
-            for (int i = 0; i <= n; i++) {
-                if (!queue.isEmpty()) {
-                    list.add(queue.poll());
-                    cnt++;
-                }
-            }
-            for (int i : list) {
-                i--;
-                if (i > 0) queue.add(i);
-            }
-            result += queue.isEmpty() ? cnt : n + 1;
+        int count = 0;
+        for (int s : map.values()) {
+            if (max == s) count++;
         }
-        return result;
+
+        return Math.max(tasks.length, (max - 1) * (n + 1) + count);
     }
 }

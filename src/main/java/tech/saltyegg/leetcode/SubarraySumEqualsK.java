@@ -1,5 +1,8 @@
 package tech.saltyegg.leetcode;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author hzhou
  * @since 8/28/17
@@ -7,20 +10,18 @@ package tech.saltyegg.leetcode;
 public class SubarraySumEqualsK {
 
     public int subarraySum(int[] nums, int k) {
-        int[] sum = new int[nums.length + 1];
-        sum[0] = 0;
+        if (nums == null || nums.length == 0) return 0;
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1);
+        int p = 0;
+        int result = 0;
         for (int i = 0; i < nums.length; i++) {
-            sum[i + 1] = sum[i] + nums[i];
+            p += nums[i];
+
+            result += map.getOrDefault(p - k, 0);
+            map.put(p, map.getOrDefault(p, 0) + 1);
         }
 
-        int result = 0;
-        for (int i = 0; i < sum.length - 1; i++) {
-            for (int j = i + 1; j < sum.length; j++) {
-                if (sum[j] - sum[i] == k) {
-                    result++;
-                }
-            }
-        }
         return result;
     }
 

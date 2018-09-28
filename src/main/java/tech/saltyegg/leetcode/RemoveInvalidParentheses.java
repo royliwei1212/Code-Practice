@@ -54,6 +54,6 @@ public class RemoveInvalidParentheses {
                 stack.pop();
             }
         }
-        return stack.size() == 0;
+        return stack.isEmpty();
     }
 }

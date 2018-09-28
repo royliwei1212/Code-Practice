@@ -15,8 +15,8 @@ public class SubarraySumEqualsK {
         map.put(0, 1);
         int p = 0;
         int result = 0;
-        for (int i = 0; i < nums.length; i++) {
-            p += nums[i];
+        for (int num : nums) {
+            p += num;
 
             result += map.getOrDefault(p - k, 0);
             map.put(p, map.getOrDefault(p, 0) + 1);

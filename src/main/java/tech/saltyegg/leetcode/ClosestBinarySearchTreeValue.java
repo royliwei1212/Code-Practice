@@ -1,5 +1,8 @@
 package tech.saltyegg.leetcode;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 import tech.saltyegg.leetcode.parent.TreeNode;
 
 /**
@@ -16,5 +19,19 @@ public class ClosestBinarySearchTreeValue {
             root = r > target ? root.left : root.right;
         }
         return closet;
+    }
+
+    public int closestValue2(TreeNode root, double target) {
+        Queue<TreeNode> queue = new LinkedList<>();
+
+        queue.add(root);
+        int result = root.val;
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            if (Math.abs(node.val - target) < Math.abs(result - target)) result = node.val;
+            if (node.left != null && node.val >= target) queue.add(node.left);
+            if (node.right != null && node.val <= target) queue.add(node.right);
+        }
+        return result;
     }
 }

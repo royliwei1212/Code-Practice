@@ -1,10 +1,10 @@
 package tech.saltyegg.leetcode;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
-import java.util.stream.Collectors;
+import java.util.PriorityQueue;
 
 /**
  * Created by hzhou on 2016/5/21.
@@ -13,13 +13,18 @@ import java.util.stream.Collectors;
 public class TopKFrequentElements {
 
     public List<Integer> topKFrequent(int[] nums, int k) {
-        Map<Integer, Integer> map = new TreeMap<>();
-        Arrays.stream(nums).forEach(x -> map.put(x, map.containsKey(x) ? map.get(x) + 1 : 1));
-        return map.entrySet().stream()
-                .sorted((o1, o2) -> o2.getValue() - o1.getValue())
-                .map(Map.Entry::getKey)
-                .limit(k)
-                .collect(Collectors.toList());
+        List<Integer> result = new ArrayList<>();
+        if (nums == null || nums.length == 0 || k < 1) return result;
+
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int n : nums) map.put(n, map.getOrDefault(n, 0) + 1);
+        PriorityQueue<Map.Entry<Integer, Integer>> queue = new PriorityQueue<>((o1, o2) -> o2.getValue() - o1.getValue());
+        for (Map.Entry<Integer, Integer> e : map.entrySet()) queue.add(e);
+        while (k > 0 && !queue.isEmpty()) {
+            result.add(queue.poll().getKey());
+            k--;
+        }
+        return result;
     }
 
 }

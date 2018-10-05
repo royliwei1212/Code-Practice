@@ -3,8 +3,7 @@
  */
 package tech.saltyegg.leetcode;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.junit.Test;
 
 import tech.saltyegg.leetcode.parent.ListNode;
 
@@ -24,20 +23,41 @@ public class ReorderList {
             return;
         }
 
-        List<ListNode> list = new ArrayList<ListNode>();
-        list.add(head);
-        ListNode cursor = head.next;
-        int count = 1;
-        while (cursor != null) {
-            list.add(cursor);
-            cursor = cursor.next;
-            count++;
+        ListNode fast = head.next;
+        ListNode slow = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        ListNode tmp = slow;
+        slow = slow.next;
+        tmp.next = null;
+
+
+        ListNode next = slow.next;
+        slow.next = null;
+        while (next != null) {
+            tmp = next.next;
+            next.next = slow;
+            slow = next;
+            next = tmp;
         }
 
-        for (int i = 0; i < count / 2; i++) {
-            list.get(i).next = list.get(count - i - 1);
-            list.get(count - i - 1).next = list.get(i + 1);
+        ListNode cursor = head;
+        fast = head.next;
+        boolean f = false;
+        while (fast != null && slow != null) {
+            if (f) {
+                cursor.next = fast;
+                fast = fast.next;
+            } else {
+                cursor.next = slow;
+                slow = slow.next;
+            }
+            f = !f;
+            cursor = cursor.next;
         }
-        list.get(count / 2).next = null;
+        if (fast != null) cursor.next = fast;
+        if (slow != null) cursor.next = slow;
     }
 }

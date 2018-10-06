@@ -1,6 +1,3 @@
-/**
- * Copyright (c) 2015 hzhou, All rights reserved.
- */
 package tech.saltyegg.leetcode;
 
 import java.util.ArrayList;
@@ -18,15 +15,15 @@ import tech.saltyegg.leetcode.parent.TreeNode;
 public class BinaryTreeLevelOrderTraversalII {
 
     public List<List<Integer>> levelOrderBottom(TreeNode root) {
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        List<List<Integer>> result = new ArrayList<>();
         if (root == null) {
             return result;
         }
-        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
         int c1 = 1;
         int c2 = 0;
-        List<Integer> crt = new ArrayList<Integer>();
+        List<Integer> crt = new ArrayList<>();
         while (!queue.isEmpty()) {
             TreeNode node = queue.poll();
             crt.add(node.val);
@@ -42,12 +39,12 @@ public class BinaryTreeLevelOrderTraversalII {
             if (c1 == 0) {
                 c1 = c2;
                 c2 = 0;
-                result.add(0, new ArrayList<Integer>(crt));
+                result.add(0, new ArrayList<>(crt));
                 crt.clear();
             }
         }
         if (!crt.isEmpty()) {
-            result.add(0, new ArrayList<Integer>(crt));
+            result.add(0, new ArrayList<>(crt));
         }
         return result;
     }

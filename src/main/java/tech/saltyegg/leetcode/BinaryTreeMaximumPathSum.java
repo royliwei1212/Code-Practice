@@ -1,6 +1,3 @@
-/**
- * Copyright (c) 2015 hzhou, All rights reserved.
- */
 package tech.saltyegg.leetcode;
 
 import tech.saltyegg.leetcode.parent.TreeNode;
@@ -13,9 +10,7 @@ import tech.saltyegg.leetcode.parent.TreeNode;
 public class BinaryTreeMaximumPathSum {
 
     public int maxPathSum(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
+        if (root == null) return 0;
 
         int[] max = new int[1];
         max[0] = Integer.MIN_VALUE;
@@ -26,9 +21,7 @@ public class BinaryTreeMaximumPathSum {
     }
 
     private int helper(int[] max, TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
+        if (root == null) return 0;
 
         int left = helper(max, root.left);
         int right = helper(max, root.right);

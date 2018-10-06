@@ -1,6 +1,3 @@
-/**
- * Copyright (c) 2015 hzhou, All rights reserved.
- */
 package tech.saltyegg.dp.state.states;
 
 import tech.saltyegg.dp.state.Context;

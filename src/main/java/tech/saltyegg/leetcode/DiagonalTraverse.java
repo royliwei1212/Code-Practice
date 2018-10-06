@@ -9,7 +9,7 @@ import java.util.List;
  * @since 9/17/17
  */
 public class DiagonalTraverse {
-    public int[] findDiagonalOrder(int[][] matrix) {
+    public int[] findDiagonalOrder1(int[][] matrix) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) return new int[0];
 
         int[] result = new int[matrix.length * matrix[0].length];
@@ -46,6 +46,45 @@ public class DiagonalTraverse {
                 Collections.reverse(list);
             }
             for (int n : list) result[index++] = n;
+        }
+        return result;
+    }
+
+    public int[] findDiagonalOrder(int[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0] == null || matrix[0].length == 0) return new int[0];
+        int lr = matrix.length;
+        int lc = matrix[0].length;
+
+        int[] result = new int[lc * lr];
+        int[][] dir = new int[][]{{-1, 1}, {1, -1}};
+        int k = 0;
+        int r = 0;
+        int c = 0;
+        for (int i = 0; i < lr * lc; i++) {
+            result[i] = matrix[r][c];
+            r += dir[k][0];
+            c += dir[k][1];
+
+            if (r >= lr) {
+                r = lr - 1;
+                c += 2;
+                k = 1 - k;
+            }
+            if (c >= lc) {
+                c = lc - 1;
+                r += 2;
+                k = 1 - k;
+            }
+            if (r < 0) {
+                r = 0;
+                k = 1 - k;
+            }
+            if (c < 0) {
+                c = 0;
+                k = 1 - k;
+            }
+
+
         }
         return result;
     }

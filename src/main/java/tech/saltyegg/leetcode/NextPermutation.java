@@ -26,42 +26,40 @@ import org.junit.Test;
 public class NextPermutation {
 
     public void nextPermutation(int[] nums) {
-        if (nums == null || nums.length < 2) {
-            return;
-        }
-        int length = nums.length - 1;
+        if (nums == null || nums.length < 2) return;
+        int s = nums.length - 1;
 
-        while (length > 0 && nums[length - 1] >= nums[length]) {
-            length--;
+        for (; s > 0; s--) {
+            if (nums[s] > nums[s - 1]) break;
         }
 
-        if (length == 0) {
+        if (s == 0) {
             Arrays.sort(nums);
             return;
         }
 
-        if (length == nums.length - 1) {
-            int tmp = nums[length];
-            nums[length] = nums[length - 1];
-            nums[length - 1] = tmp;
-            return;
-        }
+        int t = nums[s - 1];
+        int l = s;
+        int r = nums.length - 1;
 
-        // find the larger one than nums[length-1]
-        int target = length + 1;
-        while (target < nums.length && nums[target] > nums[length - 1]) {
-            target++;
+        while (l < r) {
+            int m = l + (r - l) / 2;
+            if (l == m) break;
+            if (nums[m] > t) l = m;
+            else r = m - 1;
+
+
         }
-        target--;
-        int tmp = nums[length - 1];
-        nums[length - 1] = nums[target];
-        nums[target] = tmp;
-        Arrays.sort(nums, length, nums.length);
+        if (nums[r] > t) l = r;
+        nums[s - 1] = nums[l];
+        nums[l] = t;
+
+        Arrays.sort(nums, s, nums.length);
     }
 
     @Test
     public void test() {
-        int[] nums = new int[]{5, 1, 1};
+        int[] nums = new int[]{0, 0, 4, 2, 1, 0};
         nextPermutation(nums);
 /*
         nums = new int[]{3, 2, 1};

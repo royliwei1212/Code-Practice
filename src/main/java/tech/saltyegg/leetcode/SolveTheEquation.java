@@ -1,5 +1,7 @@
 package tech.saltyegg.leetcode;
 
+import org.junit.Test;
+
 /**
  * @author hzhou
  * @since 9/13/17
@@ -24,28 +26,25 @@ public class SolveTheEquation {
     }
 
     private Expression parse(String s) {
-        Expression result = new Expression();
+        if (s == null || s.isEmpty()) return null;
 
-        String[] split1 = s.split("\\+");
-        for (String str : split1) {
-            String[] split2 = str.split("(?=-)");
-            for (String x : split2) {
-                if (x == null || x.isEmpty()) continue;
-                if (x.contains("x")) {
-                    String sub = x.substring(0, x.length() - 1);
-                    if (sub.isEmpty() || sub.equals("-")) {
-                        result.addX(sub.isEmpty() ? 1 : -1);
-                    } else {
-                        result.addX(Integer.parseInt(sub));
-                    }
+        String[] sp = s.split("\\+|(?=-)");
+        int a = 0;
+        int b = 0;
+        for (String x : sp) {
+            if (x.charAt(x.length() - 1) == 'x') {
+                String sub = x.substring(0, x.length() - 1);
 
+                if (sub.isEmpty() || sub.equals("-")) {
+                    a += sub.isEmpty() ? 1 : -1;
                 } else {
-                    result.add(Integer.parseInt(x));
+                    a += Integer.parseInt(sub);
                 }
+            } else {
+                b += Integer.parseInt(x);
             }
         }
-
-        return result;
+        return new Expression(a, b);
     }
 
     private static class Expression {
@@ -59,5 +58,15 @@ public class SolveTheEquation {
         void add(int b) {
             this.b += b;
         }
+
+        public Expression(int a, int b) {
+            this.a = a;
+            this.b = b;
+        }
+    }
+
+    @Test
+    public void test() {
+        solveEquation("x+5-3+x=6+x-2");
     }
 }

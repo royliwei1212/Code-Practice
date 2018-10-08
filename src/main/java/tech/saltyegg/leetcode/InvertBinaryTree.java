@@ -1,8 +1,5 @@
 package tech.saltyegg.leetcode;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 import tech.saltyegg.leetcode.parent.TreeNode;
 
 /**
@@ -11,27 +8,10 @@ import tech.saltyegg.leetcode.parent.TreeNode;
  */
 public class InvertBinaryTree {
     public TreeNode invertTree(TreeNode root) {
-        if (root == null) {
-            return null;
-        }
-
-        Queue<TreeNode> queue = new LinkedList<TreeNode>();
-        queue.add(root);
-
-        while (!queue.isEmpty()) {
-            TreeNode node = queue.poll();
-            TreeNode left = node.left;
-            TreeNode right = node.right;
-            // exchange left with right
-            node.left = right;
-            node.right = left;
-            if (left != null) {
-                queue.add(left);
-            }
-            if (right != null) {
-                queue.add(right);
-            }
-        }
+        if (root == null) return root;
+        TreeNode t = root.left;
+        root.left = invertTree(root.right);
+        root.right = invertTree(t);
 
         return root;
     }

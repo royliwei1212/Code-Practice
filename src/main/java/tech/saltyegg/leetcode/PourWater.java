@@ -9,11 +9,10 @@ public class PourWater {
             int t = K;
             for (int i = K - 1; i >= 0; i--) {
                 while (i >= 0 && heights[i] == heights[t]) i--;
-                if (i < 0) break;
-                if (heights[i] < heights[t]) {
-                    t = i;
-                } else {
+                if (i < 0 || heights[i] >= heights[t]) {
                     break;
+                } else {
+                    t = i;
                 }
             }
 
@@ -24,11 +23,10 @@ public class PourWater {
 
             for (int i = K + 1; i < heights.length; i++) {
                 while (i < heights.length && heights[i] == heights[t]) i++;
-                if (i == heights.length) break;
-                if (heights[i] < heights[t]) {
-                    t = i;
-                } else {
+                if (i == heights.length || heights[i] >= heights[t]) {
                     break;
+                } else {
+                    t = i;
                 }
             }
             heights[t] += 1;

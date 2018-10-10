@@ -19,24 +19,28 @@ public class SearchInRotatedSortedArray {
 
         int l = 0;
         int r = nums.length - 1;
-        while (l <= r) {
+        while (l < r) {
             int m = l + (r - l) / 2;
-            if (nums[m] == target) return m;
-
-            if (nums[l] <= nums[m]) {
-                if (target >= nums[l] && target < nums[m]) {
-                    r = m - 1;
-                } else {
-                    l = m + 1;
-                }
+            if (nums[m] > nums[r]) {
+                l = m + 1;
             } else {
-                if (target > nums[m] && target <= nums[r]) {
-                    l = m + 1;
-                } else {
-                    r = m - 1;
-                }
+                r = m;
             }
         }
+
+        int x = 0;
+        int y = nums.length - 1;
+        while (x <= y) {
+            int m = x + (y - x) / 2;
+            int rm = (m + l) % nums.length;
+            if (nums[rm] == target) return rm;
+            if (nums[rm] > target) {
+                y = m - 1;
+            } else {
+                x = m + 1;
+            }
+        }
+
         return -1;
     }
 

@@ -1,7 +1,7 @@
 package tech.saltyegg.leetcode;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,76 +12,43 @@ import java.util.Map;
  */
 public class PalindromePairs {
     public List<List<Integer>> palindromePairs(String[] words) {
-        if (words == null || words.length < 2) {
-            return Collections.emptyList();
-        }
-
         List<List<Integer>> result = new ArrayList<>();
-        Map<String, Integer> dict = new HashMap<>();
+        if (words == null || words.length < 2) return result;
+        Map<String, Integer> map = new HashMap<>();
+        for (int i = 0; i < words.length; i++) map.put(words[i], i);
 
-        for (int i = 0; i < words.length; i++) {
-            dict.put(words[i], i);
-        }
+        for (int k = 0; k < words.length; k++) {
+            String w = words[k];
+            String rw = r(w);
+            if (!w.isEmpty() && ip(w) && map.containsKey("")) {
+                result.add(Arrays.asList(k, map.get("")));
+                result.add(Arrays.asList(map.get(""), k));
+            }
+            if (!rw.equals(w) && map.containsKey(rw)) {
+                result.add(Arrays.asList(k, map.get(rw)));
+            }
 
-        for (int i = 0; i < words.length; i++) {
-            String a = words[i];
-            String reverse = getReverse(a);
-            if (isPalindrome(a)) {
-                if (dict.containsKey("") && !a.equals("")) {
-                    result.add(getPair(i, dict.get("")));
-                    result.add(getPair(dict.get(""), i));
-                }
-            }
-            if (dict.containsKey(reverse) && !reverse.equals(a)) {
-                result.add(getPair(i, dict.get(reverse)));
-            }
-            for (int x = 1; x < a.length(); x++) {
-                String right = a.substring(x);
-                String left = a.substring(0, x);
-                String rl = getReverse(left);
-                String rr = getReverse(right);
-                if (isPalindrome(right) && dict.containsKey(rl)) {
-                    result.add(getPair(i, dict.get(rl)));
-                }
-                if (isPalindrome(left) && dict.containsKey(rr)) {
-                    result.add(getPair(dict.get(rr), i));
-                }
+            for (int i = 1; i < w.length(); i++) {
+                String l = w.substring(0, i);
+                String r = w.substring(i);
+
+                String rl = r(l);
+                String rr = r(r);
+
+                if (ip(l) && map.containsKey(rr)) result.add(Arrays.asList(map.get(rr), k));
+                if (ip(r) && map.containsKey(rl)) result.add(Arrays.asList(k, map.get(rl)));
             }
         }
 
         return result;
     }
 
-    private boolean isPalindrome(String s) {
-        if (s == null || s.length() < 1) {
-            return true;
-        }
-        int a = 0;
-        int b = s.length() - 1;
-        while (a < b) {
-            if (s.charAt(a) != s.charAt(b)) {
-                return false;
-            }
-            a++;
-            b--;
-        }
-        return true;
+    private boolean ip(String s) {
+        return r(s).equals(s);
     }
 
-    private String getReverse(String a) {
-        StringBuilder sb = new StringBuilder(a);
-        return sb.reverse().toString();
+    private String r(String s) {
+        return new StringBuilder(s).reverse().toString();
     }
-
-    private List<Integer> getPair(int a, int b) {
-        List<Integer> result = new ArrayList<>();
-        result.add(a);
-        result.add(b);
-        return result;
-    }
-
-    public static void main(String[] args) {
-        PalindromePairs pp = new PalindromePairs();
-        pp.palindromePairs(new String[]{"ab", "ba", "abc", "cba"});
-    }
+}
 }

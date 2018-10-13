@@ -14,65 +14,40 @@ import org.junit.Test;
 public class FourSum {
 
     public List<List<Integer>> fourSum(int[] nums, int target) {
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
-
-        if (nums == null || nums.length < 4) {
-            return result;
-        }
+        List<List<Integer>> result = new ArrayList<>();
+        if(nums == null || nums.length < 4) return result;
         Arrays.sort(nums);
-        int l = nums.length;
 
-        for (int i = 0; i < l - 3; i++) {
-            if (i > 0 && nums[i] == nums[i - 1]) {
-                continue;
-            }
-            for (int j = i + 1; j < l - 2; j++) {
-                if (j > i + 1 && nums[j] == nums[j - 1]) {
-                    continue;
-                }
-
-                for (int k = j + 1; k < l - 1; k++) {
-                    if (k > j + 1 && nums[k] == nums[k - 1]) {
+        for(int i = 0; i < nums.length-3; i++){
+            for(int j = i + 1; j < nums.length-2; j++){
+                int sum = nums[i] + nums[j];
+                int t = target-sum;
+                int l = j + 1, r = nums.length -1;
+                while(l < r){
+                    int s = nums[l] + nums[r];
+                    if(s == t) {
+                        List<Integer> res = helper(i,j,l,r, nums);
+                        result.add(res);
+                        while(l < r &&nums[l] == res.get(2)) {l++;}
+                        while(l < r &&nums[r] == res.get(3)) {r--;}
                         continue;
                     }
-                    int left = target - nums[i] - nums[j] - nums[k];
-                    if (helper(k + 1, l - 1, nums, left)) {
-                        List<Integer> r = new ArrayList<Integer>();
-                        r.add(nums[i]);
-                        r.add(nums[j]);
-                        r.add(nums[k]);
-                        r.add(left);
-                        result.add(r);
-                    }
+                    if(s > t) r--; else l++;
                 }
 
+                while(j < nums.length-2 && nums[j+1] == nums[j]) j++;
             }
+            while(i < nums.length-3 && nums[i+1] == nums[i]) i++;
         }
-
         return result;
     }
 
-    private boolean helper(int start, int end, int[] nums, int target) {
-        while (start <= end) {
-            int middle = (start + end) / 2;
-            if (nums[middle] == target) {
-                return true;
-            }
-            if (nums[middle] > target) {
-                end = middle - 1;
-            } else {
-                start = middle + 1;
-            }
-
-        }
-
-        return false;
+    private List<Integer> helper(int a, int b, int i, int j, int[] nums){
+        List<Integer> result = new ArrayList<>();
+        result.add(nums[a]);
+        result.add(nums[b]);
+        result.add(nums[i]);
+        result.add(nums[j]);
+        return result;
     }
-
-    @Test
-    public void test() {
-        int[] nums = new int[]{0, 0, 0, 0};
-        fourSum(nums, 0);
-    }
-
 }

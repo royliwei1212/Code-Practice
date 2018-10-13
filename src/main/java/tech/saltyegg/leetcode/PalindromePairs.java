@@ -51,4 +51,3 @@ public class PalindromePairs {
         return new StringBuilder(s).reverse().toString();
     }
 }
-}

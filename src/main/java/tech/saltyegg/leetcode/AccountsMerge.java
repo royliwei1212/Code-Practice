@@ -66,9 +66,7 @@ public class AccountsMerge {
         void union(int p, int q) {
             int rp = root(p);
             int rq = root(q);
-            for (int i = 0; i < id.length; i++) {
-                if (id[i] == rp) id[i] = rq;
-            }
+            id[rp] = rq;
         }
     }
 

@@ -18,19 +18,19 @@ public class ConvertSortedListToBST {
         if (head == null) return null;
         if (head.next == null) return new TreeNode(head.val);
 
-        ListNode fast, slow, preSlow;
-        fast = slow = preSlow = head;
-        while (fast.next != null && fast.next.next != null) {
-            preSlow = slow;
-            slow = slow.next;
+        ListNode fast = head.next.next, slow = head;
+        while (fast != null && fast.next != null) {
             fast = fast.next.next;
+            slow = slow.next;
         }
 
         fast = slow.next;
-        preSlow.next = null;
-        TreeNode node = new TreeNode(slow.val);
-        if (slow != head) node.left = sortedListToBST(head);
-        node.right = sortedListToBST(fast);
-        return node;
+        slow.next = null;
+        slow = fast.next;
+
+        TreeNode root = new TreeNode(fast.val);
+        root.left = sortedListToBST(head);
+        root.right = sortedListToBST(slow);
+        return root;
     }
 }

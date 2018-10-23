@@ -26,4 +26,27 @@ public class RotateImage {
             }
         }
     }
+
+    public void rotate2(int[][] matrix) {
+        if (matrix == null) return;
+
+        int n = matrix.length;
+        for (int i = 0; i < n; i++) {
+            for (int l = 0, r = n - 1; l < r; l++, r--) {
+                swap(matrix, i, l, i, r);
+            }
+        }
+
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                swap(matrix, i, j, n - j - 1, n - i - 1);
+            }
+        }
+    }
+
+    private void swap(int[][] matrix, int a, int b, int x, int y) {
+        int t = matrix[a][b];
+        matrix[a][b] = matrix[x][y];
+        matrix[x][y] = t;
+    }
 }

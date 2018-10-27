@@ -8,10 +8,10 @@ import tech.saltyegg.leetcode.parent.TreeNode;
  * @author hzhou
  */
 public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
-
     public TreeNode buildTree(int[] preorder, int[] inorder) {
 
-        if (preorder == null || preorder.length == 0 || inorder == null || inorder.length == 0) {
+        if (preorder == null || preorder.length == 0 || inorder == null
+                || inorder.length == 0) {
             return null;
         }
         return helper(inorder, 0, inorder.length - 1, preorder, 0, preorder.length - 1);
@@ -30,7 +30,6 @@ public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
                 break;
             }
         }
-
         root.left = helper(inorder, s1, k - 1, preorder, s2 + 1, s2 + k - s1);
         root.right = helper(inorder, k + 1, e1, preorder, s2 + k - s1 + 1, e2);
         return root;

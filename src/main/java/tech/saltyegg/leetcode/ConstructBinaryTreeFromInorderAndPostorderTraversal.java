@@ -13,14 +13,11 @@ public class ConstructBinaryTreeFromInorderAndPostorderTraversal {
         if (inorder == null || inorder.length == 0 || postorder == null || postorder.length == 0) {
             return null;
         }
-
         return helper(inorder, 0, inorder.length - 1, postorder, 0, postorder.length - 1);
     }
 
     private TreeNode helper(int[] inorder, int s1, int e1, int[] postorder, int s2, int e2) {
-        if (s1 > e1 || s2 > e2) {
-            return null;
-        }
+        if (s1 > e1 || s2 > e2) return null;
 
         TreeNode root = new TreeNode(postorder[e2]);
         int k = 0;

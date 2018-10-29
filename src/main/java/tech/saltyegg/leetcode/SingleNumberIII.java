@@ -8,7 +8,6 @@ package tech.saltyegg.leetcode;
  * Given nums = [1, 2, 1, 3, 2, 5], return [3, 5].
  * <p>
  * Created by hzhou on 2016/5/4.
- * Email: i@hzhou.me
  */
 public class SingleNumberIII {
 

@@ -7,7 +7,6 @@ import org.junit.Test;
 
 /**
  * Created by hzhou on 2015/6/8.
- * Email: i@hzhou.me
  */
 public class CourseScheduleII {
     public int[] findOrder(int numCourses, int[][] prerequisites) {

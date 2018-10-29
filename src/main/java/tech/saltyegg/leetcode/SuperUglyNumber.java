@@ -2,7 +2,6 @@ package tech.saltyegg.leetcode;
 
 /**
  * Created by hzhou on 2016/5/9.
- * Email: i@hzhou.me
  */
 public class SuperUglyNumber {
 

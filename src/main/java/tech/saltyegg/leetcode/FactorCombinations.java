@@ -5,7 +5,6 @@ import java.util.List;
 
 /**
  * Created by hzhou on 2015/8/10.
- * Email: i@hzhou.me
  */
 public class FactorCombinations {
 

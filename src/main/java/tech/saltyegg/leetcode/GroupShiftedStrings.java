@@ -10,7 +10,6 @@ import org.junit.Test;
 
 /**
  * Created by hzhou on 2015/8/8.
- * Email: i@hzhou.me
  */
 public class GroupShiftedStrings {
 

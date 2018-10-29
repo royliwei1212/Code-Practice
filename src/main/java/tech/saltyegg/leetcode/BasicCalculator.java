@@ -6,7 +6,6 @@ import org.junit.Test;
 
 /**
  * Created by hzhou on 2015/6/14.
- * Email: i@hzhou.me
  */
 public class BasicCalculator {
 

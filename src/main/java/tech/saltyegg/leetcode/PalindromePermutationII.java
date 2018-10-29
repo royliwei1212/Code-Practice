@@ -10,7 +10,6 @@ import java.util.Set;
 
 /**
  * Created by hzhou on 5/4/16.
- * Email: i@hzhou.me
  */
 public class PalindromePermutationII {
 

@@ -4,7 +4,6 @@ import tech.saltyegg.leetcode.parent.VersionControl;
 
 /**
  * Created by hzhou on 2016/5/24.
- * Email: i@hzhou.me
  */
 public class FirstBadVersion extends VersionControl {
 

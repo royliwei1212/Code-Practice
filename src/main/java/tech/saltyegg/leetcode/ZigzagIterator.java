@@ -5,7 +5,6 @@ import java.util.List;
 
 /**
  * Created by hzhou on 2016/5/28.
- * Email: i@hzhou.me
  */
 public class ZigzagIterator {
 

@@ -2,7 +2,6 @@ package tech.saltyegg.leetcode;
 
 /**
  * Created by hzhou on 2015/8/8.
- * Email: i@hzhou.me
  */
 public class StrobogrammaticNumber {
 

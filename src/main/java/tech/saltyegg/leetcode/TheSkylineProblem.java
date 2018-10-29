@@ -7,7 +7,6 @@ import java.util.Queue;
 
 /**
  * Created by hzhou on 2015/6/15.
- * Email: i@hzhou.me
  * <p>
  * http://yuanhsh.iteye.com/blog/2217735
  */

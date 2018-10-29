@@ -5,7 +5,6 @@ import java.util.Set;
 
 /**
  * Created by hzhou on 2016/5/6.
- * Email: i@hzhou.me
  */
 public class ReverseVowelsOfaString {
 

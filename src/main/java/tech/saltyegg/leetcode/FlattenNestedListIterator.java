@@ -8,7 +8,6 @@ import tech.saltyegg.leetcode.parent.NestedInteger;
 
 /**
  * Created by hzhou on 2016/5/21.
- * Email: i@hzhou.me
  */
 public class FlattenNestedListIterator implements Iterator<Integer> {
 

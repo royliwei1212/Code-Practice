@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 /**
  * Created by hzhou on 2016/5/3.
- * Email: i@hzhou.me
  */
 public class UniqueWordAbbreviation {
 

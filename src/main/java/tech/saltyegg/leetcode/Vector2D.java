@@ -4,7 +4,6 @@ import java.util.List;
 
 /**
  * Created by hzhou on 2015/8/7.
- * Email: i@hzhou.me
  */
 public class Vector2D {
 

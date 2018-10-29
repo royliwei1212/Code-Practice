@@ -5,7 +5,6 @@ import java.util.List;
 
 /**
  * Created by hzhou on 2015/6/25.
- * Email: i@hzhou.me
  */
 public class SummaryRanges {
     public List<String> summaryRanges(int[] nums) {

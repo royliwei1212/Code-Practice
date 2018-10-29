@@ -7,7 +7,6 @@ import org.junit.Test;
 
 /**
  * Created by hzhou on 2015/6/4.
- * Email: i@hzhou.me
  * <p>
  * Given a string, find the length of the longest substring T that contains at most 2 distinct characters.
  * <p>

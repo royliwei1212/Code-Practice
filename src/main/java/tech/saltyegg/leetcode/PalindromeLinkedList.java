@@ -6,7 +6,6 @@ import tech.saltyegg.leetcode.parent.ListNode;
 
 /**
  * Created by hzhou on 2015/8/10.
- * Email: i@hzhou.me
  */
 public class PalindromeLinkedList {
 

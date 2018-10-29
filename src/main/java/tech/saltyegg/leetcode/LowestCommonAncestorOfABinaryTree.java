@@ -4,7 +4,6 @@ import tech.saltyegg.leetcode.parent.TreeNode;
 
 /**
  * Created by hzhou on 2015/8/9.
- * Email: i@hzhou.me
  */
 public class LowestCommonAncestorOfABinaryTree {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {

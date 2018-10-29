@@ -5,7 +5,6 @@ import java.util.Queue;
 
 /**
  * Created by hzhou on 2015/6/7.
- * Email: i@hzhou.me
  */
 public class CourseSchedule {
 

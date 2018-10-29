@@ -8,7 +8,6 @@ import java.util.Map;
 
 /**
  * Created by hzhou on 2016/5/22.
- * Email: i@hzhou.me
  */
 public class PalindromePairs {
     public List<List<Integer>> palindromePairs(String[] words) {

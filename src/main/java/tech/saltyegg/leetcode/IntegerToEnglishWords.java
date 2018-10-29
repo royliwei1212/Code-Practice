@@ -5,7 +5,6 @@ import java.util.Map;
 
 /**
  * Created by hzhou on 2016/5/11.
- * Email: i@hzhou.me
  */
 public class IntegerToEnglishWords {
     private final Map<Integer, String> map;

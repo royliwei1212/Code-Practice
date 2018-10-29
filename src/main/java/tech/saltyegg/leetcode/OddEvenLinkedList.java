@@ -4,7 +4,6 @@ import tech.saltyegg.leetcode.parent.ListNode;
 
 /**
  * Created by hzhou on 2016/5/23.
- * Email: i@hzhou.me
  */
 public class OddEvenLinkedList {
 

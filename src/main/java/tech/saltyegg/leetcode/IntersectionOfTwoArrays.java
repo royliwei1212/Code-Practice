@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 /**
  * Created by hzhou on 2016/5/18.
- * Email: i@hzhou.me
  */
 public class IntersectionOfTwoArrays {
 

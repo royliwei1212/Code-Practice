@@ -2,7 +2,6 @@ package tech.saltyegg.leetcode;
 
 /**
  * Created by hzhou on 2015/6/8.
- * Email: i@hzhou.me
  */
 public class HouseRobberII {
     public int rob(int[] nums) {

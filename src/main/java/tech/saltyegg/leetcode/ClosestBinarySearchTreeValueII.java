@@ -10,7 +10,6 @@ import tech.saltyegg.leetcode.parent.TreeNode;
 
 /**
  * Created by hzhou on 2016/5/11.
- * Email: i@hzhou.me
  * <p>
  * https://segmentfault.com/a/1190000003797291
  */

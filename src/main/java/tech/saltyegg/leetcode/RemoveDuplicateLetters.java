@@ -6,7 +6,6 @@ import java.util.Stack;
 
 /**
  * Created by hzhou on 2016/5/25.
- * Email: i@hzhou.me
  */
 public class RemoveDuplicateLetters {
 

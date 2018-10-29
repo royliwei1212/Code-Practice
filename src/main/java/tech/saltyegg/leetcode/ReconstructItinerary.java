@@ -10,7 +10,6 @@ import java.util.Set;
 
 /**
  * Created by hzhou on 2016/5/18.
- * Email: i@hzhou.me
  */
 public class ReconstructItinerary {
 

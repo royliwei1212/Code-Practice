@@ -7,7 +7,6 @@ import tech.saltyegg.leetcode.parent.TreeNode;
 
 /**
  * Created by hzhou on 2015/8/16.
- * Email: i@hzhou.me
  */
 public class BinaryTreePaths {
     public List<String> binaryTreePaths(TreeNode root) {

@@ -6,7 +6,6 @@ import java.util.List;
 
 /**
  * Created by hzhou on 2016/5/11.
- * Email: i@hzhou.me
  */
 public class EncodeAndDecodeStrings {
 

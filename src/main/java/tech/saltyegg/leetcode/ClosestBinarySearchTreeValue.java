@@ -7,7 +7,6 @@ import tech.saltyegg.leetcode.parent.TreeNode;
 
 /**
  * Created by hzhou on 2016/5/10.
- * Email: i@hzhou.me
  */
 public class ClosestBinarySearchTreeValue {
 

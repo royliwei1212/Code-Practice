@@ -2,7 +2,6 @@ package tech.saltyegg.leetcode;
 
 /**
  * Created by hzhou on 2015/6/15.
- * Email: i@hzhou.me
  */
 public class ShortestPalindrome {
     public String shortestPalindrome(String s) {

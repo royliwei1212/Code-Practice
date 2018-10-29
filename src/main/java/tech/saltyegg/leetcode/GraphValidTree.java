@@ -9,7 +9,6 @@ import java.util.Set;
 
 /**
  * Created by hzhou on 2016/5/8.
- * Email: i@hzhou.me
  */
 public class GraphValidTree {
 

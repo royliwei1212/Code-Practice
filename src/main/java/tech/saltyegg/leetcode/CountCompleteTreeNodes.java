@@ -4,7 +4,6 @@ import tech.saltyegg.leetcode.parent.TreeNode;
 
 /**
  * Created by hzhou on 2015/6/7.
- * Email: i@hzhou.me
  */
 public class CountCompleteTreeNodes {
 

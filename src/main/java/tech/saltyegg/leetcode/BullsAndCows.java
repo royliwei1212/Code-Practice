@@ -7,7 +7,6 @@ import java.util.Map;
 
 /**
  * Created by hzhou on 2016/5/24.
- * Email: i@hzhou.me
  */
 public class BullsAndCows {
 

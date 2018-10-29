@@ -4,7 +4,6 @@ import java.util.List;
 
 /**
  * Created by hzhou on 2016/5/14.
- * Email: i@hzhou.me
  */
 public interface NestedInteger {
     // @return true if this NestedInteger holds a single integer, rather than a nested list.

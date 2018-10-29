@@ -4,7 +4,6 @@ import tech.saltyegg.leetcode.parent.ListNode;
 
 /**
  * Created by hzhou on 2015/8/9.
- * Email: i@hzhou.me
  */
 public class DeleteNodeInALinkedList {
     public void deleteNode(ListNode node) {

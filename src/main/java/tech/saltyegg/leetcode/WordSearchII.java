@@ -10,7 +10,6 @@ import java.util.Set;
 
 /**
  * Created by hzhou on 2015/6/8.
- * Email: i@hzhou.me
  */
 @SuppressWarnings("Duplicates")
 public class WordSearchII {

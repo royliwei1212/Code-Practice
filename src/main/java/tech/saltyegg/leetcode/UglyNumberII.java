@@ -4,7 +4,6 @@ package tech.saltyegg.leetcode;
  * 1, 2, 3, 4, 5, 6, 8, 9, 10, 12
  * <p>
  * Created by hzhou on 2016/5/4.
- * Email: i@hzhou.me
  */
 public class UglyNumberII {
 

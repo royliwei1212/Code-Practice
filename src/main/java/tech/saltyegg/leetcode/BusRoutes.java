@@ -4,48 +4,42 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 
 public class BusRoutes {
     public int numBusesToDestination(int[][] routes, int S, int T) {
+        if (S == T) return 0;
         Map<Integer, Set<Integer>> map = new HashMap<>();
-        for (int[] r : routes) {
-            Set<Integer> set = toSet(r);
-            for (int i : r) {
-                map.putIfAbsent(i, new HashSet<>());
-                map.get(i).addAll(set);
+        for (int i = 0; i < routes.length; i++) {
+            int[] r = routes[i];
+            for (int n : r) {
+                map.putIfAbsent(n, new HashSet<>());
+                map.get(n).add(i);
             }
         }
 
         Set<Integer> visited = new HashSet<>();
-        LinkedList<Node> queue = new LinkedList<>();
-        queue.add(new Node(S, 0));
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(S);
+        int result = 0;
         while (!queue.isEmpty()) {
-            Node node = queue.poll();
-            if (T == node.val) return node.level;
-            if (!map.containsKey(node.val)) continue;
-            for (int i : map.get(node.val)) {
-                if (visited.contains(i)) continue;
-                queue.add(new Node(i, node.level + 1));
-                visited.add(i);
+            int size = queue.size();
+            result++;
+            while (size-- > 0) {
+                int val = queue.poll();
+                if (val == T) return result;
+                if (!map.containsKey(val)) continue;
+                for (int i : map.get(val)) {
+                    if (visited.contains(i)) continue;
+                    visited.add(i);
+                    for (int k = 0; k < routes[i].length; k++) {
+                        if (routes[i][k] == T) return result;
+                        queue.add(routes[i][k]);
+                    }
+                }
             }
         }
         return -1;
-    }
-
-    private Set<Integer> toSet(int[] r) {
-        Set<Integer> result = new HashSet<>();
-        for (int i : r) result.add(i);
-        return result;
-    }
-
-    static class Node {
-        int val;
-        int level;
-
-        Node(int val, int level) {
-            this.val = val;
-            this.level = level;
-        }
     }
 }

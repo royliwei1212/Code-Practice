@@ -2,6 +2,7 @@ package tech.saltyegg.leetcode;
 
 public class SentenceScreenFitting {
 
+    // TLE
     public int wordsTyping(String[] sentence, int rows, int cols) {
 
         int[] nums = new int[sentence.length];
@@ -20,6 +21,24 @@ public class SentenceScreenFitting {
             line++;
         }
         return count / nums.length;
+    }
+
+    public int wordsTyping2(String[] sentence, int rows, int cols) {
+        StringBuilder sb = new StringBuilder();
+        for (String s : sentence) sb.append(s).append(" ");
+        int start = 0, len = sb.length();
+
+        for (int i = 0; i < rows; i++) {
+            start += cols;
+            if (sb.charAt(start % len) == ' ') {
+                start++;
+            } else {
+                while (start > 0 && sb.charAt((start - 1) % len) != ' ') {
+                    start--;
+                }
+            }
+        }
+        return start / len;
     }
 
 }

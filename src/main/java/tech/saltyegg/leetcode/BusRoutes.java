@@ -28,8 +28,6 @@ public class BusRoutes {
             result++;
             while (size-- > 0) {
                 int val = queue.poll();
-                if (val == T) return result;
-                if (!map.containsKey(val)) continue;
                 for (int i : map.get(val)) {
                     if (visited.contains(i)) continue;
                     visited.add(i);

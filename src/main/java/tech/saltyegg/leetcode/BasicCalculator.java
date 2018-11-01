@@ -34,6 +34,7 @@ public class BasicCalculator {
                 result += stack.pop();
             }
         }
+        result += flag * num;
         return result;
     }
 

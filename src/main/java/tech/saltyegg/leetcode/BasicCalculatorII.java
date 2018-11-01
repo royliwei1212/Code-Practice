@@ -8,42 +8,33 @@ import java.util.Stack;
 public class BasicCalculatorII {
 
     public int calculate(String s) {
-        if (s == null || s.isEmpty()) return 0;
+        if (s == null || s.trim().isEmpty()) return 0;
+        char flag = '+';
+        int result = 0, num = 0;
+
         Stack<Integer> stack = new Stack<>();
-        s = s.replaceAll(" ", "");
-        if (s.isEmpty()) return 0;
-
-        int num = 0;
-        char f = '+';
-        char c = '+';
-
         for (int i = 0; i <= s.length(); i++) {
-            if (i < s.length()) {
-                c = s.charAt(i);
-                if (c >= '0' && c <= '9') {
-                    num = 10 * num + (c - '0');
-                    continue;
-                }
+            char c = (i == s.length()) ? '#' : s.charAt(i);
+            if (c == ' ') continue;
+            if (c >= '0' && c <= '9') {
+                num = 10 * num + (c - '0');
+                continue;
             }
 
-            switch (f) {
-                case '+':
-                    stack.push(num);
-                    break;
-                case '-':
-                    stack.push(-num);
-                    break;
-                case '*':
-                    stack.push(stack.pop() * num);
-                    break;
-                case '/':
-                    stack.push(stack.pop() / num);
-                    break;
+            // @formatter:off
+            switch(flag){
+                case '+': stack.push(num); break;
+                case '-': stack.push(-num); break;
+                case '*': stack.push(stack.pop() * num); break;
+                case '/': stack.push(stack.pop() / num); break;
             }
-            f = c;
+            // @formatter:on
             num = 0;
+            flag = c;
         }
-
-        return stack.stream().mapToInt(Integer::intValue).sum();
+        for (int i : stack) {
+            result += i;
+        }
+        return result;
     }
 }

@@ -4,8 +4,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
-import org.junit.Test;
-
 public class BasicCalculatorIII {
     public int calculate(String s) {
         if (s == null) {

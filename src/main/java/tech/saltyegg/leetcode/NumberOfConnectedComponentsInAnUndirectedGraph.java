@@ -53,4 +53,42 @@ public class NumberOfConnectedComponentsInAnUndirectedGraph {
         }
     }
 
+    public int countComponents2(int n, int[][] edges) {
+        UnionFind uf = new UnionFind(n);
+
+        for (int[] e : edges) uf.union(e[0], e[1]);
+        int result = 0;
+        for (int i = 0; i < n; i++) {
+            if (uf.root[i] == i) result++;
+        }
+        return result;
+    }
+
+    static class UnionFind {
+        int[] root;
+
+        UnionFind(int n) {
+            root = new int[n];
+            for (int i = 0; i < n; i++) root[i] = i;
+        }
+
+        int root(int p) {
+            while (p != root(p)) {
+                root[p] = root[root[p]];
+                p = root(p);
+            }
+            return p;
+        }
+
+        boolean find(int p, int q) {
+            return root(p) == root(q);
+        }
+
+        void union(int p, int q) {
+            int ip = root(p);
+            int iq = root(q);
+            root[ip] = iq;
+        }
+    }
+
 }

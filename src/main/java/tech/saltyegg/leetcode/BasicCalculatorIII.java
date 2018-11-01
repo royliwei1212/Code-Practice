@@ -1,62 +1,55 @@
 package tech.saltyegg.leetcode;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 import org.junit.Test;
 
 public class BasicCalculatorIII {
     public int calculate(String s) {
-        return helper(s);
-    }
-
-    private int helper(String s) {
-        if (!s.contains("(")) return calc(s);
-        int r = s.indexOf(')');
-        int l = r - 1;
-        for (; l >= 0; l--) {
-            if (s.charAt(l) == '(') break;
+        if (s == null) {
+            return 0;
         }
-        String ls = l > 0 ? s.substring(0, l) : "";
-        String rs = r >= s.length() - 1 ? "" : s.substring(r + 1);
-        return helper(ls + String.valueOf(helper(s.substring(l + 1, r))) + rs);
-    }
-
-
-    @SuppressWarnings("Duplicates")
-    private int calc(String s) {
-        if (s == null || s.trim().isEmpty()) return 0;
-        char flag = '+';
-        int result = 0, num = 0;
-
-        Stack<Integer> stack = new Stack<>();
-        for (int i = 0; i <= s.length(); i++) {
-            char c = (i == s.length()) ? '#' : s.charAt(i);
+        Queue<Character> q = new LinkedList<>();
+        for (char c : s.toCharArray()) {
             if (c == ' ') continue;
-            if (c >= '0' && c <= '9') {
-                num = 10 * num + (c - '0');
-                continue;
-            }
-
-            // @formatter:off
-            switch(flag){
-                case '+': stack.push(num); break;
-                case '-': stack.push(-num); break;
-                case '*': stack.push(stack.pop() * num); break;
-                case '/': stack.push(stack.pop() / num); break;
-            }
-            // @formatter:on
-            num = 0;
-            flag = c;
+            q.offer(c);
         }
-        for (int i : stack) {
-            result += i;
-        }
-        return result;
+        q.offer('+');
+        return cal(q);
     }
 
-    @Test
-    public void test() {
-        String s = "(2+6* 3+5- (3*14/7+2)*5)+3";
-        System.out.println(calculate(s));
+    private int cal(Queue<Character> q) {
+        char sign = '+';
+        int num = 0;
+        Stack<Integer> stack = new Stack<>();
+        while (!q.isEmpty()) {
+            char c = q.poll();
+            if (Character.isDigit(c)) {
+                num = 10 * num + c - '0';
+            } else if (c == '(') {
+                num = cal(q);
+            } else {
+                // @formatter:off
+                switch(sign){
+                    case '+': stack.push(num); break;
+                    case '-': stack.push(-num); break;
+                    case '*': stack.push(stack.pop() * num); break;
+                    case '/': stack.push(stack.pop() / num); break;
+                }
+                // @formatter:on
+                num = 0;
+                sign = c;
+                if (c == ')') {
+                    break;
+                }
+            }
+        }
+        int sum = 0;
+        while (!stack.isEmpty()) {
+            sum += stack.pop();
+        }
+        return sum;
     }
 }

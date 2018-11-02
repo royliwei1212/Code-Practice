@@ -30,13 +30,11 @@ public class SentenceScreenFitting {
 
         for (int i = 0; i < rows; i++) {
             start += cols;
-            if (sb.charAt(start % len) == ' ') {
-                start++;
-            } else {
-                while (start > 0 && sb.charAt((start - 1) % len) != ' ') {
-                    start--;
-                }
+
+            while (start >= 0 && sb.charAt(start % sb.length()) != ' ') {
+                start--;
             }
+            start++;
         }
         return start / len;
     }

@@ -6,13 +6,11 @@ import java.util.Queue;
 public class TheMazeII {
 
     public int shortestDistance(int[][] maze, int[] start, int[] destination) {
-        boolean[][] visited = new boolean[maze.length][maze[0].length];
         int[][] dir = new int[][]{{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
         int[][] dp = new int[maze.length][maze[0].length];
         Queue<Point> queue = new LinkedList<>();
         queue.add(new Point(start[0], start[1]));
-        visited[start[0]][start[1]] = true;
-        int result = Integer.MAX_VALUE;
+
         while (!queue.isEmpty()) {
             Point p = queue.poll();
             for (int[] d : dir) {
@@ -23,8 +21,7 @@ public class TheMazeII {
                     y += d[1];
                     c++;
                 }
-                if (!visited[x][y] || dp[p.x][p.y] + c < dp[x][y]) {
-                    visited[x][y] = true;
+                if (dp[x][y] == 0 && dp[p.x][p.y] + c > 0 || dp[p.x][p.y] + c < dp[x][y]) {
                     dp[x][y] = dp[p.x][p.y] + c;
                     queue.add(new Point(x, y));
                 }

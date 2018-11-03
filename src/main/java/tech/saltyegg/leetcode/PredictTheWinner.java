@@ -26,6 +26,8 @@ public class PredictTheWinner {
         return dp[len - 1] >= 0;
     }
 
+    // The dp[i][j] saves how much more scores that the first-in-action
+    // player will get from i to j than the second player.
     public boolean PredictTheWinner3(int[] nums) {
         int len = nums.length;
         int[][] dp = new int[len][len];

@@ -2,6 +2,7 @@ package tech.saltyegg.leetcode;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 public class NextGreaterElementI {
 
@@ -19,6 +20,24 @@ public class NextGreaterElementI {
         for (int i = 0; i < findNums.length; i++) {
             result[i] = dict.get(findNums[i]);
         }
+        return result;
+    }
+
+    public int[] nextGreaterElement2(int[] nums1, int[] nums2) {
+        Map<Integer, Integer> map = new HashMap<>();
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = 0; i < nums2.length; i++) {
+            while (!stack.isEmpty() && nums2[i] > nums2[stack.peek()]) {
+                map.put(nums2[stack.pop()], nums2[i]);
+            }
+            stack.push(i);
+        }
+        int[] result = new int[nums1.length];
+        for (int i = 0; i < nums1.length; i++) {
+            result[i] = map.getOrDefault(nums1[i], -1);
+        }
+
         return result;
     }
 

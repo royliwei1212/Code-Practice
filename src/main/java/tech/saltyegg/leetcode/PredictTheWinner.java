@@ -29,8 +29,8 @@ public class PredictTheWinner {
     public boolean PredictTheWinner3(int[] nums) {
         int len = nums.length;
         int[][] dp = new int[len][len];
-        for (int i = 0; i < len; i++) dp[i][i] = nums[i];
         for (int i = 1; i < len; i++) {
+            dp[i][i] = nums[i];
             for (int j = 0; j < len - i; j++) {
                 int k = i + j;
                 dp[j][k] = Math.max(nums[j] - dp[j + 1][k], nums[k] - dp[j][k - 1]);

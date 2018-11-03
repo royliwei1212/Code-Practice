@@ -27,15 +27,15 @@ public class PredictTheWinner {
     }
 
     public boolean PredictTheWinner3(int[] nums) {
-        int n = nums.length;
-        int[][] dp = new int[n][n];
-        for (int i = 0; i < n; i++) dp[i][i] = nums[i];
-        for (int len = 1; len < n; len++) {
-            for (int i = 0; i < n - len; i++) {
-                int j = i + len;
-                dp[i][j] = Math.max(nums[i] - dp[i + 1][j], nums[j] - dp[i][j - 1]);
+        int len = nums.length;
+        int[][] dp = new int[len][len];
+        for (int i = 0; i < len; i++) dp[i][i] = nums[i];
+        for (int i = 1; i < len; i++) {
+            for (int j = 0; j < len - i; j++) {
+                int k = i + j;
+                dp[j][k] = Math.max(nums[j] - dp[j + 1][k], nums[k] - dp[j][k - 1]);
             }
         }
-        return dp[0][n - 1] >= 0;
+        return dp[0][len - 1] >= 0;
     }
 }

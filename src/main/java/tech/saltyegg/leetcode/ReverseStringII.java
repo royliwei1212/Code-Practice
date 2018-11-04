@@ -7,18 +7,13 @@ package tech.saltyegg.leetcode;
 public class ReverseStringII {
 
     public String reverseStr(String s, int k) {
-        if (s == null || s.isEmpty() || k <= 0) {
-            return s;
-        }
-
-        String[] arr = s.split("(?<=\\G.{" + k + "})");
+        if (s == null || s.isEmpty() || k <= 1) return s;
         StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < arr.length; i++) {
-            if (i % 2 == 1) {
-                sb.append(arr[i]);
-            } else {
-                sb.append(new StringBuilder(arr[i]).reverse().toString());
+        for (int i = 0; i < s.length(); i += 2 * k) {
+            String sub = s.substring(i, i + k >= s.length() ? s.length() : i + k);
+            sb.append(new StringBuilder(sub).reverse());
+            for (int j = i + k; j < Math.min(s.length(), i + 2 * k); j++) {
+                sb.append(s.charAt(j));
             }
         }
         return sb.toString();

@@ -30,4 +30,21 @@ public class TargetSum {
         }
     }
 
+    public int findTargetSumWays2(int[] nums, int S) {
+        int sum = 0;
+        for (int n : nums) sum += n;
+        int t = sum + S;
+        if (t % 2 != 0 || S > sum) return 0;
+        t = t / 2;
+
+        int[] dp = new int[t + 1];
+        dp[0] = 1;
+        for (int n : nums) {
+            for (int i = t; i >= n; i--) {
+                dp[i] = dp[i] + dp[i - n];
+            }
+        }
+        return dp[t];
+    }
+
 }

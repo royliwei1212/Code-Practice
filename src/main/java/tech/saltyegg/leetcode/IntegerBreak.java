@@ -6,24 +6,14 @@ package tech.saltyegg.leetcode;
 public class IntegerBreak {
 
     public int integerBreak(int n) {
-        if (n < 2) {
-            return 0;
+        int[] dp = new int[n + 1];
+        dp[1] = 1;
+        for (int i = 2; i < dp.length; i++) {
+            for (int j = 1; j < i; j++) {
+                dp[i] = Math.max(dp[i], Math.max(dp[i - j] * j, j * (i - j)));
+            }
         }
-        if (n == 2) return 1;
-        if (n == 3) return 2;
-
-        int x = n / 3;
-        int y = n % 3;
-        switch (y) {
-            case 0:
-                return (int) Math.pow(3, x);
-            case 1:
-                return (int) Math.pow(3, x - 1) * 4;
-            case 2:
-                return (int) Math.pow(3, x) * 2;
-        }
-
-        return 0;
+        return dp[n];
     }
 
 }

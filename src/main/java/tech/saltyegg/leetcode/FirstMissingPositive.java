@@ -1,5 +1,8 @@
 package tech.saltyegg.leetcode;
 
+import java.util.Set;
+import java.util.TreeSet;
+
 /**
  * Description: Given an unsorted integer array, find the first missing positive integer.
  * <p/>
@@ -35,4 +38,13 @@ public class FirstMissingPositive {
         return nums.length + 1;
     }
 
+    public int firstMissingPositive2(int[] nums) {
+        Set<Integer> set = new TreeSet<>();
+        for (int n : nums) if (n > 0) set.add(n);
+        int i = 1;
+        for (int n : set) {
+            if (i++ != n) return i - 1;
+        }
+        return i;
+    }
 }

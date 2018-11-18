@@ -26,14 +26,16 @@ public class MeetingTime {
         int count = 0;
         List<Interval> result = new ArrayList<>();
         int pre = -1;
+        int n = intervals.size();
         while (!pq.isEmpty()) {
             int[] node = pq.poll();
             count += node[1];
-            boolean isStart = node[1] < 0;
             int time = node[0];
-            if (!isStart && pre == -1 && count == 0) {
+            if (pre == -1 && count == k - n) {
                 pre = time;
-            } else if (isStart && pre != -1 && count == -1) {
+            } else if (pre != -1 && count < k - n - 1) {
+                pre = -1;
+            } else if (pre != -1 && (count == k - n - 1 || pq.isEmpty() && count > k - n - 1)) {
                 result.add(new Interval(pre, time));
                 pre = -1;
             }
@@ -48,7 +50,8 @@ public class MeetingTime {
         intervals.add(Collections.singletonList(new Interval(2, 4)));
         intervals.add(Arrays.asList(new Interval(2, 3), new Interval(9, 12)));
 
-        print(getAvailableIntervals(intervals, 1));
+        print(getAvailableIntervals(intervals, intervals.size()));
+        print(getAvailableIntervals(intervals, 2));
 
     }
 
@@ -56,5 +59,6 @@ public class MeetingTime {
         for (Interval i : intervals) {
             System.out.print(i.start + ">" + i.end + " , ");
         }
+        System.out.println();
     }
 }

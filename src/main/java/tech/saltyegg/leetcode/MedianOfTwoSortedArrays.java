@@ -19,30 +19,20 @@ public class MedianOfTwoSortedArrays {
     }
 
     private int findNumber(int startA, int startB, int offSet, int[] nums1, int[] nums2) {
-        if (startA >= nums1.length) {
-            return nums2[startB + offSet - 1];
-        }
-        if (startB >= nums2.length) {
-            return nums1[startA + offSet - 1];
-        }
+        if (startA >= nums1.length) return nums2[startB + offSet - 1];
+        if (startB >= nums2.length) return nums1[startA + offSet - 1];
 
-        if (offSet == 1) {
-            return Math.min(nums1[startA], nums2[startB]);
-        }
+
+        if (offSet == 1) return Math.min(nums1[startA], nums2[startB]);
 
         int a = Integer.MAX_VALUE;
         int b = Integer.MAX_VALUE;
 
-        if (startA + offSet / 2 - 1 < nums1.length) {
-            a = nums1[startA + offSet / 2 - 1];
-        }
+        if (startA + offSet / 2 - 1 < nums1.length) a = nums1[startA + offSet / 2 - 1];
 
-        if (startB + offSet / 2 - 1 < nums2.length) {
-            b = nums2[startB + offSet / 2 - 1];
-        }
+        if (startB + offSet / 2 - 1 < nums2.length) b = nums2[startB + offSet / 2 - 1];
 
         if (a > b) {
-            //return findNumber(startA, startB + offSet / 2, offSet / 2, nums1, nums2);
             return findNumber(startA, startB + offSet / 2, offSet - offSet / 2, nums1, nums2);
         } else {
             return findNumber(startA + offSet / 2, startB, offSet - offSet / 2, nums1, nums2);

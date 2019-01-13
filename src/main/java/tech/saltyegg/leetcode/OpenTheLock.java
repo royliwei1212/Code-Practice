@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
 
-import javafx.util.Pair;
+import tech.saltyegg.leetcode.parent.Pair;
 
 public class OpenTheLock {
 

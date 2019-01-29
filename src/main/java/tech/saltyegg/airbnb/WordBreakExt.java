@@ -107,5 +107,6 @@ public class WordBreakExt {
 
         List<String> dict = Arrays.asList("acef", "aa", "abc", "j", "abt", "qmgcc", "zzz");
         System.out.println("result = " + new WordBreakExt().maxCount(board, dict));
+        // result = ["abc", "abc". "abt", "j", "qmgcc"]
     }
 }

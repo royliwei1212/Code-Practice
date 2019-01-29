@@ -62,7 +62,7 @@ public class WordBreakExt {
         for (Set<Integer> path : list) {
             if (!containAny(visited, path)) {
                 visited.addAll(path);
-                getMaxCount(groupValue, n + 1, out + 1, visited); //当前group不取值
+                getMaxCount(groupValue, n + 1, out + 1, visited);
                 visited.removeAll(path);
             }
         }
@@ -107,6 +107,6 @@ public class WordBreakExt {
 
         List<String> dict = Arrays.asList("acef", "aa", "abc", "j", "abt", "qmgcc", "zzz");
         System.out.println("result = " + new WordBreakExt().maxCount(board, dict));
-        // result = ["abc", "abc". "abt", "j", "qmgcc"]
+        // result = 5 => ["abc", "abc". "abt", "j", "qmgcc"]
     }
 }

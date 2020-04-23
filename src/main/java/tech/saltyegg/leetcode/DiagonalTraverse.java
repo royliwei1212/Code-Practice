@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.Test;
+
 /**
  * @author hzhou
  * @since 9/17/17
@@ -27,6 +29,8 @@ public class DiagonalTraverse {
             dict.add(list);
         }
 
+        print(dict);
+
         for (int i = 1; i < matrix.length; i++) {
             List<Integer> list = new ArrayList<>();
             list.add(matrix[i][matrix[0].length - 1]);
@@ -39,6 +43,7 @@ public class DiagonalTraverse {
             }
             dict.add(list);
         }
+        print(dict);
         int index = 0;
         for (int i = 0; i < dict.size(); i++) {
             List<Integer> list = dict.get(i);
@@ -48,6 +53,37 @@ public class DiagonalTraverse {
             for (int n : list) result[index++] = n;
         }
         return result;
+    }
+
+    private void print(List<List<Integer>> dict) {
+        System.out.println("====================");
+        for (List<Integer> list : dict) {
+            for (int i : list) {
+                System.out.print(i + " ");
+            }
+            System.out.println();
+        }
+        System.out.println("====================\n\n");
+    }
+
+    public void print(int[] dict) {
+        System.out.println("--------------------\n");
+        for (int i : dict) {
+            System.out.print(i + " ");
+        }
+        System.out.println("--------------------\n\n");
+    }
+
+    @Test
+    public void test1() {
+        int[][] input = new int[][]{
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+
+        DiagonalTraverse dt = new DiagonalTraverse();
+        dt.print(dt.findDiagonalOrder1(input));
     }
 
     public int[] findDiagonalOrder(int[][] matrix) {

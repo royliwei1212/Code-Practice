@@ -10,7 +10,6 @@ import java.util.TreeMap;
  * @since 8/27/17
  */
 public class LFUCache {
-
     private TreeMap<Integer, LinkedHashSet<Integer>> countMap;
     private Map<Integer, Integer> cache;
     private Map<Integer, Integer> keyCount;
@@ -26,7 +25,6 @@ public class LFUCache {
 
     public int get(int key) {
         if (!cache.containsKey(key)) return -1;
-
         int preCount = keyCount.get(key);
         countMap.get(preCount).remove(key);
         if (countMap.get(preCount).isEmpty()) countMap.remove(preCount);
@@ -61,15 +59,4 @@ public class LFUCache {
         if (!countMap.containsKey(count + 1)) countMap.put(count + 1, new LinkedHashSet<>());
         countMap.get(count + 1).add(key);
     }
-
-    public static void main(String[] args) {
-        LFUCache cache = new LFUCache(2);
-        cache.put(2, 1);
-        cache.put(2, 2);
-        cache.get(2);       // returns 1
-        cache.put(1, 1);    // evicts key 2
-        cache.put(4, 1);    // evicts key 1.
-        cache.get(2);       // returns 4
-    }
-
 }

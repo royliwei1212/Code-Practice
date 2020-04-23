@@ -30,7 +30,8 @@ public class SpiralMatrix {
                     result.add(matrix[x][y++]);
                 }
                 break;
-            } else if (w == 1) {
+            }
+            if (w == 1) {
                 for (int i = 0; i < h; i++) {
                     result.add(matrix[x++][y]);
                 }

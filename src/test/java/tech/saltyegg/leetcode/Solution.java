@@ -1,28 +1,24 @@
 package tech.saltyegg.leetcode;
 
-import org.junit.Test;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class Solution {
 
-    public int missingNumber(int[] nums) {
-        if(nums == null || nums.length == 0) return 0;
-
-        for(int i = 0; i < nums.length; i++){
-            if(i != nums[i] && nums[i] < nums.length && nums[nums[i]] < nums.length) {
-                int t = nums[i];
-                nums[i] = nums[nums[i]];
-                nums[nums[i]] = t;
-            }
-        }
-
-        for(int i = 0; i < nums.length; i++){
-            if(i != nums[i]) return i;
-        }
-        return nums.length;
+    public List<List<Integer>> combination(Map<Character, List<Integer>> map) {
+        return null;
     }
 
-    @Test
-    public void test() {
-        missingNumber(new int[]{3,0,1});
+    private List<String> genStr(Set<Character> set) {
+        List<String> result = new ArrayList<>();
+        return result;
     }
+
+    private void genStrHelper(List<String> result, Set<Character> set, int start, Set<Character> visited) {
+        if (start == set.size()) return;
+
+    }
+
 }
